@@ -33,11 +33,12 @@ def _get_reply_ids(session: Session, reply_ids: dict) -> dict:
 
 
 def log_post_to_db(
-    session: Session, post: CreateRecordResponse, reply_ids: dict
+    session: Session, post: CreateRecordResponse, post_params: dict, reply_ids: dict
 ) -> str:
     new_post = Post(
         uri=post.uri,
         cid=post.cid,
+        post_text=post_params["text"],
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow(),
     )
@@ -79,12 +80,11 @@ def create_post(
     post_params["text"] = post_text
     post = client.send_post(**post_params)
 
-    return log_post_to_db(session, post, reply_ids)
+    return log_post_to_db(session, post, post_params, reply_ids)
 
 
 if __name__ == "__main__":
     client = init_client()
     session = init_db_session()
 
-    post = create_post(client, session, "test post db",
-                       {"parent": "1", "root": "1"})
+    post = create_post(client, session, "test post db", {})

@@ -15,6 +15,7 @@ class Post(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     uri: Mapped[str] = mapped_column(String(80))
     cid: Mapped[str] = mapped_column(String(80))
+    post_text: Mapped[str] = mapped_column(String(300))
     created_at: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
     updated_at: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
     root_id: Mapped[Optional[int]] = mapped_column(Integer)
