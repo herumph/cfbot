@@ -21,9 +21,7 @@ def _query_for_post_ids(session: Session, reply_ids: dict, key: str) -> dict:
 
 
 def _get_reply_ids(session: Session, reply_ids: dict) -> dict:
-    assert (
-        "parent" in reply_ids.keys() and "root" in reply_ids.keys()
-    ), "both parent and root ids must be included for a reply"
+    assert "parent" in reply_ids.keys() and "root" in reply_ids.keys(), "both parent and root ids must be included for a reply"
 
     parent = _query_for_post_ids(session, reply_ids, "parent")
     if reply_ids["parent"] == reply_ids["root"] or reply_ids["root"] is None:
@@ -33,9 +31,7 @@ def _get_reply_ids(session: Session, reply_ids: dict) -> dict:
     return {"parent": parent, "root": root}
 
 
-def log_post_to_db(
-    session: Session, post: CreateRecordResponse, post_params: dict, reply_ids: dict
-) -> str:
+def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: dict, reply_ids: dict) -> str:
     new_post = Post(
         uri=post.uri,
         cid=post.cid,

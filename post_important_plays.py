@@ -83,24 +83,16 @@ def post_important_results(important_results: dict):
         assert game_info.last_post_id, "No previous post made for this game"
         result["home"] = game_info.home_team
         result["away"] = game_info.away_team
-        result["scoring_team"] = (
-            game_info.home_team
-            if game_info.home_team_id == result["scoring_team"]
-            else game_info.away_team
-        )
+        result["scoring_team"] = game_info.home_team if game_info.home_team_id == result["scoring_team"] else game_info.away_team
 
         # get parent and root posts from post table
         previous_post = _get_previous_posts(session, game_info)
 
         # format post and send it
         if result["update_time"] > previous_post["created_at"]:
-            previous_post = {
-                k: v for k, v in previous_post.items() if k == "parent" or k == "root"
-            }
+            previous_post = {k: v for k, v in previous_post.items() if k == "parent" or k == "root"}
             post_text = format_scoring_play(result)
-            result["last_post_id"] = create_post(
-                client, session, post_text, previous_post
-            )
+            result["last_post_id"] = create_post(client, session, post_text, previous_post)
 
             # update database with new information
             _update_database(session, result)

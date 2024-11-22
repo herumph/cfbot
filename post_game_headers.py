@@ -26,11 +26,7 @@ def _update_database(session: Session, result: dict):
 
 
 def _get_team_streak(team_info: dict) -> str:
-    streak = [
-        stat["value"]
-        for stat in team_info["team"]["record"]["items"][0]["stats"]
-        if stat["name"] == "streak"
-    ][0]
+    streak = [stat["value"] for stat in team_info["team"]["record"]["items"][0]["stats"] if stat["name"] == "streak"][0]
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
 

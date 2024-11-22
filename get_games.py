@@ -12,13 +12,9 @@ from models import Game
 def get_records(teams: dict, home_away: str, records: list[dict]):
     for record in records:
         if record["type"] == "total":
-            teams[f"{home_away}_wins"], teams[f"{home_away}_losses"] = record[
-                "summary"
-            ].split("-")
+            teams[f"{home_away}_wins"], teams[f"{home_away}_losses"] = record["summary"].split("-")
         elif record["type"] == "vsconf":
-            teams[f"{home_away}_conf_wins"], teams[f"{home_away}_conf_losses"] = record[
-                "summary"
-            ].split("-")
+            teams[f"{home_away}_conf_wins"], teams[f"{home_away}_conf_losses"] = record["summary"].split("-")
 
     return teams
 
