@@ -1,13 +1,14 @@
 from datetime import datetime
 from typing import Optional
-from sqlalchemy import select
-from sqlalchemy.orm import Session
+
 from atproto_client import Client
 from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
-from models import Post
 from create_db import init_db_session
 from login import init_client
+from models import Post
 
 
 def _query_for_post_ids(session: Session, reply_ids: dict, key: str) -> dict:

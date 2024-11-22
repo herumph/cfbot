@@ -1,13 +1,13 @@
 from datetime import datetime, timedelta
+
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-
+from common import ESPN_GAME, call_espn
 from create_db import init_db_session
-from models import Game, Post
 from create_post import create_post
 from login import init_client
-from common import call_espn, ESPN_GAME
+from models import Game, Post
 
 
 def _update_database(session: Session, result: dict):
@@ -49,8 +49,7 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list:
     previous_drives = game_info["drives"]["previous"]
     for drive in previous_drives:
         last_play = drive["plays"][-1]
-        last_play_time = datetime.strptime(
-            last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
+        last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
         if drive["isScore"] and last_play_time > last_updated:
             scoring_team_id = last_play["end"]["team"]["id"]
             results.append(

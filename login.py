@@ -1,4 +1,5 @@
 from typing import Optional
+
 from atproto_client import Client, Session, SessionEvent
 
 

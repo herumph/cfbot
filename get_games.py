@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
+
 from sqlalchemy import select
 
-
+from common import ESPN_SCOREBOARD, call_espn
 from create_db import init_db_session
-from models import Game
 from create_post import create_post
 from login import init_client
-from common import call_espn, ESPN_SCOREBOARD
+from models import Game
 
 
 def get_records(teams: dict, home_away: str, records: list[dict]):

@@ -1,8 +1,7 @@
 from typing import Optional
-from sqlalchemy import String, Integer, Boolean, TIMESTAMP
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
+
+from sqlalchemy import TIMESTAMP, Boolean, Integer, String
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):

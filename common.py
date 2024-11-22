@@ -1,6 +1,5 @@
 import requests
 
-
 ESPN_GAME = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates="
 ESPN_TEAM = (
