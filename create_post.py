@@ -71,17 +71,9 @@ def create_post(
     post_params = {}
     if reply_ids:
         bsky_ids = _get_reply_ids(session, reply_ids)
-        print(bsky_ids)
         post_params["reply_to"] = bsky_ids
 
     post_params["text"] = post_text
     post = client.send_post(**post_params)
 
     return log_post_to_db(session, post, post_params, reply_ids)
-
-
-if __name__ == "__main__":
-    client = init_client()
-    session = init_db_session()
-
-    post = create_post(client, session, "test post db", {})

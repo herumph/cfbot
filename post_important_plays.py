@@ -50,8 +50,7 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list:
     for drive in previous_drives:
         last_play = drive["plays"][-1]
         last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
-        if drive["isScore"] and last_play_time > last_updated:
-            scoring_team_id = last_play["end"]["team"]["id"]
+        if drive["isScore"] and datetime.utcnow() - timedelta(minutes=2) > last_play_time > last_updated:
             results.append(
                 {
                     "game_id": game_info["header"]["id"],
@@ -60,7 +59,7 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list:
                     "away_score": last_play["awayScore"],
                     "home_score": last_play["homeScore"],
                     "drive_description": drive["description"],
-                    "scoring_team": scoring_team_id,
+                    "scoring_team": last_play["end"]["team"]["id"],
                     "is_complete": is_complete,
                 }
             )
@@ -103,8 +102,3 @@ def post_about_game(game_id: str, date: datetime):
     important_results = get_important_results(game_info, date)
 
     post_important_results(important_results)
-
-
-if __name__ == "__main__":
-    game_id = "401645366"
-    post_about_game(game_id, datetime.utcnow() - timedelta(minutes=5))

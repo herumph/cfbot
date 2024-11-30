@@ -29,9 +29,3 @@ def init_client() -> Client:
     client.login(session_string=session_string)
 
     return client
-
-
-if __name__ == "__main__":
-    client = init_client()
-    # do something with the client
-    print("Client is ready to use!")

@@ -32,7 +32,6 @@ def _get_team_streak(team_info: dict) -> str:
 
 
 def _format_post_text(game: Game, streak_info: dict) -> str:
-    # return "Clemson (8-2, 4-2) W3 @ Virginia Tech (4-3, 1-3) L1 has kicked off on ESPN!"
     away_team = f"{game.away_team} ({game.away_wins}-{game.away_losses}, {(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
     home_away = f"{game.home_team}({game.home_wins}-{game.home_losses}, {game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
     return away_team + home_away + f" has kicked off on {game.networks}!"
@@ -64,9 +63,3 @@ def post_about_current_games(date: datetime):
         post_text = _format_post_text(game, streak_info)
         post = create_post(client, session, post_text)
         _update_database(session, {"game_id": game.id, "last_post_id": post})
-
-
-if __name__ == "__main__":
-    date = datetime.utcnow()
-
-    post_about_current_games(date)
