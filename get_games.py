@@ -75,12 +75,8 @@ def post_a_days_games(todays_games: list[Game]):
 
 if __name__ == "__main__":
     date = datetime.utcnow().strftime("%Y%m%d")
-    # date = "20241115"
     # group 80 == FBS, 81 == FCS
     game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
     games = parse_games(game_data)
 
     log_games_to_db(games)
-    todays_games = get_a_days_games(datetime.utcnow())
-    print(todays_games)
-    # post_a_days_games(todays_games)
