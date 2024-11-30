@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
@@ -11,7 +11,7 @@ from models import Game, Post
 
 
 def _update_database(session: Session, result: dict):
-    end_ts = datetime.utcnow() if result["is_complete"] else None
+    end_ts = datetime.now(timezone.utc) if result["is_complete"] else None
     query = (
         update(Game)
         .where(Game.id == result["game_id"])
@@ -50,7 +50,7 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list:
     for drive in previous_drives:
         last_play = drive["plays"][-1]
         last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
-        if drive["isScore"] and datetime.utcnow() - timedelta(minutes=2) > last_play_time > last_updated:
+        if drive["isScore"] and datetime.now(timezone.utc) - timedelta(minutes=2) > last_play_time > last_updated:
             results.append(
                 {
                     "game_id": game_info["header"]["id"],

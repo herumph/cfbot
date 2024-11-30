@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
 
@@ -74,7 +74,7 @@ def post_a_days_games(todays_games: list[Game]):
 
 
 if __name__ == "__main__":
-    date = datetime.utcnow().strftime("%Y%m%d")
+    date = datetime.now(timezone.utc).strftime("%Y%m%d")
     # group 80 == FBS, 81 == FCS
     game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
     games = parse_games(game_data)

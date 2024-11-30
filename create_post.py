@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from atproto_client import Client
@@ -6,8 +6,6 @@ from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from create_db import init_db_session
-from login import init_client
 from models import Post
 
 
@@ -36,8 +34,8 @@ def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: di
         uri=post.uri,
         cid=post.cid,
         post_text=post_params["text"],
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
+        created_at=datetime.now(timezone.utc),
+        updated_at=datetime.now(timezone.utc),
     )
 
     if reply_ids:
