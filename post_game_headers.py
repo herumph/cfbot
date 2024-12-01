@@ -1,3 +1,7 @@
+"""
+Create root post about a game that is starting
+"""
+
 from datetime import datetime, timedelta
 
 from sqlalchemy import select, update
@@ -10,7 +14,14 @@ from login import init_client
 from models import Game
 
 
-def _update_database(session: Session, result: dict):
+def _update_database(session: Session, result: dict[str, str]):
+    """
+    Update database with last created post
+
+    Args:
+        session (Session): SQLite session
+        result (dict[str, str]): dictionary containing game_id and last_post_id
+    """
     query = (
         update(Game)
         .where(Game.id == result["game_id"])
@@ -26,18 +37,46 @@ def _update_database(session: Session, result: dict):
 
 
 def _get_team_streak(team_info: dict) -> str:
+    """
+    Gather win/loss streaks from ESPN API json
+
+    Args:
+        team_info (dict): ESPN API json response
+
+    Returns:
+        string: formatted win/loss streak
+    """
     streak = [stat["value"] for stat in team_info["team"]["record"]["items"][0]["stats"] if stat["name"] == "streak"][0]
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
 
 
-def _format_post_text(game: Game, streak_info: dict) -> str:
+def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
+    """
+    Format information into posting format
+
+    Args:
+        game (Game): game information from the game database
+        streak_info (dict[str, str]): dictionary of the streak information for the home and away teams
+
+    Returns:
+        string: post text
+    """
     away_team = f"{game.away_team} ({game.away_wins}-{game.away_losses}, {(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
     home_away = f"{game.home_team}({game.home_wins}-{game.home_losses}, {game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
     return away_team + home_away + f" has kicked off on {game.networks}!"
 
 
 def get_current_games(start_date: datetime) -> list[Game]:
+    """
+    Query game table to get currently active games
+
+    Args:
+        start_date (datetime): start date of games to consider
+
+    Returns:
+        list[Game]: list of currently ongoing games
+    """
     session = init_db_session()
     statement = select(Game).filter(
         (Game.start_ts <= start_date),
@@ -50,6 +89,12 @@ def get_current_games(start_date: datetime) -> list[Game]:
 
 
 def post_about_current_games(date: datetime):
+    """
+    Create root level posts for all currently ongoing games
+
+    Args:
+        date (datetime): date to get active games for
+    """
     client = init_client()
     session = init_db_session()
 

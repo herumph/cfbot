@@ -1,3 +1,7 @@
+"""
+SQLite models
+"""
+
 from typing import Optional
 
 from sqlalchemy import TIMESTAMP, Boolean, Integer, String
@@ -5,10 +9,18 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
+    """
+    Defintion of base model
+    """
+
     pass
 
 
 class Post(Base):
+    """
+    Table definition for Post
+    """
+
     __tablename__ = "posts"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -22,6 +34,10 @@ class Post(Base):
 
 
 class Game(Base):
+    """
+    Table definition for Game
+    """
+
     __tablename__ = "games"
 
     id: Mapped[str] = mapped_column(String(20), primary_key=True)
@@ -38,6 +54,8 @@ class Game(Base):
     away_losses: Mapped[int] = mapped_column(Integer)
     away_conf_wins: Mapped[int] = mapped_column(Integer)
     away_conf_losses: Mapped[int] = mapped_column(Integer)
+    home_score: Mapped[int] = mapped_column(Integer)
+    away_score: Mapped[int] = mapped_column(Integer)
     networks: Mapped[str] = mapped_column(String(50))
     trackable: Mapped[bool] = mapped_column(Boolean)
     last_post_id: Mapped[Optional[int]] = mapped_column(Integer)

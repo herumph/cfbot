@@ -1,3 +1,7 @@
+"""
+Post scoring plays for a given game
+"""
+
 from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select, update
@@ -10,7 +14,14 @@ from login import init_client
 from models import Game, Post
 
 
-def _update_database(session: Session, result: dict):
+def _update_database(session: Session, result: dict[str, str]):
+    """
+    Update database with last post created and if a game is over
+
+    Args:
+        session (Session): SQLite session
+        result (dict): dictionary containing last_post_id, game_id, and is_complete
+    """
     end_ts = datetime.now(timezone.utc) if result["is_complete"] else None
     query = (
         update(Game)
@@ -26,9 +37,18 @@ def _update_database(session: Session, result: dict):
     session.commit()
 
 
-def _get_previous_posts(session: Session, game_info: dict) -> dict:
-    # queries for post information
-    query = select(Post).filter(Post.id == game_info.last_post_id)
+def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
+    """
+    Get information about previous post for a game
+
+    Args:
+        session (Session): SQLite session
+        last_post_id (str): id of the last post made
+
+    Returns:
+        dict: post information
+    """
+    query = select(Post).filter(Post.id == last_post_id)
     last_post = session.execute(query).first()
 
     return {
@@ -38,7 +58,17 @@ def _get_previous_posts(session: Session, game_info: dict) -> dict:
     }
 
 
-def get_important_results(game_info: dict, last_updated: datetime) -> list:
+def get_important_results(game_info: dict, last_updated: datetime) -> list[dict[str, str]]:
+    """
+    Get scoring plays from an ESPN API response
+
+    Args:
+        game_info (dict): ESPN API response
+        last_updated (datetime): datetime of last post made about the game
+
+    Returns:
+        list[dict]: list containing all scoring plays from the game that haven't been posted about yet
+    """
     results = []
     if "drives" not in game_info.keys():
         return results
@@ -67,11 +97,26 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list:
     return results
 
 
-def format_scoring_play(drive: dict) -> str:
+def format_scoring_play(drive: dict[str, str]) -> str:
+    """
+    Format the scoring play for a drive
+
+    Args:
+        drive (dict): dictionary containing drive information
+
+    Returns:
+        string: scoring play formatted for posting
+    """
     return f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()} after a drive of {drive["drive_description"]} minutes.\n{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
 
 
-def post_important_results(important_results: dict):
+def post_important_results(important_results: dict[str, str]):
+    """
+    Post scoring plays for a game
+
+    Args:
+        important_results (dict): information about the drive's scoring play
+    """
     client = init_client()
     session = init_db_session()
 
@@ -85,7 +130,7 @@ def post_important_results(important_results: dict):
         result["scoring_team"] = game_info.home_team if game_info.home_team_id == result["scoring_team"] else game_info.away_team
 
         # get parent and root posts from post table
-        previous_post = _get_previous_posts(session, game_info)
+        previous_post = _get_previous_posts(session, game_info.last_post_id)
 
         # format post and send it
         if result["update_time"] > previous_post["created_at"]:
@@ -98,6 +143,13 @@ def post_important_results(important_results: dict):
 
 
 def post_about_game(game_id: str, date: datetime):
+    """
+    Create bluesky posts about scoring plays for a game
+
+    Args:
+        game_id (str): id of the game in the game table
+        date (datetime): datetime of the earliest drive to consider posting about
+    """
     game_info = call_espn(ESPN_GAME + game_id)
     important_results = get_important_results(game_info, date)
 

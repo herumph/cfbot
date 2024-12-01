@@ -1,9 +1,19 @@
+"""
+Login to bluesky
+"""
+
 from typing import Optional
 
 from atproto_client import Client, Session, SessionEvent
 
 
 def get_session() -> Optional[str]:
+    """
+    Get session text files
+
+    Returns:
+        session text information if it exists
+    """
     try:
         with open("session.txt") as f:
             return f.read()
@@ -11,17 +21,36 @@ def get_session() -> Optional[str]:
         return None
 
 
-def save_session(session_string: str) -> None:
+def save_session(session_string: str):
+    """
+    Export current session to a text file
+
+    Args:
+        session_string (str): session information
+    """
     with open("session.txt", "w") as f:
         f.write(session_string)
 
 
-def on_session_change(event: SessionEvent, session: Session) -> None:
+def on_session_change(event: SessionEvent, session: Session):
+    """
+    Export session if there is a change
+
+    Args:
+        event (SessionEvent): session trigger event
+        session (Sessions): bluesky session
+    """
     if event in (SessionEvent.CREATE, SessionEvent.REFRESH):
         save_session(session.export())
 
 
 def init_client() -> Client:
+    """
+    Connect to bluesky using saved credentials
+
+    Returns:
+        Client: bluesky client
+    """
     client = Client()
     client.on_session_change(on_session_change)
 
