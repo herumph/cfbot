@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-from time import sleep  # TODO: delete this for cron setup
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -18,17 +17,14 @@ def get_active_games(session: Session, start_date: datetime) -> list[Game]:
 
 
 if __name__ == "__main__":
-    while True:
-        # first run `get_games.py` for the day
-        session = init_db_session()
-        date = datetime.now(timezone.utc)
+    # first run `get_games.py` for the day
+    session = init_db_session()
+    date = datetime.now(timezone.utc)
 
-        # create root game post
-        post_about_current_games(date)
+    # create root game post
+    post_about_current_games(date)
 
-        games = get_active_games(session, date)
-        for game in games:
-            print(date, game.id, game.home_team, game.away_team)
-            post_about_game(game.id, datetime.now(timezone.utc) - timedelta(minutes=5))
-
-        sleep(60)
+    games = get_active_games(session, date)
+    for game in games:
+        print(date, game.id, game.home_team, game.away_team)
+        post_about_game(game.id, datetime.now(timezone.utc) - timedelta(minutes=5))

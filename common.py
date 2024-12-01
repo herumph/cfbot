@@ -6,7 +6,16 @@ ESPN_TEAM = "https://site.api.espn.com/apis/site/v2/sports/football/college-foot
 
 
 def call_espn(url: str) -> dict:
-    response = requests.get(url)
+    """
+    Query ESPN API
+
+    Args:
+        url (str): url in espn's api to query
+
+    Returns:
+        dict: json response from the api
+    """
+    response = requests.get(url, timeout=10)
 
     if response.status_code == 200:
         return response.json()
