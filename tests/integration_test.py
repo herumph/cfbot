@@ -1,6 +1,4 @@
-"""
-Testing E2E -- importing in order
-"""
+"""Testing E2E -- importing in order."""
 import os.path
 import sys
 

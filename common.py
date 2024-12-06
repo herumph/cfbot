@@ -1,6 +1,4 @@
-"""
-ESPN API functions
-"""
+"""ESPN API functions."""
 
 import requests
 
@@ -10,8 +8,7 @@ ESPN_TEAM = "https://site.api.espn.com/apis/site/v2/sports/football/college-foot
 
 
 def call_espn(url: str) -> dict:
-    """
-    Query ESPN API
+    """Query ESPN API.
 
     Args:
         url (str): url in espn's api to query
