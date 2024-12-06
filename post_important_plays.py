@@ -2,7 +2,7 @@
 Post scoring plays for a given game
 """
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
@@ -29,6 +29,8 @@ def _update_database(session: Session, result: dict[str, str]):
         .values(
             {
                 "last_post_id": result["last_post_id"],
+                "home_score": result["home_score"],
+                "away_score": result["away_score"],
                 "end_ts": end_ts,
             }
         )
@@ -51,20 +53,20 @@ def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
     query = select(Post).filter(Post.id == last_post_id)
     last_post = session.execute(query).first()
 
+    root_id = last_post[0].root_id if last_post[0].root_id else last_post[0].id
     return {
         "parent": last_post[0].id,
-        "root": last_post[0].root_id,
+        "root": root_id,
         "created_at": last_post[0].created_at,
     }
 
 
-def get_important_results(game_info: dict, last_updated: datetime) -> list[dict[str, str]]:
+def get_important_results(game_info: dict) -> list[dict[str, str]]:
     """
-    Get scoring plays from an ESPN API response
+    Gets scoring plays from an ESPN API response and returns them sorted by time
 
     Args:
         game_info (dict): ESPN API response
-        last_updated (datetime): datetime of last post made about the game
 
     Returns:
         list[dict]: list containing all scoring plays from the game that haven't been posted about yet
@@ -76,25 +78,26 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list[dict[
         return results
 
     is_complete = game_info["header"]["competitions"][0]["status"]["type"]["completed"]
-    previous_drives = game_info["drives"]["previous"]
-    for drive in previous_drives:
-        last_play = drive["plays"][-1]
-        last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
-        if drive["isScore"] and datetime.now(timezone.utc) - timedelta(minutes=2) > last_play_time > last_updated:
-            results.append(
-                {
-                    "game_id": game_info["header"]["id"],
-                    "update_time": last_play_time,
-                    "play_text": last_play["text"],
-                    "away_score": last_play["awayScore"],
-                    "home_score": last_play["homeScore"],
-                    "drive_description": drive["description"],
-                    "scoring_team": last_play["end"]["team"]["id"],
-                    "is_complete": is_complete,
-                }
-            )
+    all_drives = game_info["drives"]["previous"]
+    for drive in all_drives:
+        scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
+        for ind, play in enumerate(scoring_plays):  # yes, there can be multiple scoring plays in one drive according to ESPN
+            if drive["isScore"]:
+                drive_description = drive["description"] if ind == 0 else None
+                results.append(
+                    {
+                        "game_id": game_info["header"]["id"],
+                        "play_text": play["text"],
+                        "away_score": play["awayScore"],
+                        "home_score": play["homeScore"],
+                        "total_score": play["homeScore"] + play["awayScore"],  # needed because ESPN doesn't know how clocks work
+                        "drive_description": drive_description,
+                        "scoring_team": play["end"]["team"]["id"],
+                        "is_complete": is_complete,
+                    }
+                )
 
-    return results
+    return sorted(results, key=lambda d: d["total_score"])
 
 
 def format_scoring_play(drive: dict[str, str]) -> str:
@@ -107,7 +110,10 @@ def format_scoring_play(drive: dict[str, str]) -> str:
     Returns:
         string: scoring play formatted for posting
     """
-    return f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()} after a drive of {drive["drive_description"]} minutes.\n{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
+    play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
+    drive_text = f"""after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
+    score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
+    return play_text + drive_text + score_text
 
 
 def post_important_results(important_results: dict[str, str]):
@@ -132,9 +138,9 @@ def post_important_results(important_results: dict[str, str]):
         # get parent and root posts from post table
         previous_post = _get_previous_posts(session, game_info.last_post_id)
 
-        # format post and send it
-        if result["update_time"] > previous_post["created_at"]:
-            previous_post = {k: v for k, v in previous_post.items() if k == "parent" or k == "root"}
+        # format post and send it if the score has gone up
+        if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
+            previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
             post_text = format_scoring_play(result)
             result["last_post_id"] = create_post(client, session, post_text, previous_post)
 
@@ -142,7 +148,7 @@ def post_important_results(important_results: dict[str, str]):
             _update_database(session, result)
 
 
-def post_about_game(game_id: str, date: datetime):
+def post_about_game(game_id: str):
     """
     Create bluesky posts about scoring plays for a game
 
@@ -151,6 +157,6 @@ def post_about_game(game_id: str, date: datetime):
         date (datetime): datetime of the earliest drive to consider posting about
     """
     game_info = call_espn(ESPN_GAME + game_id)
-    important_results = get_important_results(game_info, date)
+    important_results = get_important_results(game_info)
 
     post_important_results(important_results)

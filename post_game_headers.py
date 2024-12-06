@@ -81,7 +81,6 @@ def get_current_games(start_date: datetime) -> list[Game]:
     statement = select(Game).filter(
         (Game.start_ts <= start_date),
         (Game.start_ts >= start_date - timedelta(hours=6)),
-        (Game.last_post_id == None),
     )
     rows = session.execute(statement).all()
 
@@ -100,11 +99,12 @@ def post_about_current_games(date: datetime):
 
     games = get_current_games(date)
     for game in games:
-        streak_info = {}
-        for team in [game.home_team_id, game.away_team_id]:
-            team_info = call_espn(ESPN_TEAM + team)
-            streak_info[team] = _get_team_streak(team_info)
+        if not game.last_post_id:
+            streak_info = {}
+            for team in [game.home_team_id, game.away_team_id]:
+                team_info = call_espn(ESPN_TEAM + team)
+                streak_info[team] = _get_team_streak(team_info)
 
-        post_text = _format_post_text(game, streak_info)
-        post = create_post(client, session, post_text)
-        _update_database(session, {"game_id": game.id, "last_post_id": post})
+            post_text = _format_post_text(game, streak_info)
+            post = create_post(client, session, post_text)
+            _update_database(session, {"game_id": game.id, "last_post_id": post})

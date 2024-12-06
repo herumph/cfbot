@@ -2,7 +2,7 @@
 Wrapper to monitor games and post when scoring occurs.
 """
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from post_game_headers import get_current_games, post_about_current_games
 from post_important_plays import post_about_game
@@ -15,5 +15,4 @@ if __name__ == "__main__":
 
     games = get_current_games(date)
     for game in games:
-        print(date, game.id, game.home_team, game.away_team)
-        post_about_game(game.id, datetime.now(timezone.utc) - timedelta(minutes=5))
+        post_about_game(game.id)
