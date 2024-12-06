@@ -90,7 +90,7 @@ def get_important_results(game_info: dict) -> list[dict[str, str]]:
                         "play_text": play["text"],
                         "away_score": play["awayScore"],
                         "home_score": play["homeScore"],
-                        "total_score": play["homeScore"] + play["awayScore"], # needed because ESPN doesn't know how clocks work
+                        "total_score": play["homeScore"] + play["awayScore"],  # needed because ESPN doesn't know how clocks work
                         "drive_description": drive_description,
                         "scoring_team": play["end"]["team"]["id"],
                         "is_complete": is_complete,

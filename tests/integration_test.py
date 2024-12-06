@@ -1,14 +1,15 @@
 """
 Testing E2E -- importing in order
 """
-import sys
 import os.path
+import sys
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 from datetime import datetime, timedelta
 
 from get_games import main
-from post_game_headers import post_about_current_games, get_current_games
+from post_game_headers import get_current_games, post_about_current_games
 from post_important_plays import post_about_game
 
 # testing with this BYU game because there is some weird data in there

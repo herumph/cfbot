@@ -2,8 +2,8 @@
 Gather games from the ESPN API for a given date and log them to the database
 """
 
-from typing import Optional
 from datetime import datetime, timedelta, timezone
+from typing import Optional
 
 from sqlalchemy import select
 
