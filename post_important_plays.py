@@ -127,7 +127,6 @@ def post_important_results(important_results: dict[str, str]):
     session = init_db_session()
 
     for result in important_results:
-        print(result)
         # get information about this game from game table
         query = select(Game).filter(Game.id == result["game_id"])
         game_info = session.execute(query).first()[0]
@@ -141,7 +140,6 @@ def post_important_results(important_results: dict[str, str]):
 
         # format post and send it if the score has gone up
         if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
-            print("HERE")
             previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
             post_text = format_scoring_play(result)
             result["last_post_id"] = create_post(client, session, post_text, previous_post)
