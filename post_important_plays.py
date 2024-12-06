@@ -138,7 +138,6 @@ def post_important_results(important_results: dict[str, str]):
         if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
             previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
             post_text = format_scoring_play(result)
-            print(previous_post)
             result["last_post_id"] = create_post(client, session, post_text, previous_post)
 
             # update database with new information
