@@ -1,9 +1,4 @@
-"""Testing E2E -- importing in order."""
-import os.path
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-
+"""Testing E2E"""
 from datetime import datetime, timedelta
 
 from get_games import main
