@@ -13,6 +13,7 @@ To run this bot:
 2. Post scoring updates by running `python monitor_games.py`
 
 ## TO-DO
-1. Add unit tests
-2. Organize project
-3. Create as a project using `pants`
+1. Only injest new games
+2. Add unit tests
+3. Organize project
+4. Create as a project using `pants`
