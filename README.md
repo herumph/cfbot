@@ -11,3 +11,8 @@ To run this bot:
 
 1. Gather games that will occur today by running `python get_games.py`
 2. Post scoring updates by running `python monitor_games.py`
+
+## TO-DO
+1. Add unit tests
+2. Organize project
+3. Create as a project using `pants`
