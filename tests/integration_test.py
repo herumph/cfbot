@@ -15,7 +15,7 @@ START_DATE = "2024-11-30"
 START_DATE = datetime.strptime(START_DATE, "%Y-%m-%d")
 
 # get games
-# main(START_DATE, ["BYU"])
+main(START_DATE, ["BYU"])
 
 # make header post
 START_DATE = START_DATE + timedelta(hours=31)
@@ -23,6 +23,5 @@ post_about_current_games(START_DATE)
 
 # post scoring plays
 games = get_current_games(START_DATE)
-print(games)
 for game in games:
     post_about_game(game.id)
