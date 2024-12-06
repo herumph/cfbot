@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from sqlalchemy import select
+from sqlalchemy.dialects.sqlite import insert
 
 from common import ESPN_SCOREBOARD, call_espn
 from create_db import init_db_session
@@ -56,7 +57,7 @@ def parse_competitors(competitors: list[dict]) -> dict[str, str]:
     return teams
 
 
-def parse_games(game_json: dict) -> list[Game]:
+def parse_games(game_json: dict) -> list[dict]:
     """
     Parse game information from the ESPN scoreboard
 
@@ -64,21 +65,21 @@ def parse_games(game_json: dict) -> list[Game]:
         game_json (dict): ESPN API response from the ESPN scoreboard for a given league
 
     Returns:
-        list[Game]: list of Game models to be added to the SQLite database
+        list[dict]: list of games to be added to the SQLite database
     """
     games = []
     for event in game_json["events"]:
         competitors = parse_competitors(event["competitions"][0]["competitors"])
         games.append(
-            Game(
-                id=event["id"],
-                start_ts=datetime.strptime(event["date"], "%Y-%m-%dT%H:%MZ"),
-                networks=event["competitions"][0]["broadcast"],
-                home_score=0,
-                away_score=0,
-                trackable=True,
+            {
+                "id": event["id"],
+                "start_ts": datetime.strptime(event["date"], "%Y-%m-%dT%H:%MZ"),
+                "networks": event["competitions"][0]["broadcast"],
+                "home_score": 0,
+                "away_score": 0,
+                "trackable": True,
                 **competitors,
-            )
+            }
         )
 
     return games
@@ -92,7 +93,7 @@ def log_games_to_db(game_data: list[Game]):
         game_data (list): list of games to add to the database
     """
     session = init_db_session()
-    session.add_all(game_data)
+    session.execute(insert(Game).values(game_data).on_conflict_do_nothing())
 
     session.commit()
 
@@ -146,7 +147,7 @@ def main(date: datetime, selected_teams: Optional[list] = None):
     games = parse_games(game_data)
 
     if selected_teams:
-        games = [game for game in games if game.home_team in selected_teams or game.away_team in selected_teams]
+        games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
     log_games_to_db(games)
 
