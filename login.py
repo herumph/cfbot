@@ -3,13 +3,15 @@ Login to bluesky
 """
 
 from typing import Optional
+import getpass
 
 from atproto_client import Client, Session, SessionEvent
 
 
-def get_session() -> Optional[str]:
+def get_session(client: Client) -> Optional[str]:
     """
-    Get session text files
+    Get session text files if they exist, 
+    otherwise prompt for username and password
 
     Returns:
         session text information if it exists
@@ -18,7 +20,14 @@ def get_session() -> Optional[str]:
         with open("session.txt") as f:
             return f.read()
     except FileNotFoundError:
-        return None
+        user = getpass.getpass("user:")
+        password = getpass.getpass("password:")
+        client.login(user, password)
+        session_string = client.export_session_string()
+
+        save_session(session_string)
+        return session_string
+
 
 
 def save_session(session_string: str):
@@ -54,7 +63,7 @@ def init_client() -> Client:
     client = Client()
     client.on_session_change(on_session_change)
 
-    session_string = get_session()
+    session_string = get_session(client)
     client.login(session_string=session_string)
 
     return client
