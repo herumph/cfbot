@@ -29,6 +29,8 @@ def _update_database(session: Session, result: dict[str, str]):
         .values(
             {
                 "last_post_id": result["last_post_id"],
+                "home_score": result["home_score"],
+                "away_score": result["away_score"],
                 "end_ts": end_ts,
             }
         )
@@ -58,13 +60,12 @@ def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
     }
 
 
-def get_important_results(game_info: dict, last_updated: datetime) -> list[dict[str, str]]:
+def get_important_results(game_info: dict) -> list[dict[str, str]]:
     """
     Get scoring plays from an ESPN API response
 
     Args:
         game_info (dict): ESPN API response
-        last_updated (datetime): datetime of last post made about the game
 
     Returns:
         list[dict]: list containing all scoring plays from the game that haven't been posted about yet
@@ -76,11 +77,11 @@ def get_important_results(game_info: dict, last_updated: datetime) -> list[dict[
         return results
 
     is_complete = game_info["header"]["competitions"][0]["status"]["type"]["completed"]
-    previous_drives = game_info["drives"]["previous"]
-    for drive in previous_drives:
+    all_drives = game_info["drives"]["previous"]
+    for drive in all_drives:
         last_play = drive["plays"][-1]
         last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
-        if drive["isScore"] and datetime.now(timezone.utc) - timedelta(minutes=2) > last_play_time > last_updated:
+        if drive["isScore"]:
             results.append(
                 {
                     "game_id": game_info["header"]["id"],
@@ -132,9 +133,9 @@ def post_important_results(important_results: dict[str, str]):
         # get parent and root posts from post table
         previous_post = _get_previous_posts(session, game_info.last_post_id)
 
-        # format post and send it
-        if result["update_time"] > previous_post["created_at"]:
-            previous_post = {k: v for k, v in previous_post.items() if k == "parent" or k == "root"}
+        # format post and send it if the score has gone up
+        if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
+            previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
             post_text = format_scoring_play(result)
             result["last_post_id"] = create_post(client, session, post_text, previous_post)
 
@@ -142,7 +143,7 @@ def post_important_results(important_results: dict[str, str]):
             _update_database(session, result)
 
 
-def post_about_game(game_id: str, date: datetime):
+def post_about_game(game_id: str):
     """
     Create bluesky posts about scoring plays for a game
 
@@ -151,6 +152,6 @@ def post_about_game(game_id: str, date: datetime):
         date (datetime): datetime of the earliest drive to consider posting about
     """
     game_info = call_espn(ESPN_GAME + game_id)
-    important_results = get_important_results(game_info, date)
+    important_results = get_important_results(game_info)
 
     post_important_results(important_results)
