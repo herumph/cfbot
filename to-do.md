@@ -5,4 +5,4 @@
 4. sort important plays before posting.
 5. Test with BYU game to try and address [this issue](https://bsky.app/profile/blanketdevbot.bsky.social/post/3lc7qyacxl52f)
 6. Add unit tests
-7. Fix reply issues.
+7. Fix reply issues. -- DONE

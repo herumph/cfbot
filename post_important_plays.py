@@ -63,7 +63,7 @@ def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
 
 def get_important_results(game_info: dict) -> list[dict[str, str]]:
     """
-    Get scoring plays from an ESPN API response
+    Gets scoring plays from an ESPN API response and returns them sorted by time
 
     Args:
         game_info (dict): ESPN API response
@@ -80,23 +80,24 @@ def get_important_results(game_info: dict) -> list[dict[str, str]]:
     is_complete = game_info["header"]["competitions"][0]["status"]["type"]["completed"]
     all_drives = game_info["drives"]["previous"]
     for drive in all_drives:
-        last_play = drive["plays"][-1]
-        last_play_time = datetime.strptime(last_play["wallclock"], "%Y-%m-%dT%H:%M:%SZ")
-        if drive["isScore"]:
-            results.append(
-                {
-                    "game_id": game_info["header"]["id"],
-                    "update_time": last_play_time,
-                    "play_text": last_play["text"],
-                    "away_score": last_play["awayScore"],
-                    "home_score": last_play["homeScore"],
-                    "drive_description": drive["description"],
-                    "scoring_team": last_play["end"]["team"]["id"],
-                    "is_complete": is_complete,
-                }
-            )
+        scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
+        for ind, play in enumerate(scoring_plays):  # yes, there can be multiple scoring plays in one drive according to ESPN
+            if drive["isScore"]:
+                drive_description = drive["description"] if ind == 0 else None
+                results.append(
+                    {
+                        "game_id": game_info["header"]["id"],
+                        "update_time": datetime.strptime(play["wallclock"], "%Y-%m-%dT%H:%M:%SZ"),
+                        "play_text": play["text"],
+                        "away_score": play["awayScore"],
+                        "home_score": play["homeScore"],
+                        "drive_description": drive_description,
+                        "scoring_team": play["end"]["team"]["id"],
+                        "is_complete": is_complete,
+                    }
+                )
 
-    return results
+    return sorted(results, key=lambda d: d["update_time"])
 
 
 def format_scoring_play(drive: dict[str, str]) -> str:
@@ -109,7 +110,10 @@ def format_scoring_play(drive: dict[str, str]) -> str:
     Returns:
         string: scoring play formatted for posting
     """
-    return f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()} after a drive of {drive["drive_description"]} minutes.\n{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
+    play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
+    drive_text = f"""after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
+    score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
+    return play_text + drive_text + score_text
 
 
 def post_important_results(important_results: dict[str, str]):
