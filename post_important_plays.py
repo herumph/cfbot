@@ -111,7 +111,7 @@ def format_scoring_play(drive: dict[str, str]) -> str:
         string: scoring play formatted for posting
     """
     play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
-    drive_text = f"""after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
+    drive_text = f""" after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
     score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
     return play_text + drive_text + score_text
 
