@@ -85,7 +85,7 @@ def parse_games(game_json: dict) -> list[dict]:
     return games
 
 
-def log_games_to_db(game_data: list[Game]):
+def log_games_to_db(game_data: list[dict]):
     """
     Logs games to SQLite database
 
