@@ -88,7 +88,7 @@ def create_post(
     client: Client,
     session: Session,
     post_text,
-    reply_ids: Optional[dict[str, str]] = None,
+    reply_ids: Optional[dict[str, int]] = None,
 ) -> str:
     """
     Create a post that is either new or a reply to an existing post

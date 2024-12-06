@@ -1,6 +1,9 @@
 """
 Testing E2E -- importing in order
 """
+import sys
+import os.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 from datetime import datetime, timedelta
 
