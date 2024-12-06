@@ -2,7 +2,7 @@
 Post scoring plays for a given game
 """
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
@@ -53,9 +53,10 @@ def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
     query = select(Post).filter(Post.id == last_post_id)
     last_post = session.execute(query).first()
 
+    root_id = last_post[0].root_id if last_post[0].root_id else last_post[0].id
     return {
         "parent": last_post[0].id,
-        "root": last_post[0].root_id,
+        "root": root_id,
         "created_at": last_post[0].created_at,
     }
 
@@ -137,6 +138,7 @@ def post_important_results(important_results: dict[str, str]):
         if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
             previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
             post_text = format_scoring_play(result)
+            print(previous_post)
             result["last_post_id"] = create_post(client, session, post_text, previous_post)
 
             # update database with new information
