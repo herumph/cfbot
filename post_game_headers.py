@@ -100,7 +100,6 @@ def post_about_current_games(date: datetime):
     games = get_current_games(date)
     for game in games:
         if not game.last_post_id:
-            print(game)
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
                 team_info = call_espn(ESPN_TEAM + team)
