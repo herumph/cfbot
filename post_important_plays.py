@@ -35,6 +35,8 @@ def _update_database(session: Session, result: dict[str, str]):
             }
         )
     )
+    if end_ts:
+        post_final_score()
     session.execute(query)
     session.commit()
 
@@ -115,7 +117,6 @@ def format_scoring_play(drive: dict[str, str]) -> str:
     score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
     return play_text + drive_text + score_text
 
-
 def post_important_results(important_results: dict[str, str]):
     """
     Post scoring plays for a game
@@ -147,6 +148,41 @@ def post_important_results(important_results: dict[str, str]):
             # update database with new information
             _update_database(session, result)
 
+def post_final_score():
+    """
+    Post final score of a game.
+
+    Args:
+         final_score (dict): information about the game's final score state 
+    """
+    client = init_client()
+    session = init_db_session()
+
+    for result in game_info:
+        # get information about this game from game table
+        query = select(Game).filter(Game.id == result["game_id"])
+        game_info = session.execute(query).first()[0]
+        assert game_info.last_post_id, "No previous post made for this game"
+        result["home"] = game_info.home_team
+        result["away"] = game_info.away_team
+        result["winning_team"] = game_info.home_team if game_info.home_score > game_info.away_score else game_info.away_team
+        result["losing_team"] = game_info.home_team if game_info.home_score < game_info.away_score else game_info.away_team
+        result["winning_score"] = game_info.home_score if game_info.home_score > game_info.away_score else game_info.away_score
+        result["losing_score"] = game_info.home_score if game_info.home_score < game_info.away_score else game_info.away_score
+
+        # get parent and root posts from post table
+        previous_post = _get_previous_posts(session, game_info.last_post_id)
+
+        # format post and send it
+        previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
+        post_text = f"""{result["winning_team"]} wins over {result["losing_team"]} by a score of
+            {result["winning_score"]} to {result["losing_score"]}!"""
+        result["last_post_id"] = create_post(client, session, post_text, previous_post)
+
+        # update database with new information
+        _update_database(session, result)
+
+    
 
 def post_about_game(game_id: str):
     """
