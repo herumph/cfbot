@@ -1,6 +1,4 @@
-"""
-Wrapper to monitor games and post when scoring occurs.
-"""
+"""Wrapper to monitor games and post when scoring occurs."""
 
 from datetime import datetime, timezone
 

@@ -1,6 +1,4 @@
-"""
-SQLite models
-"""
+"""SQLite models."""
 
 from typing import Optional
 
@@ -9,17 +7,13 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
-    """
-    Defintion of base model
-    """
+    """Defintion of base model."""
 
     pass
 
 
 class Post(Base):
-    """
-    Table definition for Post
-    """
+    """Table definition for Post."""
 
     __tablename__ = "posts"
 
@@ -34,9 +28,7 @@ class Post(Base):
 
 
 class Game(Base):
-    """
-    Table definition for Game
-    """
+    """Table definition for Game."""
 
     __tablename__ = "games"
 
