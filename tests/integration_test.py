@@ -1,4 +1,4 @@
-"""Testing E2E"""
+"""Testing E2E."""
 from datetime import datetime, timedelta
 
 from get_games import main
