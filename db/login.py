@@ -14,7 +14,7 @@ def get_session(client: Client) -> Optional[str]:
         session text information if it exists
     """
     try:
-        with open("session.txt") as f:
+        with open("/Users/scott/GitHub/cfbot/db/session.txt") as f:
             return f.read()
     except FileNotFoundError:
         user = getpass.getpass("user:")
