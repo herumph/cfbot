@@ -1,4 +1,7 @@
-"""Wrapper to monitor games and post when scoring occurs."""
+"""
+Wrapper to monitor games and post when scoring occurs.
+TODO: delete this file and create a proper handler.
+"""
 
 from datetime import datetime, timezone
 
