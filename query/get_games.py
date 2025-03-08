@@ -7,11 +7,11 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
-from post.create_post import create_post
-from db.common import ESPN_SCOREBOARD, call_espn
 from db.create_db import init_db_session
-from db.login import init_client
 from db.models import Game
+from post.create_post import create_post
+from post.login import init_client
+from query.common import ESPN_SCOREBOARD, call_espn
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
@@ -141,7 +141,8 @@ def main(date: datetime, selected_teams: Optional[list] = None):
     if selected_teams:
         games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
-    log_games_to_db(games)
+    if games:
+        log_games_to_db(games)
 
 
 if __name__ == "__main__":

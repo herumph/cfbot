@@ -16,4 +16,6 @@ To run this bot:
 1. Only injest new games -- DONE
 2. Add unit tests
 3. Organize project
-4. Create as a project using `pants`
+4. Create as a project using `pants` -- DONE
+5. Create table for storing credentials
+6. Move db initialization to the db __init__ file
