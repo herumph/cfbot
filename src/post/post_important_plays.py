@@ -5,11 +5,11 @@ from datetime import datetime, timezone
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from query.common import ESPN_GAME, call_espn
 from db.create_db import init_db_session
+from db.models import Game, Post
 from post.create_post import create_post
 from post.login import init_client
-from db.models import Game, Post
+from query.common import ESPN_GAME, call_espn
 
 
 def _update_database(session: Session, result: dict[str, str]):

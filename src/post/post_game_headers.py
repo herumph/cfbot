@@ -5,11 +5,11 @@ from datetime import datetime, timedelta
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from query.common import ESPN_TEAM, call_espn
 from db.create_db import init_db_session
+from db.models import Game
 from post.create_post import create_post
 from post.login import init_client
-from db.models import Game
+from query.common import ESPN_TEAM, call_espn
 
 
 def _update_database(session: Session, result: dict[str, str]):
@@ -57,9 +57,11 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     Returns:
         string: post text
     """
-    away_team = f"{game.away_team} ({game.away_wins}-{game.away_losses}, {(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
-    home_away = f"{game.home_team} ({game.home_wins}-{game.home_losses}, {game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
-    return away_team + home_away + f" has kicked off on {game.networks}!"
+    away_team = f"{game.away_team} ({game.away_wins}-{game.away_losses}, "
+    away_team_conference = f"{(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
+    home_team = f"{game.home_team} ({game.home_wins}-{game.home_losses}, "
+    home_team_conference = f"{game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
+    return away_team + away_team_conference + home_team + home_team_conference + f" has kicked off on {game.networks}!"
 
 
 def get_current_games(start_date: datetime) -> list[Game]:
