@@ -7,11 +7,11 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
-from common import ESPN_SCOREBOARD, call_espn
-from create_db import init_db_session
-from create_post import create_post
-from login import init_client
-from models import Game
+from post.create_post import create_post
+from db.common import ESPN_SCOREBOARD, call_espn
+from db.create_db import init_db_session
+from db.login import init_client
+from db.models import Game
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:

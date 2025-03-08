@@ -1,7 +1,3 @@
-python_requirements(
-    name="reqs0",
-)
+python_requirements(name="reqs")
 
-python_sources(
-    name="root",
-)
+python_sources(sources=["**/*.py"])

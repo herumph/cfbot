@@ -3,7 +3,7 @@
 import getpass
 from typing import Optional
 
-from atproto_client import Client, Session, SessionEvent
+from atproto import Client, Session, SessionEvent
 
 
 def get_session(client: Client) -> Optional[str]:

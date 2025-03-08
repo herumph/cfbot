@@ -1,9 +1,9 @@
 """Testing E2E."""
 from datetime import datetime, timedelta
 
-from get_games import main
-from post_game_headers import get_current_games, post_about_current_games
-from post_important_plays import post_about_game
+from db.get_games import main
+from post.post_game_headers import get_current_games, post_about_current_games
+from post.post_important_plays import post_about_game
 
 # testing with this BYU game because there is some weird data in there
 # https://www.espn.com/college-football/game/_/gameId/401636942/houston-byu

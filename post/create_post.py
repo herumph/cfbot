@@ -8,7 +8,7 @@ from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from models import Post
+from db.models import Post
 
 
 def _query_for_post_ids(session: Session, reply_ids: dict[str, str], key: str) -> dict:
