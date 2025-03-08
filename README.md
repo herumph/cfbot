@@ -18,3 +18,4 @@ To run this bot:
 3. Organize project
 4. Create as a project using `pants` -- DONE
 5. Create table for storing credentials
+6. Move db initialization to the db __init__ file
