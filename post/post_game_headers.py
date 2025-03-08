@@ -1,22 +1,19 @@
-"""
-Create root post about a game that is starting
-"""
+"""Create root post about a game that is starting."""
 
 from datetime import datetime, timedelta
 
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from common import ESPN_TEAM, call_espn
-from create_db import init_db_session
-from create_post import create_post
-from login import init_client
-from models import Game
+from db.common import ESPN_TEAM, call_espn
+from db.create_db import init_db_session
+from post.create_post import create_post
+from db.login import init_client
+from db.models import Game
 
 
 def _update_database(session: Session, result: dict[str, str]):
-    """
-    Update database with last created post
+    """Update database with last created post.
 
     Args:
         session (Session): SQLite session
@@ -37,8 +34,7 @@ def _update_database(session: Session, result: dict[str, str]):
 
 
 def _get_team_streak(team_info: dict) -> str:
-    """
-    Gather win/loss streaks from ESPN API json
+    """Gather win/loss streaks from ESPN API json.
 
     Args:
         team_info (dict): ESPN API json response
@@ -52,8 +48,7 @@ def _get_team_streak(team_info: dict) -> str:
 
 
 def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
-    """
-    Format information into posting format
+    """Format information into posting format.
 
     Args:
         game (Game): game information from the game database
@@ -68,8 +63,7 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
 
 
 def get_current_games(start_date: datetime) -> list[Game]:
-    """
-    Query game table to get currently active games
+    """Query game table to get currently active games.
 
     Args:
         start_date (datetime): start date of games to consider
@@ -88,8 +82,7 @@ def get_current_games(start_date: datetime) -> list[Game]:
 
 
 def post_about_current_games(date: datetime):
-    """
-    Create root level posts for all currently ongoing games
+    """Create root level posts for all currently ongoing games.
 
     Args:
         date (datetime): date to get active games for

@@ -1,6 +1,4 @@
-"""
-Create post on bluesky and log its information to appropriate tables
-"""
+"""Create post on bluesky and log its information to appropriate tables."""
 
 from datetime import datetime, timezone
 from typing import Optional
@@ -10,12 +8,11 @@ from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from models import Post
+from db.models import Post
 
 
 def _query_for_post_ids(session: Session, reply_ids: dict[str, str], key: str) -> dict:
-    """
-    Gather information for a parent/root post from the sqlite database
+    """Gather information for a parent/root post from the sqlite database.
 
     Args:
         session (Session): SQLite session
@@ -33,8 +30,8 @@ def _query_for_post_ids(session: Session, reply_ids: dict[str, str], key: str) -
 
 
 def _get_reply_ids(session: Session, reply_ids: dict[str, dict]) -> dict:
-    """
-    Gather information for the parent and root posts from the sqlite database
+    """Gather information for the parent and root posts from the sqlite
+    database.
 
     Args:
         session (Session): SQLite session
@@ -54,8 +51,7 @@ def _get_reply_ids(session: Session, reply_ids: dict[str, dict]) -> dict:
 
 
 def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: dict[str, str], reply_ids: dict[str, dict]) -> str:
-    """
-    Logs created post to the Post table
+    """Logs created post to the Post table.
 
     Args:
         session (Session): SQLite session
@@ -90,8 +86,7 @@ def create_post(
     post_text,
     reply_ids: Optional[dict[str, int]] = None,
 ) -> str:
-    """
-    Create a post that is either new or a reply to an existing post
+    """Create a post that is either new or a reply to an existing post.
 
     Args:
         client (Client): connection to bluesky

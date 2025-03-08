@@ -1,6 +1,5 @@
-"""
-Gather games from the ESPN API for a given date and log them to the database
-"""
+"""Gather games from the ESPN API for a given date and log them to the
+database."""
 
 from datetime import datetime, timedelta, timezone
 from typing import Optional
@@ -8,16 +7,15 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
-from common import ESPN_SCOREBOARD, call_espn
-from create_db import init_db_session
-from create_post import create_post
-from login import init_client
-from models import Game
+from post.create_post import create_post
+from db.common import ESPN_SCOREBOARD, call_espn
+from db.create_db import init_db_session
+from db.login import init_client
+from db.models import Game
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
-    """
-    Parse record information from an ESPN API response
+    """Parse record information from an ESPN API response.
 
     Args:
         teams (dict): dictionary containing information about home and away teams
@@ -39,8 +37,7 @@ def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> d
 
 
 def parse_competitors(competitors: list[dict]) -> dict[str, str]:
-    """
-    Gather competitor information from an ESPN API response
+    """Gather competitor information from an ESPN API response.
 
     Args:
         competitiors (list[dict]): list containing all teams involved in a competition
@@ -58,8 +55,7 @@ def parse_competitors(competitors: list[dict]) -> dict[str, str]:
 
 
 def parse_games(game_json: dict) -> list[dict]:
-    """
-    Parse game information from the ESPN scoreboard
+    """Parse game information from the ESPN scoreboard.
 
     Args:
         game_json (dict): ESPN API response from the ESPN scoreboard for a given league
@@ -86,8 +82,7 @@ def parse_games(game_json: dict) -> list[dict]:
 
 
 def log_games_to_db(game_data: list[dict]):
-    """
-    Logs games to SQLite database
+    """Logs games to SQLite database.
 
     Args:
         game_data (list): list of games to add to the database
@@ -99,8 +94,7 @@ def log_games_to_db(game_data: list[dict]):
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
-    """
-    Query the games table for all games on a given date
+    """Query the games table for all games on a given date.
 
     Args:
         start_date: date to query games for
@@ -120,8 +114,7 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
 
 
 def post_a_days_games(todays_games: list[Game]):
-    """
-    Create a top level post of how many games there are today
+    """Create a top level post of how many games there are today.
 
     Args:
         todays_games (list[Game]): list of games
@@ -134,8 +127,7 @@ def post_a_days_games(todays_games: list[Game]):
 
 
 def main(date: datetime, selected_teams: Optional[list] = None):
-    """
-    Gathers games from espn and logs them to the database
+    """Gathers games from espn and logs them to the database.
 
     Args:
         date (datetime): date to get games for

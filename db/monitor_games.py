@@ -1,11 +1,9 @@
-"""
-Wrapper to monitor games and post when scoring occurs.
-"""
+"""Wrapper to monitor games and post when scoring occurs."""
 
 from datetime import datetime, timezone
 
-from post_game_headers import get_current_games, post_about_current_games
-from post_important_plays import post_about_game
+from post.post_game_headers import get_current_games, post_about_current_games
+from post.post_important_plays import post_about_game
 
 if __name__ == "__main__":
     date = datetime.now(timezone.utc)

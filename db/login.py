@@ -1,23 +1,20 @@
-"""
-Login to bluesky
-"""
+"""Login to bluesky."""
 
-from typing import Optional
 import getpass
+from typing import Optional
 
-from atproto_client import Client, Session, SessionEvent
+from atproto import Client, Session, SessionEvent
 
 
 def get_session(client: Client) -> Optional[str]:
-    """
-    Get session text files if they exist, 
-    otherwise prompt for username and password
+    """Get session text files if they exist, otherwise prompt for username and
+    password.
 
     Returns:
         session text information if it exists
     """
     try:
-        with open("session.txt") as f:
+        with open("/Users/scott/GitHub/cfbot/db/session.txt") as f:
             return f.read()
     except FileNotFoundError:
         user = getpass.getpass("user:")
@@ -29,10 +26,8 @@ def get_session(client: Client) -> Optional[str]:
         return session_string
 
 
-
 def save_session(session_string: str):
-    """
-    Export current session to a text file
+    """Export current session to a text file.
 
     Args:
         session_string (str): session information
@@ -42,8 +37,7 @@ def save_session(session_string: str):
 
 
 def on_session_change(event: SessionEvent, session: Session):
-    """
-    Export session if there is a change
+    """Export session if there is a change.
 
     Args:
         event (SessionEvent): session trigger event
@@ -54,8 +48,7 @@ def on_session_change(event: SessionEvent, session: Session):
 
 
 def init_client() -> Client:
-    """
-    Connect to bluesky using saved credentials
+    """Connect to bluesky using saved credentials.
 
     Returns:
         Client: bluesky client

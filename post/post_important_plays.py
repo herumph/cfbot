@@ -1,22 +1,19 @@
-"""
-Post scoring plays for a given game
-"""
+"""Post scoring plays for a given game."""
 
 from datetime import datetime, timezone
 
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from common import ESPN_GAME, call_espn
-from create_db import init_db_session
-from create_post import create_post
-from login import init_client
-from models import Game, Post
+from db.common import ESPN_GAME, call_espn
+from db.create_db import init_db_session
+from post.create_post import create_post
+from db.login import init_client
+from db.models import Game, Post
 
 
 def _update_database(session: Session, result: dict[str, str]):
-    """
-    Update database with last post created and if a game is over
+    """Update database with last post created and if a game is over.
 
     Args:
         session (Session): SQLite session
@@ -40,8 +37,7 @@ def _update_database(session: Session, result: dict[str, str]):
 
 
 def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
-    """
-    Get information about previous post for a game
+    """Get information about previous post for a game.
 
     Args:
         session (Session): SQLite session
@@ -62,8 +58,8 @@ def _get_previous_posts(session: Session, last_post_id: str) -> dict[str, str]:
 
 
 def get_important_results(game_info: dict) -> list[dict[str, str]]:
-    """
-    Gets scoring plays from an ESPN API response and returns them sorted by time
+    """Gets scoring plays from an ESPN API response and returns them sorted by
+    time.
 
     Args:
         game_info (dict): ESPN API response
@@ -101,8 +97,7 @@ def get_important_results(game_info: dict) -> list[dict[str, str]]:
 
 
 def format_scoring_play(drive: dict[str, str]) -> str:
-    """
-    Format the scoring play for a drive
+    """Format the scoring play for a drive.
 
     Args:
         drive (dict): dictionary containing drive information
@@ -117,8 +112,7 @@ def format_scoring_play(drive: dict[str, str]) -> str:
 
 
 def post_important_results(important_results: dict[str, str]):
-    """
-    Post scoring plays for a game
+    """Post scoring plays for a game.
 
     Args:
         important_results (dict): information about the drive's scoring play
@@ -149,8 +143,7 @@ def post_important_results(important_results: dict[str, str]):
 
 
 def post_about_game(game_id: str):
-    """
-    Create bluesky posts about scoring plays for a game
+    """Create bluesky posts about scoring plays for a game.
 
     Args:
         game_id (str): id of the game in the game table
