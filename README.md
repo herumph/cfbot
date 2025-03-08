@@ -16,5 +16,4 @@ To run this bot:
 1. Only injest new games -- DONE
 2. Add unit tests
 3. Organize project
-4. Create as a project using `pants` -- DONE
-5. Add pants lockfile
+4. Create as a project using `pants`
