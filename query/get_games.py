@@ -141,7 +141,8 @@ def main(date: datetime, selected_teams: Optional[list] = None):
     if selected_teams:
         games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
-    log_games_to_db(games)
+    if games:
+        log_games_to_db(games)
 
 
 if __name__ == "__main__":
