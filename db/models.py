@@ -59,8 +59,7 @@ class Credentials(Base):
 
     __tablename__ = "credentials"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(String(80))
+    username: Mapped[str] = mapped_column(String(80), primary_key=True)
     password: Mapped[str] = mapped_column(String(80))
     session: Mapped[str] = mapped_column(String(1000))
     type: Mapped[str] = mapped_column(String(50))
