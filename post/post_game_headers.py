@@ -89,8 +89,8 @@ def post_about_current_games(date: datetime):
     Args:
         date (datetime): date to get active games for
     """
-    client = init_client()
     session = init_db_session()
+    client = init_client(session)
 
     games = get_current_games(date)
     for game in games:

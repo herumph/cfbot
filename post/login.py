@@ -6,6 +6,7 @@ from typing import Optional
 from atproto import Client
 from sqlalchemy import insert, select, update
 from sqlalchemy.orm import Session
+
 from db.create_db import init_db_session
 from db.models import Credentials
 
@@ -38,16 +39,13 @@ def save_session(user: str, password: str, session_string: str, db_session: Sess
     Args:
         session_string (str): session information
     """
-    query = (
-        insert(Credentials)
-        .values(
-            {
-                "username": user,
-                "password": password,
-                "session": session_string,
-                "type": login_type,
-            }
-        )
+    query = insert(Credentials).values(
+        {
+            "username": user,
+            "password": password,
+            "session": session_string,
+            "type": login_type,
+        }
     )
     db_session.execute(query)
     db_session.commit()

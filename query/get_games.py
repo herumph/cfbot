@@ -119,8 +119,8 @@ def post_a_days_games(todays_games: list[Game]):
     Args:
         todays_games (list[Game]): list of games
     """
-    client = init_client()
     session = init_db_session()
+    client = init_client(session)
 
     post_text = f"There are {len(todays_games)} college football games today!"
     create_post(client, session, post_text)
