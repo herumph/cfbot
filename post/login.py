@@ -88,5 +88,6 @@ def init_client(db_session: Session) -> Client:
     return client
 
 
+# TODO: remove this
 if __name__ == "__main__":
     init_client(init_db_session())
