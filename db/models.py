@@ -52,3 +52,14 @@ class Game(Base):
     trackable: Mapped[bool] = mapped_column(Boolean)
     last_post_id: Mapped[Optional[int]] = mapped_column(Integer)
     end_ts: Mapped[Optional[TIMESTAMP]] = mapped_column(TIMESTAMP)
+
+
+class Credentials(Base):
+    """Table definition for Credentials."""
+
+    __tablename__ = "credentials"
+
+    username: Mapped[str] = mapped_column(String(80), primary_key=True)
+    password: Mapped[str] = mapped_column(String(80))
+    session: Mapped[str] = mapped_column(String(1000))
+    type: Mapped[str] = mapped_column(String(50))

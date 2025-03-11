@@ -17,5 +17,5 @@ To run this bot:
 2. Add unit tests
 3. Organize project
 4. Create as a project using `pants` -- DONE
-5. Create table for storing credentials
-6. Move db initialization to the db __init__ file
+5. Create table for storing credentials -- DONE
+6. Move db initialization to the db __init__ file -- Will not do

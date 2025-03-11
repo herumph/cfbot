@@ -117,8 +117,8 @@ def post_important_results(important_results: dict[str, str]):
     Args:
         important_results (dict): information about the drive's scoring play
     """
-    client = init_client()
     session = init_db_session()
+    client = init_client(session)
 
     for result in important_results:
         # get information about this game from game table
