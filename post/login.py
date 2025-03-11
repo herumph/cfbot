@@ -8,7 +8,6 @@ from atproto.exceptions import AtProtocolError, NetworkError
 from sqlalchemy import insert, select, update
 from sqlalchemy.orm import Session
 
-from db.create_db import init_db_session
 from db.models import Credentials
 
 
