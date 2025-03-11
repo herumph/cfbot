@@ -1,7 +1,6 @@
 """Login to bluesky."""
 
 import getpass
-from typing import Optional
 
 from atproto import Client
 from atproto.exceptions import AtProtocolError, NetworkError
@@ -13,7 +12,7 @@ from db.models import Credentials
 
 def get_session(
     client: Client, db_session: Session, username: str, login_type: str | None = "dev", refresh_session: bool | None = False
-) -> Optional[str]:
+) -> str:
     """Get session text files if they exist, otherwise prompt for username and
     password.
 
