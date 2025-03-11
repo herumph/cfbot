@@ -4,6 +4,7 @@ import getpass
 from typing import Optional
 
 from atproto import Client
+from atproto.exceptions import AtProtocolError, NetworkError
 from sqlalchemy import insert, select, update
 from sqlalchemy.orm import Session
 
@@ -11,7 +12,7 @@ from db.create_db import init_db_session
 from db.models import Credentials
 
 
-def get_session(client: Client, db_session: Session, login_type: str | None = "dev") -> Optional[str]:
+def get_session(client: Client, db_session: Session, login_type: str | None = "dev", refresh_session: bool | None = False) -> Optional[str]:
     """Get session text files if they exist, otherwise prompt for username and
     password.
 
@@ -27,8 +28,12 @@ def get_session(client: Client, db_session: Session, login_type: str | None = "d
         password = getpass.getpass("password:")
         client.login(user, password)
         session_string = client.export_session_string()
-
         save_session(user, password, session_string, db_session, login_type)
+
+    elif refresh_session:
+        client.login(credentials[0].username, credentials[0].password)
+        session_string = client.export_session_string()
+        update_creds(credentials[0].username, session_string, db_session)
 
     return session_string
 
@@ -51,7 +56,7 @@ def save_session(user: str, password: str, session_string: str, db_session: Sess
     db_session.commit()
 
 
-def update_creds(user: str, password: str, session_string: str, db_session: Session, login_type: str):
+def update_creds(user: str, session_string: str, db_session: Session):
     """Export current session to a text file.
 
     Args:
@@ -59,13 +64,10 @@ def update_creds(user: str, password: str, session_string: str, db_session: Sess
     """
     query = (
         update(Credentials)
-        .where(Credentials.type == login_type)
+        .where(Credentials.username == user)
         .values(
             {
-                "username": user,
-                "password": password,
                 "session": session_string,
-                "type": login_type,
             }
         )
     )
@@ -80,10 +82,15 @@ def init_client(db_session: Session) -> Client:
         Client: bluesky client
     """
     client = Client()
-    # client.on_session_change(on_session_change)
-
     session_string = get_session(client, db_session)
-    client.login(session_string=session_string)
+
+    # handle session string expiry and network issues
+    try:
+        client.login(session_string=session_string)
+    except (AtProtocolError, NetworkError):
+        client = Client()
+        session_string = get_session(client, db_session, refresh_session=True)
+        client.login(session_string=session_string)
 
     return client
 
