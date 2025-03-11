@@ -24,7 +24,6 @@ def get_session(
     session_string = credentials[0].session if credentials else None
 
     if not session_string:
-        username = getpass.getpass("username:")
         password = getpass.getpass("password:")
         client.login(username, password)
         session_string = client.export_session_string()
