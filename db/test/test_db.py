@@ -1,13 +1,8 @@
 import pytest
 from sqlalchemy import inspect
 
-from db.create_db import init_db_engine, init_db_session
+from db.create_db import init_db_engine
 from db.models import Base
-
-
-@pytest.fixture(scope="session")
-def db_session():
-    return init_db_session()
 
 
 @pytest.fixture(scope="session")
