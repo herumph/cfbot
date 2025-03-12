@@ -1,13 +1,13 @@
 """Create sqlite db and all tables."""
 
-from sqlalchemy import create_engine, Engine
+from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import Session
 
 from db.models import Base
 
 
 def init_db_engine(database_name: str) -> Engine:
-    """Initialize database engine"""
+    """Initialize database engine."""
     return create_engine(f"sqlite:///{database_name}")
 
 
