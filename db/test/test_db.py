@@ -10,7 +10,6 @@ def db_engine():
     return init_db_engine("database.db")
 
 
-# test for database table names
 def test_table_names(db_engine):
     """Test for table names."""
     Base.metadata.create_all(db_engine)
