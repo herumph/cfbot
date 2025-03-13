@@ -1,8 +1,7 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
 
-from datetime import datetime, timedelta, timezone
-from typing import Optional
+from datetime import datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
@@ -126,11 +125,14 @@ def post_a_days_games(todays_games: list[Game]):
     create_post(client, session, post_text)
 
 
-def query_for_games(date: str):
-    return call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
+def query_for_games(date: str, groups: str):
+    """
+    TODO: docstring
+    """
+    return call_espn(ESPN_SCOREBOARD + f"{date}&groups={groups}")
 
 
-def get_games(date: datetime, selected_teams: Optional[list] = None):
+def get_games(date: datetime, selected_teams: list | None = None, groups: str | None = "80"):
     """Gathers games from espn and logs them to the database.
 
     Args:
@@ -139,7 +141,7 @@ def get_games(date: datetime, selected_teams: Optional[list] = None):
     """
     date = date.strftime("%Y%m%d")
     # group 80 == FBS, 81 == FCS
-    game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
+    game_data = query_for_games(date, groups)
     games = parse_games(game_data)
 
     if selected_teams:
