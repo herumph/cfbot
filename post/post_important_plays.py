@@ -6,10 +6,8 @@ from atproto import Client
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from db.create_db import init_db_session
 from db.models import Game, Post
 from post.create_post import create_post
-from post.login import init_client
 from post.post_game_headers import get_current_games
 from query.common import ESPN_GAME, call_espn
 
