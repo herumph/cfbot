@@ -7,6 +7,10 @@ from post.post_game_headers import post_about_current_games
 from post.post_important_plays import post_important_plays
 from query.get_games import get_games
 
+DATE = datetime.now(timezone.utc)
+USERNAME = "arethegoodnamesaretaken+devbot@gmail.com"
+LOGIN_TYPE = "dev"
+
 
 def post_about_cfb(date: datetime, username: str, login_type: str | None = "dev"):
     """Wrapper function to execute each module."""
@@ -19,7 +23,4 @@ def post_about_cfb(date: datetime, username: str, login_type: str | None = "dev"
 
 
 if __name__ == "__main__":
-    DATE = datetime.now(timezone.utc)
-    USERNAME = "arethegoodnamesaretaken+devbot@gmail.com"
-    LOGIN_TYPE = "dev"
     post_about_cfb(date=DATE, username=USERNAME, login_type=LOGIN_TYPE)
