@@ -17,3 +17,4 @@ To run this bot:
 4. Create as a project using `pants` -- DONE
 5. Create table for storing credentials -- DONE
 6. Move db initialization to the db __init__ file -- Will not do
+7. Does login type do anything???
