@@ -5,9 +5,13 @@
 # 4 - post important plays
 from datetime import datetime, timezone
 
-def main(date: datetime):
-    date = date.strftime("%Y%m%d")
+from query.get_games import get_games
+
+def post_about_cfb(date: datetime):
+    """Wrapper function to execute each module"""
+    # get games for a given day
+    get_games(date=date, selected_teams=None)
 
 
 if __name__ == "__main__":
-    main(datetime.now(timezone.utc))
+    post_about_cfb(datetime.now(timezone.utc))

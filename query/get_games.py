@@ -126,7 +126,11 @@ def post_a_days_games(todays_games: list[Game]):
     create_post(client, session, post_text)
 
 
-def main(date: datetime, selected_teams: Optional[list] = None):
+def query_for_games(date: str):
+    return call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
+
+
+def get_games(date: datetime, selected_teams: Optional[list] = None):
     """Gathers games from espn and logs them to the database.
 
     Args:
@@ -143,8 +147,3 @@ def main(date: datetime, selected_teams: Optional[list] = None):
 
     if games:
         log_games_to_db(games)
-
-
-if __name__ == "__main__":
-    date = datetime.now(timezone.utc)
-    main(date)
