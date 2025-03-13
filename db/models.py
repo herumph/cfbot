@@ -21,8 +21,8 @@ class Post(Base):
     uri: Mapped[str] = mapped_column(String(80))
     cid: Mapped[str] = mapped_column(String(80))
     post_text: Mapped[str] = mapped_column(String(300))
-    created_at: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
-    updated_at: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
+    created_at_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
+    updated_at_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
     root_id: Mapped[Optional[int]] = mapped_column(Integer)
     parent_id: Mapped[Optional[int]] = mapped_column(Integer)
 
@@ -63,3 +63,13 @@ class Credentials(Base):
     password: Mapped[str] = mapped_column(String(80))
     session: Mapped[str] = mapped_column(String(1000))
     type: Mapped[str] = mapped_column(String(50))
+
+
+class ApiQueries(Base):
+    """Table definition for ApiQueries."""
+
+    __tablename__ = "api_queries"
+
+    id: Mapped[str] = mapped_column(String(20), primary_key=True)
+    endpoint: Mapped[str] = mapped_column(String(50))
+    date_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)

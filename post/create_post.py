@@ -66,8 +66,8 @@ def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: di
         uri=post.uri,
         cid=post.cid,
         post_text=post_params["text"],
-        created_at=datetime.now(timezone.utc),
-        updated_at=datetime.now(timezone.utc),
+        created_at_ts=datetime.now(timezone.utc),
+        updated_at_ts=datetime.now(timezone.utc),
     )
 
     if reply_ids:
