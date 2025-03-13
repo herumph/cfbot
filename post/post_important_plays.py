@@ -10,6 +10,7 @@ from db.models import Game, Post
 from post.create_post import create_post
 from post.login import init_client
 from query.common import ESPN_GAME, call_espn
+from post.post_game_headers import get_current_games
 
 
 def _update_database(session: Session, result: dict[str, str]):
@@ -153,3 +154,12 @@ def post_about_game(game_id: str):
     important_results = get_important_results(game_info)
 
     post_important_results(important_results)
+
+
+def post_important_plays(date: datetime):
+    """
+    TODO: docstring
+    """
+    games = get_current_games(date)
+    for game in games:
+        post_about_game(game["id"])
