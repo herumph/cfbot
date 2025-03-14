@@ -122,12 +122,11 @@ def post_a_days_games(todays_games: list[Game], db_session: Session, client: Cli
     create_post(client, db_session, post_text, "daily")
 
 
-def get_games(date: datetime, db_session, client, selected_teams: list | None = None, groups: str | None = "80") -> list[dict]:
+def get_games(date: datetime, db_session, groups: str | None = "80") -> list[dict]:
     """Gathers games from espn and logs them to the database.
 
     Args:
         date (datetime): date to get games for
-        selected_teams Optional[list]: names of teams to add games for
 
     Returns:
         list[dict]: list of each game for a given date
@@ -136,9 +135,6 @@ def get_games(date: datetime, db_session, client, selected_teams: list | None = 
     # group 80 == FBS, 81 == FCS
     game_data = call_espn(db_session, ESPN_SCOREBOARD + f"{date}&groups={groups}")
     games = parse_games(game_data)
-
-    if selected_teams:
-        games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
     log_games_to_db(games=games, db_session=db_session)
     return games
