@@ -1,7 +1,7 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
-from datetime import datetime, timedelta
 import logging
+from datetime import datetime, timedelta
 
 from atproto import Client
 from sqlalchemy import select
@@ -141,5 +141,4 @@ def get_games(date: datetime, db_session, client, selected_teams: list | None = 
         games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
     log_games_to_db(games=games, db_session=db_session)
-
     return games
