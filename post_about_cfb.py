@@ -3,10 +3,9 @@ from datetime import datetime, timezone
 
 from db.create_db import init_db_session
 from post.login import init_client
-from post.post_game_headers import post_about_current_games
+from post.post_game_headers import post_a_days_games, post_about_current_games
 from post.post_important_plays import post_important_plays
-from query.get_games import (get_games,  # TODO: move the posting function
-                             post_a_days_games)
+from query.get_games import get_games
 
 DATE = datetime.now(timezone.utc)
 USERNAME = "arethegoodnamesaretaken+devbot@gmail.com"
