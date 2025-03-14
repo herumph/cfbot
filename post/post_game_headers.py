@@ -97,5 +97,5 @@ def post_about_current_games(date: datetime, db_session: Session, client: Client
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
-            post = create_post(client, db_session, post_text)
+            post = create_post(client, db_session, post_text, "game_header")
             _update_database(db_session, {"game_id": game.id, "last_post_id": post})

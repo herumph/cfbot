@@ -50,7 +50,9 @@ def _get_reply_ids(session: Session, reply_ids: dict[str, dict]) -> dict:
     return {"parent": parent, "root": root}
 
 
-def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: dict[str, str], reply_ids: dict[str, dict]) -> str:
+def log_post_to_db(
+    session: Session, post: CreateRecordResponse, post_params: dict[str, str], post_type: str, reply_ids: dict[str, dict]
+) -> str:
     """Logs created post to the Post table.
 
     Args:
@@ -68,6 +70,7 @@ def log_post_to_db(session: Session, post: CreateRecordResponse, post_params: di
         post_text=post_params["text"],
         created_at_ts=datetime.now(timezone.utc),
         updated_at_ts=datetime.now(timezone.utc),
+        post_type=post_type,
     )
 
     if reply_ids:
@@ -84,6 +87,7 @@ def create_post(
     client: Client,
     session: Session,
     post_text,
+    post_type,
     reply_ids: Optional[dict[str, int]] = None,
 ) -> str:
     """Create a post that is either new or a reply to an existing post.
@@ -104,4 +108,4 @@ def create_post(
     post_params["text"] = post_text
     post = client.send_post(**post_params)
 
-    return log_post_to_db(session, post, post_params, reply_ids)
+    return log_post_to_db(session, post, post_params, post_type, reply_ids)

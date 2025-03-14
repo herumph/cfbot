@@ -25,6 +25,7 @@ class Post(Base):
     updated_at_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
     root_id: Mapped[Optional[int]] = mapped_column(Integer)
     parent_id: Mapped[Optional[int]] = mapped_column(Integer)
+    post_type: Mapped[str] = mapped_column(String(80))
 
 
 class Game(Base):

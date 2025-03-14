@@ -108,13 +108,14 @@ def get_a_days_games(start_date: datetime, db_session: Session) -> list[Game]:
 
 
 def post_a_days_games(todays_games: list[Game], db_session: Session, client: Client):
-    """Create a top level post of how many games there are today.
+    """Create a top level post of how many games there are today. If a post
+    hasn't already been created.
 
     Args:
         todays_games (list[Game]): list of games
     """
     post_text = f"There are {len(todays_games)} college football games today!"
-    create_post(client, db_session, post_text)
+    create_post(client, db_session, post_text, "daily")
 
 
 def get_games(date: datetime, db_session, client, selected_teams: list | None = None, groups: str | None = "80") -> list[dict]:
