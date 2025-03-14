@@ -72,11 +72,11 @@ def get_current_games(start_date: datetime, db_session: Session) -> list[Game]:
     Returns:
         list[Game]: list of currently ongoing games
     """
-    statement = select(Game).filter(
+    query = select(Game).filter(
         (Game.start_ts <= start_date),
         (Game.start_ts >= start_date - timedelta(hours=6)),
     )
-    rows = db_session.execute(statement).all()
+    rows = db_session.execute(query).all()
 
     return [row[0] for row in rows]
 
