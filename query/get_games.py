@@ -3,13 +3,11 @@ database."""
 import logging
 from datetime import datetime, timedelta
 
-from atproto import Client
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 from sqlalchemy.orm import Session
 
 from db.models import Game
-from post.create_post import create_post
 from query.common import ESPN_SCOREBOARD, call_espn
 
 
