@@ -63,7 +63,7 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     return away_team + away_team_conference + home_team + home_team_conference + f" has kicked off on {game.networks}!"
 
 
-def get_current_games(start_date: datetime, db_session: Session) -> list[Game]:
+def get_games(start_date: datetime, end_date: datetime, db_session: Session) -> list[Game]:
     """Query game table to get currently active games.
 
     Args:
@@ -73,8 +73,8 @@ def get_current_games(start_date: datetime, db_session: Session) -> list[Game]:
         list[Game]: list of currently ongoing games
     """
     query = select(Game).filter(
-        (Game.start_ts <= start_date),
-        (Game.start_ts >= start_date - timedelta(hours=6)),
+        (Game.start_ts <= end_date),
+        (Game.start_ts >= start_date),
     )
     rows = db_session.execute(query).all()
 
@@ -98,8 +98,8 @@ def post_about_current_games(date: datetime, db_session: Session, client: Client
     Args:
         date (datetime): date to get active games for
     """
-
-    games = get_current_games(date, db_session)
+    end_date = date - timedelta(hours=6)
+    games = get_games(date, end_date, db_session)
     # TODO: This shouldn't be here
     for game in games:
         if not game.last_post_id:
