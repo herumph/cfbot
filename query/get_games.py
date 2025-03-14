@@ -1,6 +1,7 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
 from datetime import datetime, timedelta
+import logging
 
 from atproto import Client
 from sqlalchemy import select
@@ -85,8 +86,11 @@ def log_games_to_db(games: list[dict], db_session: Session):
     Args:
         game_data (list): list of games to add to the database
     """
-    db_session.execute(insert(Game).values(games).on_conflict_do_nothing())
-    db_session.commit()
+    if games:
+        db_session.execute(insert(Game).values(games).on_conflict_do_nothing())
+        db_session.commit()
+    else:
+        logging.info("No games found.")
 
 
 def get_a_days_games(start_date: datetime, db_session: Session) -> list[Game]:
@@ -136,8 +140,6 @@ def get_games(date: datetime, db_session, client, selected_teams: list | None = 
     if selected_teams:
         games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
 
-    if games:
-        log_games_to_db(games=games, db_session=db_session)
-        post_a_days_games(games, db_session=db_session, client=client)
+    log_games_to_db(games=games, db_session=db_session)
 
     return games
