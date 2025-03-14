@@ -100,6 +100,7 @@ def post_about_current_games(date: datetime, db_session: Session, client: Client
     """
 
     games = get_current_games(date, db_session)
+    # TODO: This shouldn't be here
     for game in games:
         if not game.last_post_id:
             streak_info = {}
