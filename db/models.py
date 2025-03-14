@@ -65,11 +65,11 @@ class Credentials(Base):
     type: Mapped[str] = mapped_column(String(50))
 
 
-class ApiQueries(Base):
+class Query(Base):
     """Table definition for ApiQueries."""
 
     __tablename__ = "api_queries"
 
     id: Mapped[str] = mapped_column(String(20), primary_key=True)
-    endpoint: Mapped[str] = mapped_column(String(50))
+    url: Mapped[str] = mapped_column(String(120))
     date_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
