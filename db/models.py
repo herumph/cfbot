@@ -70,6 +70,7 @@ class Query(Base):
 
     __tablename__ = "api_queries"
 
-    id: Mapped[str] = mapped_column(String(20), primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     url: Mapped[str] = mapped_column(String(120))
+    status_code: Mapped[int] = mapped_column(Integer)
     date_ts: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP)
