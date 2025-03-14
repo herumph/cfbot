@@ -85,7 +85,7 @@ def update_creds(db_session: Session, username: str, session_string: str):
     db_session.commit()
 
 
-def init_client(db_session: Session, username: str, login_type: str | None = "dev") -> Client:
+def init_client(db_session: Session, username: str, login_type: str) -> Client:
     """Connect to bluesky using saved credentials.
 
     Args:

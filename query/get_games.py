@@ -1,16 +1,13 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
-
-from datetime import datetime, timedelta, timezone
-from typing import Optional
+import logging
+from datetime import datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
+from sqlalchemy.orm import Session
 
-from db.create_db import init_db_session
 from db.models import Game
-from post.create_post import create_post
-from post.login import init_client
 from query.common import ESPN_SCOREBOARD, call_espn
 
 
@@ -81,19 +78,20 @@ def parse_games(game_json: dict) -> list[dict]:
     return games
 
 
-def log_games_to_db(game_data: list[dict]):
+def log_games_to_db(games: list[dict], db_session: Session):
     """Logs games to SQLite database.
 
     Args:
         game_data (list): list of games to add to the database
     """
-    session = init_db_session()
-    session.execute(insert(Game).values(game_data).on_conflict_do_nothing())
+    if games:
+        db_session.execute(insert(Game).values(games).on_conflict_do_nothing())
+        db_session.commit()
+    else:
+        logging.info("No games found.")
 
-    session.commit()
 
-
-def get_a_days_games(start_date: datetime) -> list[Game]:
+def get_a_days_games(start_date: datetime, db_session: Session) -> list[Game]:
     """Query the games table for all games on a given date.
 
     Args:
@@ -102,49 +100,28 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     Returns:
         list[Game]: list of all games
     """
-    session = init_db_session()
-
     statement = select(Game).filter(
         (Game.start_ts >= start_date),
         (Game.start_ts <= (start_date + timedelta(days=1))),
     )
-    rows = session.execute(statement).all()
+    rows = db_session.execute(statement).all()
 
     return [row[0] for row in rows]
 
 
-def post_a_days_games(todays_games: list[Game]):
-    """Create a top level post of how many games there are today.
-
-    Args:
-        todays_games (list[Game]): list of games
-    """
-    session = init_db_session()
-    client = init_client(session)
-
-    post_text = f"There are {len(todays_games)} college football games today!"
-    create_post(client, session, post_text)
-
-
-def main(date: datetime, selected_teams: Optional[list] = None):
+def get_games(date: datetime, db_session, groups: str | None = "80") -> list[dict]:
     """Gathers games from espn and logs them to the database.
 
     Args:
         date (datetime): date to get games for
-        selected_teams Optional[list]: names of teams to add games for
+
+    Returns:
+        list[dict]: list of each game for a given date
     """
     date = date.strftime("%Y%m%d")
     # group 80 == FBS, 81 == FCS
-    game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups=80")
+    game_data = call_espn(db_session, ESPN_SCOREBOARD + f"{date}&groups={groups}")
     games = parse_games(game_data)
 
-    if selected_teams:
-        games = [game for game in games if game["home_team"] in selected_teams or game["away_team"] in selected_teams]
-
-    if games:
-        log_games_to_db(games)
-
-
-if __name__ == "__main__":
-    date = datetime.now(timezone.utc)
-    main(date)
+    log_games_to_db(games=games, db_session=db_session)
+    return games

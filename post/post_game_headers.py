@@ -2,21 +2,20 @@
 
 from datetime import datetime, timedelta
 
+from atproto import Client
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from db.create_db import init_db_session
 from db.models import Game
 from post.create_post import create_post
-from post.login import init_client
 from query.common import ESPN_TEAM, call_espn
 
 
-def _update_database(session: Session, result: dict[str, str]):
+def _update_database(db_session: Session, result: dict[str, str]):
     """Update database with last created post.
 
     Args:
-        session (Session): SQLite session
+        db_session (Session): SQLite session
         result (dict[str, str]): dictionary containing game_id and last_post_id
     """
     query = (
@@ -29,8 +28,8 @@ def _update_database(session: Session, result: dict[str, str]):
         )
     )
 
-    session.execute(query)
-    session.commit()
+    db_session.execute(query)
+    db_session.commit()
 
 
 def _get_team_streak(team_info: dict) -> str:
@@ -64,7 +63,7 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     return away_team + away_team_conference + home_team + home_team_conference + f" has kicked off on {game.networks}!"
 
 
-def get_current_games(start_date: datetime) -> list[Game]:
+def get_games(start_date: datetime, end_date: datetime, db_session: Session) -> list[Game]:
     """Query game table to get currently active games.
 
     Args:
@@ -73,33 +72,44 @@ def get_current_games(start_date: datetime) -> list[Game]:
     Returns:
         list[Game]: list of currently ongoing games
     """
-    session = init_db_session()
-    statement = select(Game).filter(
-        (Game.start_ts <= start_date),
-        (Game.start_ts >= start_date - timedelta(hours=6)),
+    query = select(Game).filter(
+        (Game.start_ts <= end_date),
+        (Game.start_ts >= start_date),
     )
-    rows = session.execute(statement).all()
+    rows = db_session.execute(query).all()
 
     return [row[0] for row in rows]
 
 
-def post_about_current_games(date: datetime):
+def post_a_days_games(todays_games: list[Game], db_session: Session, client: Client):
+    """Create a top level post of how many games there are today. If a post
+    hasn't already been created.
+
+    Args:
+        todays_games (list[Game]): list of games
+    """
+    # TODO: update this function to query the database and get all games in the next 24 hours.
+    # this is tricky because of timezones and ESPN using UTC for game times
+    post_text = f"There are {len(todays_games)} college football games today!"
+    create_post(client, db_session, post_text, "daily")
+
+
+def post_about_current_games(date: datetime, db_session: Session, client: Client):
     """Create root level posts for all currently ongoing games.
 
     Args:
         date (datetime): date to get active games for
     """
-    session = init_db_session()
-    client = init_client(session)
-
-    games = get_current_games(date)
+    end_date = date - timedelta(hours=6)
+    games = get_games(date, end_date, db_session)
+    # TODO: This shouldn't be here
     for game in games:
         if not game.last_post_id:
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
-                team_info = call_espn(ESPN_TEAM + team)
+                team_info = call_espn(db_session, ESPN_TEAM + team)
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
-            post = create_post(client, session, post_text)
-            _update_database(session, {"game_id": game.id, "last_post_id": post})
+            post = create_post(client, db_session, post_text, "game_header")
+            _update_database(db_session, {"game_id": game.id, "last_post_id": post})
