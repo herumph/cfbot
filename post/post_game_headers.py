@@ -88,6 +88,8 @@ def post_a_days_games(todays_games: list[Game], db_session: Session, client: Cli
     Args:
         todays_games (list[Game]): list of games
     """
+    # TODO: update this function to query the database and get all games in the next 24 hours.
+    # this is tricky because of timezones and ESPN using UTC for game times
     post_text = f"There are {len(todays_games)} college football games today!"
     create_post(client, db_session, post_text, "daily")
 
