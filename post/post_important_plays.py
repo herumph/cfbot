@@ -147,7 +147,7 @@ def post_about_game(game_id: str, db_session: Session, client: Client):
         game_id (str): id of the game in the game table
         date (datetime): datetime of the earliest drive to consider posting about
     """
-    game_info = call_espn(ESPN_GAME + game_id)
+    game_info = call_espn(db_session, ESPN_GAME + game_id)
     important_results = get_important_results(game_info)
 
     post_important_results(important_results, db_session, client)

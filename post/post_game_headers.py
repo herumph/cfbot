@@ -93,7 +93,7 @@ def post_about_current_games(date: datetime, db_session: Session, client: Client
         if not game.last_post_id:
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
-                team_info = call_espn(ESPN_TEAM + team)
+                team_info = call_espn(db_session, ESPN_TEAM + team)
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
