@@ -25,5 +25,5 @@ def post_about_cfb(date: datetime, username: str, login_type: str | None = "dev"
 
 
 if __name__ == "__main__":
-    DATE = datetime.strptime("2025-01-20 15:00:00", "%Y-%m-%d %H:%M:%S")  # for testing purposes only
+    # DATE = datetime.strptime("2025-01-20 15:00:00", "%Y-%m-%d %H:%M:%S")  # for testing purposes only
     post_about_cfb(date=DATE, username=USERNAME, login_type=LOGIN_TYPE)

@@ -7,7 +7,7 @@ from atproto import Client
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from db.models import Game
+from db.models import Game, Post
 from post.create_post import create_post
 from query.common import ESPN_TEAM, call_espn
 
@@ -93,10 +93,29 @@ def post_a_days_games(date: datetime, db_session: Session, client: Client, offse
     # this is tricky because of timezones and ESPN using UTC for game times
     # query for today's games if it's after 8 AM Eastern and there hasn't been a previous post
     todays_games = get_games(date, date + timedelta(hours=24), db_session) if date.hour + offset >= post_hour else None
-    get_previous_daily_post = False
-    if todays_games and not get_previous_daily_post:
+    if todays_games and has_previous_daily_post(date, db_session):
+        print('making post')
         post_text = f"There are {len(todays_games)} college football games today!"
         create_post(client, db_session, post_text, "daily")
+
+
+def has_previous_daily_post(date: datetime, db_session: Session) -> bool:
+    """Checking if a daily post was made already for a given date.
+    
+    Args:
+        date (datetime): date to get previous posts for
+        db_session (Session): database session
+
+    Returns:
+        bool: if there is a previous daily post
+    """
+    query = select(Post).filter(
+        (Post.created_at_ts >= date - timedelta(hours=24)),
+        (Post.created_at_ts <= date),
+        (Post.post_type == "daily"),
+    )
+    rows = db_session.execute(query).all()
+    return len(rows) > 1
 
 
 def post_about_current_games(date: datetime, db_session: Session, client: Client):
