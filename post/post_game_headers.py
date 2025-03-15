@@ -93,7 +93,8 @@ def post_a_days_games(date: datetime, db_session: Session, client: Client, offse
     # this is tricky because of timezones and ESPN using UTC for game times
     # query for today's games if it's after 8 AM Eastern and there hasn't been a previous post
     todays_games = get_games(date, date + timedelta(hours=24), db_session) if date.hour + offset >= post_hour else None
-    if todays_games:
+    get_previous_daily_post = False
+    if todays_games and not get_previous_daily_post:
         post_text = f"There are {len(todays_games)} college football games today!"
         create_post(client, db_session, post_text, "daily")
 
