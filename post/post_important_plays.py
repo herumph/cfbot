@@ -154,8 +154,12 @@ def post_about_game(game_id: str, db_session: Session, client: Client):
 
 
 def post_important_plays(date: datetime, db_session: Session, client: Client):
-    """
-    TODO: docstring
+    """Reply to game header posts with important plays, e.g. scoring plays.
+
+    Args:
+        date (datetime): date to query against
+        db_session (Session): database session
+        client (Client): login client
     """
     games = get_games(date, date + timedelta(hours=1), db_session)
     for game in games:
