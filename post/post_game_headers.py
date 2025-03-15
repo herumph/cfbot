@@ -87,14 +87,14 @@ def post_a_days_games(date: datetime, db_session: Session, client: Client, offse
     hasn't already been created.
 
     Args:
-        todays_games (list[Game]): list of games
+        date (datetime): date to post about
+        db_session (Session): database session
+        client (Client): login client
+        offset (Optional, int): timezone offset from utc, default -5
+        post_hour (Optional, int): hour after which to post the daily update, default 7
     """
-    # TODO: update this function to query the database and get all games in the next 24 hours.
-    # this is tricky because of timezones and ESPN using UTC for game times
-    # query for today's games if it's after 8 AM Eastern and there hasn't been a previous post
     todays_games = get_games(date, date + timedelta(hours=24), db_session) if date.hour + offset >= post_hour else None
     if todays_games and has_previous_daily_post(date, db_session):
-        print('making post')
         post_text = f"There are {len(todays_games)} college football games today!"
         create_post(client, db_session, post_text, "daily")
 
