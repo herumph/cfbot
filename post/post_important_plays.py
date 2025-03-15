@@ -1,6 +1,6 @@
 """Post scoring plays for a given game."""
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from atproto import Client
 from sqlalchemy import select, update
@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from db.models import Game, Post
 from post.create_post import create_post
-from post.post_game_headers import get_current_games
+from post.post_game_headers import get_games
 from query.common import ESPN_GAME, call_espn
 
 
@@ -157,6 +157,6 @@ def post_important_plays(date: datetime, db_session: Session, client: Client):
     """
     TODO: docstring
     """
-    games = get_current_games(date, db_session)
+    games = get_games(date, date + timedelta(hours=1), db_session)
     for game in games:
         post_about_game(game["id"], db_session, client)

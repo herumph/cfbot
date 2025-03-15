@@ -1,6 +1,7 @@
 """Create root post about a game that is starting."""
 
-from datetime import datetime, timedelta
+import logging
+from datetime import datetime, timedelta, timezone
 
 from atproto import Client
 from sqlalchemy import select, update
@@ -81,7 +82,7 @@ def get_games(start_date: datetime, end_date: datetime, db_session: Session) -> 
     return [row[0] for row in rows]
 
 
-def post_a_days_games(todays_games: list[Game], db_session: Session, client: Client):
+def post_a_days_games(date: datetime, db_session: Session, client: Client, offset: int | None = -5, post_hour: int | None = 7):
     """Create a top level post of how many games there are today. If a post
     hasn't already been created.
 
@@ -90,8 +91,12 @@ def post_a_days_games(todays_games: list[Game], db_session: Session, client: Cli
     """
     # TODO: update this function to query the database and get all games in the next 24 hours.
     # this is tricky because of timezones and ESPN using UTC for game times
-    post_text = f"There are {len(todays_games)} college football games today!"
-    create_post(client, db_session, post_text, "daily")
+    # query for today's games if it's after 8 AM Eastern and there hasn't been a previous post
+    todays_games = get_games(date, date + timedelta(hours=24), db_session) if date.hour + offset >= post_hour else None
+    print(todays_games)
+    if todays_games:
+        post_text = f"There are {len(todays_games)} college football games today!"
+        create_post(client, db_session, post_text, "daily")
 
 
 def post_about_current_games(date: datetime, db_session: Session, client: Client):
