@@ -17,7 +17,6 @@ def post_about_cfb(date: datetime, username: str, login_type: str | None = "dev"
     db_session = init_db_session()
     client = init_client(db_session=db_session, username=username, login_type=login_type)
 
-    # TODO: return should be still be active but not needed for next wrapper function
     get_games(date=date, db_session=db_session)
     post_a_days_games(date=date, db_session=db_session, client=client)
     post_about_current_games(date=date, db_session=db_session, client=client)  # TODO: this name is horrible
