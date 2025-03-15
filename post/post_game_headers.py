@@ -1,7 +1,6 @@
 """Create root post about a game that is starting."""
 
-import logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 from atproto import Client
 from sqlalchemy import select, update
@@ -101,7 +100,7 @@ def post_a_days_games(date: datetime, db_session: Session, client: Client, offse
 
 def has_previous_daily_post(date: datetime, db_session: Session) -> bool:
     """Checking if a daily post was made already for a given date.
-    
+
     Args:
         date (datetime): date to get previous posts for
         db_session (Session): database session
@@ -118,7 +117,7 @@ def has_previous_daily_post(date: datetime, db_session: Session) -> bool:
     return len(rows) > 1
 
 
-def post_about_current_games(date: datetime, db_session: Session, client: Client):
+def create_game_header_posts(date: datetime, db_session: Session, client: Client):
     """Create root level posts for all currently ongoing games.
 
     Args:

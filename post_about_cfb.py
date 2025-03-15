@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 
 from db.create_db import init_db_session
 from post.login import init_client
-from post.post_game_headers import post_a_days_games, post_about_current_games
+from post.post_game_headers import create_game_header_posts, post_a_days_games
 from post.post_important_plays import post_important_plays
 from query.get_games import get_games
 
@@ -19,7 +19,7 @@ def post_about_cfb(date: datetime, username: str, login_type: str | None = "dev"
 
     get_games(date=date, db_session=db_session)
     post_a_days_games(date=date, db_session=db_session, client=client)
-    post_about_current_games(date=date, db_session=db_session, client=client)  # TODO: this name is horrible
+    create_game_header_posts(date=date, db_session=db_session, client=client)  # TODO: this name is horrible
     post_important_plays(date=date, db_session=db_session, client=client)
 
 
