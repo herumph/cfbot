@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from db.models import Credentials
 
 
-def get_session(client: Client, db_session: Session, username: str, login_type: str, refresh_session: bool | None = False) -> str:
+def get_session(client: Client, db_session: Session, username: str, refresh_session: bool | None = False) -> str:
     """Get session text files if they exist, otherwise prompt for username and
     password.
 
@@ -18,7 +18,6 @@ def get_session(client: Client, db_session: Session, username: str, login_type: 
         client (Client): atproto client
         db_session (Session): credential database
         username (str): bluesky username
-        login_type (str): type of login, prod or dev.
         refresh_session (bool): bool to refresh the client session string
 
     Returns:
@@ -32,7 +31,7 @@ def get_session(client: Client, db_session: Session, username: str, login_type: 
         password = getpass.getpass("password:")
         client.login(username, password)
         session_string = client.export_session_string()
-        save_session(db_session, username, password, session_string, login_type)
+        save_session(db_session, username, password, session_string)
 
     elif refresh_session:
         client.login(credentials[0].username, credentials[0].password)
@@ -42,7 +41,7 @@ def get_session(client: Client, db_session: Session, username: str, login_type: 
     return session_string
 
 
-def save_session(db_session: Session, username: str, password: str, session_string: str, login_type: str):
+def save_session(db_session: Session, username: str, password: str, session_string: str):
     """Export current session to a text file.
 
     Args:
@@ -50,14 +49,12 @@ def save_session(db_session: Session, username: str, password: str, session_stri
         username (str): username to save
         password (str): password to save
         session_string (str): session information
-        login_type (str): type of login to save, prod or dev
     """
     query = insert(Credentials).values(
         {
             "username": username,
             "password": password,
             "session": session_string,
-            "type": login_type,
         }
     )
     db_session.execute(query)
@@ -85,26 +82,25 @@ def update_creds(db_session: Session, username: str, session_string: str):
     db_session.commit()
 
 
-def init_client(db_session: Session, username: str, login_type: str) -> Client:
+def init_client(db_session: Session, username: str) -> Client:
     """Connect to bluesky using saved credentials.
 
     Args:
         db_session (Session): database to save credentials to
         username (str): username to connect with or save to the database
-        login_type (str): type of login to save, prod or dev. Defaults to dev.
 
     Returns:
         Client: bluesky client
     """
     client = Client()
-    session_string = get_session(client, db_session, username, login_type)
+    session_string = get_session(client, db_session, username)
 
     # handle session string expiry and network issues
     try:
         client.login(session_string=session_string)
     except (AtProtocolError, NetworkError):
         client = Client()
-        session_string = get_session(client, db_session, username, login_type, refresh_session=True)
+        session_string = get_session(client, db_session, username, refresh_session=True)
         client.login(session_string=session_string)
 
     return client

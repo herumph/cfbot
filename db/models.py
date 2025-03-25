@@ -63,7 +63,6 @@ class Credentials(Base):
     username: Mapped[str] = mapped_column(String(80), primary_key=True)
     password: Mapped[str] = mapped_column(String(80))
     session: Mapped[str] = mapped_column(String(1000))
-    type: Mapped[str] = mapped_column(String(50))
 
 
 class Query(Base):
