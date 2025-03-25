@@ -88,7 +88,6 @@ def init_client(db_session: Session, username: str) -> Client:
     Args:
         db_session (Session): database to save credentials to
         username (str): username to connect with or save to the database
-        login_type (str): type of login to save, prod or dev. Defaults to dev.
 
     Returns:
         Client: bluesky client
