@@ -5,10 +5,11 @@ from datetime import datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
-from sqlalchemy.orm import Session
 
 from db.models import Game
 from query.common import ESPN_SCOREBOARD, call_espn
+
+from common import DB_SESSION
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
@@ -78,20 +79,20 @@ def parse_games(game_json: dict) -> list[dict]:
     return games
 
 
-def log_games_to_db(games: list[dict], db_session: Session):
+def log_games_to_db(games: list[dict]):
     """Logs games to SQLite database.
 
     Args:
         game_data (list): list of games to add to the database
     """
     if games:
-        db_session.execute(insert(Game).values(games).on_conflict_do_nothing())
-        db_session.commit()
+        DB_SESSION.execute(insert(Game).values(games).on_conflict_do_nothing())
+        DB_SESSION.commit()
     else:
         logging.info("No games found.")
 
 
-def get_a_days_games(start_date: datetime, db_session: Session) -> list[Game]:
+def get_a_days_games(start_date: datetime) -> list[Game]:
     """Query the games table for all games on a given date.
 
     Args:
@@ -104,12 +105,12 @@ def get_a_days_games(start_date: datetime, db_session: Session) -> list[Game]:
         (Game.start_ts >= start_date),
         (Game.start_ts <= (start_date + timedelta(days=1))),
     )
-    rows = db_session.execute(statement).all()
+    rows = DB_SESSION.execute(statement).all()
 
     return [row[0] for row in rows]
 
 
-def get_games(date: datetime, db_session, groups: str | None = "80") -> list[dict]:
+def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
     """Gathers games from espn and logs them to the database.
 
     Args:
@@ -120,8 +121,8 @@ def get_games(date: datetime, db_session, groups: str | None = "80") -> list[dic
     """
     date = date.strftime("%Y%m%d")
     # group 80 == FBS, 81 == FCS
-    game_data = call_espn(db_session, ESPN_SCOREBOARD + f"{date}&groups={groups}")
+    game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups={groups}")
     games = parse_games(game_data)
 
-    log_games_to_db(games=games, db_session=db_session)
+    log_games_to_db(games=games)
     return games
