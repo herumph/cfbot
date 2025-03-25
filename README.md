@@ -5,10 +5,7 @@ This is a bot to monitor CFB games and post updated scores to bluesky.
 It uses a SQLite backend to track games that are currently ongoing and track posts that have been made.
 
 ## Getting Started
-To run this bot:
-
-1. Gather games that will occur today by running `python get_games.py`
-2. Post scoring updates by running `python monitor_games.py`
+To run this bot run the `post_about_cfb` script
 
 ## TO-DO
 1. Only injest new games -- DONE
