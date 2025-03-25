@@ -2,20 +2,20 @@
 
 from datetime import datetime, timedelta
 
-from atproto import Client
 from sqlalchemy import select, update
-from sqlalchemy.orm import Session
 
 from db.models import Game, Post
 from post.create_post import create_post
 from query.common import ESPN_TEAM, call_espn
 
+from common import DB_SESSION
 
-def _update_database(db_session: Session, result: dict[str, str]):
+
+def _update_database(result: dict[str, str]):
     """Update database with last created post.
 
     Args:
-        db_session (Session): SQLite session
+        DB_SESSION (Session): SQLite session
         result (dict[str, str]): dictionary containing game_id and last_post_id
     """
     query = (
@@ -28,8 +28,8 @@ def _update_database(db_session: Session, result: dict[str, str]):
         )
     )
 
-    db_session.execute(query)
-    db_session.commit()
+    DB_SESSION.execute(query)
+    DB_SESSION.commit()
 
 
 def _get_team_streak(team_info: dict) -> str:
@@ -63,7 +63,7 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     return away_team + away_team_conference + home_team + home_team_conference + f" has kicked off on {game.networks}!"
 
 
-def get_games(start_date: datetime, end_date: datetime, db_session: Session) -> list[Game]:
+def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     """Query game table to get currently active games.
 
     Args:
@@ -76,34 +76,31 @@ def get_games(start_date: datetime, end_date: datetime, db_session: Session) -> 
         (Game.start_ts <= end_date),
         (Game.start_ts >= start_date),
     )
-    rows = db_session.execute(query).all()
+    rows = DB_SESSION.execute(query).all()
 
     return [row[0] for row in rows]
 
 
-def post_a_days_games(date: datetime, db_session: Session, client: Client, offset: int | None = -5, post_hour: int | None = 7):
+def post_a_days_games(date: datetime, offset: int | None = -5, post_hour: int | None = 7):
     """Create a top level post of how many games there are today. If a post
     hasn't already been created.
 
     Args:
         date (datetime): date to post about
-        db_session (Session): database session
-        client (Client): login client
         offset (Optional, int): timezone offset from utc, default -5
         post_hour (Optional, int): hour after which to post the daily update, default 7
     """
-    todays_games = get_games(date, date + timedelta(hours=24), db_session) if date.hour + offset >= post_hour else None
-    if todays_games and has_previous_daily_post(date, db_session):
+    todays_games = get_games(date, date + timedelta(hours=24)) if date.hour + offset >= post_hour else None
+    if todays_games and has_previous_daily_post(date):
         post_text = f"There are {len(todays_games)} college football games today!"
-        create_post(client, db_session, post_text, "daily")
+        create_post(post_text, "daily")
 
 
-def has_previous_daily_post(date: datetime, db_session: Session) -> bool:
+def has_previous_daily_post(date: datetime) -> bool:
     """Checking if a daily post was made already for a given date.
 
     Args:
         date (datetime): date to get previous posts for
-        db_session (Session): database session
 
     Returns:
         bool: if there is a previous daily post
@@ -113,26 +110,26 @@ def has_previous_daily_post(date: datetime, db_session: Session) -> bool:
         (Post.created_at_ts <= date),
         (Post.post_type == "daily"),
     )
-    rows = db_session.execute(query).all()
+    rows = DB_SESSION.execute(query).all()
     return len(rows) > 1
 
 
-def create_game_header_posts(date: datetime, db_session: Session, client: Client):
+def create_game_header_posts(date: datetime):
     """Create root level posts for all currently ongoing games.
 
     Args:
         date (datetime): date to get active games for
     """
     end_date = date - timedelta(hours=6)
-    games = get_games(date, end_date, db_session)
+    games = get_games(date, end_date)
     # TODO: This shouldn't be here
     for game in games:
         if not game.last_post_id:
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
-                team_info = call_espn(db_session, ESPN_TEAM + team)
+                team_info = call_espn(ESPN_TEAM + team)
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
-            post = create_post(client, db_session, post_text, "game_header")
-            _update_database(db_session, {"game_id": game.id, "last_post_id": post})
+            post = create_post(post_text, "game_header")
+            _update_database({"game_id": game.id, "last_post_id": post})
