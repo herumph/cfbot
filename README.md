@@ -17,5 +17,5 @@ To run this bot:
 4. Create as a project using `pants` -- DONE
 5. Create table for storing credentials -- DONE
 6. Move db initialization to the db __init__ file -- Will not do
-7. Does login type do anything???
+7. Does login type do anything??? -- REMOVED
 8. Make db_session and client exist in common and import to each file instead of passing between most functions
