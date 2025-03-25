@@ -18,7 +18,7 @@ def post_about_cfb(date: datetime, username: str):
 
     get_games(date=date, db_session=db_session)
     post_a_days_games(date=date, db_session=db_session, client=client)
-    create_game_header_posts(date=date, db_session=db_session, client=client)  # TODO: this name is horrible
+    create_game_header_posts(date=date, db_session=db_session, client=client)
     post_important_plays(date=date, db_session=db_session, client=client)
 
 
