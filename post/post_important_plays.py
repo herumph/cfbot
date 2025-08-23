@@ -135,8 +135,8 @@ def post_important_results(important_results: dict[str, str]):
             if "KICK" in post_text or "Two-Point" in post_text or "FG" in post_text:
                 result["last_post_id"] = create_post(post_text, previous_post, "game_update")
 
-            # update database with new information
-            _update_database(result)
+                # update database with new information
+                _update_database(result)
 
 
 def post_about_game(game_id: str):
