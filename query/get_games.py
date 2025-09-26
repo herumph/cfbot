@@ -1,15 +1,11 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
 import logging
-from datetime import datetime, timedelta
-
-from sqlalchemy import select
-from sqlalchemy.dialects.sqlite import insert
+from datetime import datetime
 
 from db.models import Game
 from query.common import ESPN_SCOREBOARD, call_espn
-
-from common import DB_SESSION
+from db.db_utils import insert_values
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
@@ -80,34 +76,15 @@ def parse_games(game_json: dict) -> list[dict]:
 
 
 def log_games_to_db(games: list[dict]):
-    """Logs games to SQLite database.
+    """Logs games database.
 
     Args:
         game_data (list): list of games to add to the database
     """
     if games:
-        DB_SESSION.execute(insert(Game).values(games).on_conflict_do_nothing())
-        DB_SESSION.commit()
+        insert_values(Game, games)
     else:
         logging.info("No games found.")
-
-
-def get_a_days_games(start_date: datetime) -> list[Game]:
-    """Query the games table for all games on a given date.
-
-    Args:
-        start_date: date to query games for
-
-    Returns:
-        list[Game]: list of all games
-    """
-    statement = select(Game).filter(
-        (Game.start_ts >= start_date),
-        (Game.start_ts <= (start_date + timedelta(days=1))),
-    )
-    rows = DB_SESSION.execute(statement).all()
-
-    return [row[0] for row in rows]
 
 
 def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
