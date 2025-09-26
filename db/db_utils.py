@@ -1,10 +1,11 @@
+import logging
 from datetime import datetime, timedelta
 
-from db.models import Base, Game
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
 from common import DB_SESSION
+from db.models import Base, Game
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
@@ -21,6 +22,9 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
         (Game.start_ts <= (start_date + timedelta(days=1))),
     )
     rows = DB_SESSION.execute(statement).all()
+
+    if not len(rows):
+        logging.warning(f"No games found for date {start_date.date()}")
 
     return [row[0] for row in rows]
 
