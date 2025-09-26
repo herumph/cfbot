@@ -29,12 +29,16 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 
-def insert_values(table: Base, rows: list[dict]):
+def insert_rows(table: Base, rows: list[dict]):
     """Generic interface to log rows into a database table.
 
     Args:
         table: table in the database to log to
         rows: rows to insert
     """
+    if not len(rows):
+        logging.info("No rows to insert")
+        return
+    
     DB_SESSION.execute(insert(table).values(rows).on_conflict_do_nothing())
     DB_SESSION.commit()

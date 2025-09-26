@@ -1,9 +1,8 @@
 """Gather games from the ESPN API for a given date and log them to the
 database."""
-import logging
 from datetime import datetime
 
-from db.db_utils import insert_values
+from db.db_utils import insert_rows
 from db.models import Game
 from query.common import ESPN_SCOREBOARD, call_espn
 
@@ -75,18 +74,6 @@ def parse_games(game_json: dict) -> list[dict]:
     return games
 
 
-def log_games_to_db(games: list[dict]):
-    """Logs games database.
-
-    Args:
-        game_data (list): list of games to add to the database
-    """
-    if games:
-        insert_values(Game, games)
-    else:
-        logging.info("No games found.")
-
-
 def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
     """Gathers games from espn and logs them to the database.
 
@@ -101,5 +88,5 @@ def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
     game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups={groups}")
     games = parse_games(game_data)
 
-    log_games_to_db(games=games)
+    insert_rows(Game, games)
     return games
