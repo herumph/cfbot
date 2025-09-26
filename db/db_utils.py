@@ -1,8 +1,9 @@
-from models import Base
 from datetime import datetime, timedelta
-from models import Game
+
+from models import Base, Game
+from sqlalchemy import insert, select
+
 from common import DB_SESSION
-from sqlalchemy import select, insert
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
@@ -24,8 +25,7 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
 
 
 def insert_values(table: Base, rows: list[dict]):
-    """
-    Generic interface to log rows into a database table
+    """Generic interface to log rows into a database table.
 
     Args:
         table: table in the database to log to
@@ -33,4 +33,3 @@ def insert_values(table: Base, rows: list[dict]):
     """
     DB_SESSION.execute(insert(table).values(rows).on_conflict_do_nothing())
     DB_SESSION.commit()
-

@@ -3,9 +3,8 @@ from datetime import datetime, timezone
 
 import requests
 
-from db.models import Query
-
 from common import DB_SESSION
+from db.models import Query
 
 ESPN_GAME = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates="

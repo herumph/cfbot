@@ -6,9 +6,8 @@ from typing import Optional
 from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
 from sqlalchemy import select
 
-from db.models import Post
-
 from common import CLIENT, DB_SESSION
+from db.models import Post
 
 
 def _query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:

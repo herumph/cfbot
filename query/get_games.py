@@ -3,9 +3,9 @@ database."""
 import logging
 from datetime import datetime
 
+from db.db_utils import insert_values
 from db.models import Game
 from query.common import ESPN_SCOREBOARD, call_espn
-from db.db_utils import insert_values
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:

@@ -4,12 +4,11 @@ from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select, update
 
+from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
 from post.post_game_headers import get_games
 from query.common import ESPN_GAME, call_espn
-
-from common import DB_SESSION
 
 
 def _update_database(result: dict[str, str]):
