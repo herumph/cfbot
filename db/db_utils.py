@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 
-from models import Base, Game
-from sqlalchemy import insert, select
+from db.models import Base, Game
+from sqlalchemy import select
+from sqlalchemy.dialects.sqlite import insert
 
 from common import DB_SESSION
 
