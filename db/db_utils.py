@@ -1,9 +1,8 @@
-import logging
-from sqlalchemy.orm import DeclarativeBase
+from models import Base
 from datetime import datetime, timedelta
 from models import Game
 from common import DB_SESSION
-from sqlalchemy import select
+from sqlalchemy import select, insert
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
@@ -24,7 +23,7 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 
-def insert_values(table: DeclarativeBase, rows: list[dict]):
+def insert_values(table: Base, rows: list[dict]):
     """
     Generic interface to log rows into a database table
 
