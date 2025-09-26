@@ -39,6 +39,6 @@ def insert_rows(table: Base, rows: list[dict]):
     if not len(rows):
         logging.info("No rows to insert")
         return
-    
+
     DB_SESSION.execute(insert(table).values(rows).on_conflict_do_nothing())
     DB_SESSION.commit()

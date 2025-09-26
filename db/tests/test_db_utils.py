@@ -2,8 +2,8 @@ import logging
 from datetime import datetime
 
 import pytest
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
 from db.db_utils import get_a_days_games, insert_rows
@@ -94,7 +94,7 @@ class TestInsertRows:
 
         statement = select(Game).filter(Game.id == self.valid_game["id"])
         rows = self.session.execute(statement).all()
-        
+
         assert len(rows) == 1
         assert int(rows[0].Game.id) == self.valid_game["id"]
         assert rows[0].Game.home_team == self.valid_game["home_team"]
