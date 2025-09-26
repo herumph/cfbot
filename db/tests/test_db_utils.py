@@ -40,10 +40,10 @@ class TestGetADaysGames:
         self.session.rollback()
         self.session.close()
 
-    def test_get_a_days_games_no_games(self):
-        games = get_a_days_games(datetime(1700, 1, 1))
-        assert logging.getLogger().level == logging.WARNING
-        assert games == []
+    def test_get_a_days_games_no_games(self, caplog):
+        with caplog.at_level(logging.WARNING):
+            games = get_a_days_games(datetime(1700, 1, 1))
+        assert any("No games found for date" in message for message in caplog.messages)
 
     def test_get_a_days_games_with_games(self):
         self.session.add(self.valid_game)
@@ -99,3 +99,8 @@ class TestInsertRows:
         assert int(rows[0].Game.id) == self.valid_game["id"]
         assert rows[0].Game.home_team == self.valid_game["home_team"]
         assert rows[0].Game.away_team == self.valid_game["away_team"]
+
+    def test_insert_values_no_rows(self, caplog):
+        with caplog.at_level(logging.INFO):
+            insert_rows(Game, [])
+        assert any("No rows to insert" in message for message in caplog.messages)
