@@ -37,7 +37,7 @@ class ESPNAPIs:
             return response.json()
         else:
             logging.error(f"Error querying ESPN API: {response.status_code} for URL {url}")
-            return None
+            return {}
 
     def _create_scoreboard_url(self, date: str, group: str) -> str:
         """Generate a scoreboard query URL.
