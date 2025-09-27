@@ -64,5 +64,5 @@ def query_scoreboard(date: str, group: str) -> dict:
     Returns:
         dict: json response from the API
     """
-    return call_espn(_create_scoreboard_url(date, group))
+    return _call_espn(_create_scoreboard_url(date, group))
 
