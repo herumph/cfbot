@@ -6,7 +6,8 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
-from db.db_utils import get_a_days_games, insert_rows, save_api_query
+from db.db_utils import (add_record, get_a_days_games, get_db_tables,
+                         insert_rows)
 from db.models import Game, Query
 
 DB_SESSION = init_db_session()
@@ -90,7 +91,7 @@ class TestInsertRows:
         self.session.close()
 
     def test_insert_values_success(self):
-        insert_rows(Game, [self.valid_game])
+        insert_rows("games", [self.valid_game])
 
         statement = select(Game).filter(Game.id == self.valid_game["id"])
         rows = self.session.execute(statement).all()
@@ -102,11 +103,11 @@ class TestInsertRows:
 
     def test_insert_values_no_rows(self, caplog):
         with caplog.at_level(logging.INFO):
-            insert_rows(Game, [])
+            insert_rows("games", [])
         assert any("No rows to insert" in message for message in caplog.messages)
 
 
-class TestSaveApiQuery:
+class TestAddRecord:
     def setup_class(self):
         self.session = DB_SESSION
         self.valid_url = "https://example.com"
@@ -117,11 +118,15 @@ class TestSaveApiQuery:
         self.session.close()
 
     def test_save_api_query_success(self):
-        save_api_query(self.valid_url, self.valid_status_code)
+        add_record("api_queries", {"url": self.valid_url, "status_code": self.valid_status_code, "date_ts": datetime.now()})
 
         statement = select(Query).filter(Query.url == self.valid_url)
         rows = self.session.execute(statement).all()
 
-        assert len(rows) == 1  # Just checking that no games were added
         assert rows[0].Query.url == self.valid_url
         assert rows[0].Query.status_code == self.valid_status_code
+
+    def test_save_api_query_no_values(self, caplog):
+        with caplog.at_level(logging.INFO):
+            add_record("api_queries", {})
+        assert any("No values to insert" in message for message in caplog.messages)

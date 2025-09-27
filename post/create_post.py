@@ -47,7 +47,7 @@ def _get_reply_ids(reply_ids: dict[str, dict]) -> dict:
     return {"parent": parent, "root": root}
 
 
-def log_post_to_db(post: CreateRecordResponse, post_params: dict[str, str], post_type: str, reply_ids: dict[str, dict]) -> str:
+def _log_post_to_db(post: CreateRecordResponse, post_params: dict[str, str], post_type: str, reply_ids: dict[str, dict]) -> str:
     """Logs created post to the Post table.
 
     Args:
@@ -99,4 +99,4 @@ def create_post(
     post_params["text"] = post_text
     post = CLIENT.send_post(**post_params)
 
-    return log_post_to_db(post, post_params, post_type, reply_ids)
+    return _log_post_to_db(post, post_params, post_type, reply_ids)

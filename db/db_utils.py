@@ -8,6 +8,23 @@ from common import DB_SESSION
 from db.models import Base, Game, Query
 
 
+def get_db_tables(table_name: str) -> Base:
+    """Get a database table by name.
+
+    Args:
+        table_name (str): name of the table to get
+
+    Returns:
+        Base: table class
+    """
+    tables = Base.__subclasses__()
+    for table in tables:
+        if table.__tablename__ == table_name:
+            return table
+
+    raise ValueError(f"Table {table_name} not found in database. Available tables: {[table.__tablename__ for table in tables]}")
+
+
 def get_a_days_games(start_date: datetime) -> list[Game]:
     """Query the games table for all games on a given date.
 
@@ -29,28 +46,33 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 
-def insert_rows(table: Base, rows: list[dict]):
+def insert_rows(table_name: str, rows: list[dict]):
     """Generic interface to log rows into a database table.
 
     Args:
-        table: table in the database to log to
+        table_name: table in the database to log to
         rows: rows to insert
     """
     if not len(rows):
         logging.info("No rows to insert")
         return
 
-    DB_SESSION.execute(insert(table).values(rows).on_conflict_do_nothing())
+    DB_SESSION.execute(insert(get_db_tables(table_name)).values(rows).on_conflict_do_nothing())
     DB_SESSION.commit()
 
 
-def save_api_query(url: str, status_code: int):
-    """Saves a query to the database.
+def add_record(table_name: str, values: dict):
+    """Saves a record to the database.
 
     Args:
-        url (str): url that was queried
-        status_code (int): status code of the api response
+        table_name (str): name of the table to log to
+        values (dict): dictionary containing the values to log
     """
-    query = Query(url=url, status_code=status_code, date_ts=datetime.now(timezone.utc))
+    if not values:
+        logging.info("No values to insert")
+        return
+
+    table = get_db_tables(table_name)
+    query = table(**values)
     DB_SESSION.add(query)
     DB_SESSION.commit()

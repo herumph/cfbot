@@ -3,7 +3,6 @@ database."""
 from datetime import datetime
 
 from db.db_utils import insert_rows
-from db.models import Game
 from query.common import ESPN_SCOREBOARD, call_espn
 
 
@@ -88,5 +87,5 @@ def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
     game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups={groups}")
     games = parse_games(game_data)
 
-    insert_rows(Game, games)
+    insert_rows("games", games)
     return games

@@ -1,5 +1,6 @@
 """ESPN API functions."""
 import requests
+
 from db.db_utils import save_api_query
 
 ESPN_GAME = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
