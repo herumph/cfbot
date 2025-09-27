@@ -1,6 +1,6 @@
 """ESPN API functions."""
 import logging
-
+from datetime import datetime
 import requests
 
 from db.db_utils import add_record
@@ -35,7 +35,7 @@ def _call_espn(url: str) -> dict:
         dict: json response from the api
     """
     response = requests.get(url, timeout=10)
-    add_record("api_queries", url, response.status_code)
+    add_record("api_queries", {"url": url, "status_code": response.status_code, "date_ts": datetime.now()})
 
     if response.status_code == 200:
         return response.json()
