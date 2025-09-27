@@ -1,11 +1,11 @@
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
 from common import DB_SESSION
-from db.models import Base, Game, Query
+from db.models import Base, Game
 
 
 def get_db_tables(table_name: str) -> Base:

@@ -1,7 +1,8 @@
 """ESPN API functions."""
 import requests
+import logging
 
-from db.db_utils import save_api_query
+from db.db_utils import add_record
 
 ESPN_GAME = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates="
@@ -18,8 +19,10 @@ def call_espn(url: str) -> dict:
         dict: json response from the api
     """
     response = requests.get(url, timeout=10)
-    save_api_query(url, response.status_code)
+    add_record("api_queries", url, response.status_code)
 
     if response.status_code == 200:
         return response.json()
-    return None
+    else:
+        logging.error(f"Error querying ESPN API: {response.status_code} for URL {url}")
+        return None
