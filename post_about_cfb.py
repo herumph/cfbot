@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 
 from post.post_game_headers import create_game_header_posts, post_a_days_games
 from post.post_important_plays import post_important_plays
-from query.get_games import get_games
+from data.get_games import get_games
 
 DATE = datetime.now(timezone.utc)
 

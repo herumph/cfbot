@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from db.db_utils import insert_rows
-from query.query_api import query_scoreboard
-from query.parse_results import parse_games
+from data.query_api import query_scoreboard
+from data.parse_results import parse_games
 
 
 def get_games(date: datetime, group: str | None = "80") -> None:

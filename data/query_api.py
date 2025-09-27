@@ -1,4 +1,4 @@
-from query.espn_api import ESPNAPI
+from data.espn_api import ESPNAPI
 
 def query_scoreboard(date: str, group: str) -> dict:
     """Query the ESPN scoreboard API.
