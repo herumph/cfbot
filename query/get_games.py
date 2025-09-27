@@ -3,7 +3,7 @@ database."""
 from datetime import datetime
 
 from db.db_utils import insert_rows
-from query.common import query_scoreboard
+from query.query_api import query_scoreboard
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:

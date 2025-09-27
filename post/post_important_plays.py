@@ -8,7 +8,7 @@ from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
 from post.post_game_headers import get_games
-from query.common import query_game
+from query.query_api import query_game
 
 
 def _update_database(result: dict[str, str]):
