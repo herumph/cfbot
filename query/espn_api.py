@@ -21,7 +21,7 @@ class ESPNAPIs:
     def team(self) -> str:
         return "https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/"
 
-    def _call_espn(self, url: str) -> dict:
+    def _call_espn(self, url: str) -> dict | None:
         """Query ESPN API.
 
         Args:
