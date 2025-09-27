@@ -3,7 +3,7 @@ database."""
 from datetime import datetime
 
 from db.db_utils import insert_rows
-from query.common import ESPN_SCOREBOARD, call_espn
+from query.common import query_scoreboard
 
 
 def get_records(teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
@@ -73,18 +73,18 @@ def parse_games(game_json: dict) -> list[dict]:
     return games
 
 
-def get_games(date: datetime, groups: str | None = "80") -> list[dict]:
+def get_games(date: datetime, group: str | None = "80") -> list[dict]:
     """Gathers games from espn and logs them to the database.
 
     Args:
         date (datetime): date to get games for
+        group (str | None): ESPN group to query. 80 == FBS, 81 == FCS. Default value is 80.
 
     Returns:
         list[dict]: list of each game for a given date
     """
     date = date.strftime("%Y%m%d")
-    # group 80 == FBS, 81 == FCS
-    game_data = call_espn(ESPN_SCOREBOARD + f"{date}&groups={groups}")
+    game_data = query_scoreboard(date, group)
     games = parse_games(game_data)
 
     insert_rows("games", games)

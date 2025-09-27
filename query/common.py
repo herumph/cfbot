@@ -1,12 +1,51 @@
 """ESPN API functions."""
-import requests
 import logging
+
+import requests
 
 from db.db_utils import add_record
 
-ESPN_GAME = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
-ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates="
-ESPN_TEAM = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/"
+
+class ESPNAPIUrls:
+    """ESPN API endpoints."""
+
+    @property
+    def game(self) -> str:
+        return "https://site.api.espn.com/apis/site/v2/sports/football/college-football/summary?event="
+
+    @property
+    def scoreboard(self) -> str:
+        return "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates="
+
+    @property
+    def team(self) -> str:
+        return "https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/"
+
+
+def _create_scoreboard_url(date: str, group: str) -> str:
+    """Generate a scoreboard query URL.
+
+    Args:
+        date (str): date to query in %Y%m%d format
+        group (str): ESPN group to query
+
+    Returns:
+        str: full URL to query the ESPN scoreboard API
+    """
+    return f"{ESPNAPIUrls.scoreboard}{date}&groups={group}"
+
+
+def query_scoreboard(date: str, group: str) -> dict:
+    """Query the ESPN scoreboard API.
+
+    Args:
+        date (str): date to query in %Y%m%d format
+        group (str): ESPN group to query
+
+    Returns:
+        dict: json response from the API
+    """
+    return call_espn(_create_scoreboard_url(date, group))
 
 
 def call_espn(url: str) -> dict:
