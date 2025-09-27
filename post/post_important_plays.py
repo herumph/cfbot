@@ -121,4 +121,4 @@ def post_important_plays(date: datetime):
     """
     games = get_games(date, date + timedelta(hours=1))
     for game in games:
-        post_about_game(game["id"])
+        post_about_game(game.id)
