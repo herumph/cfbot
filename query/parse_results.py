@@ -1,4 +1,4 @@
-from query.parse_espn import ESPNParser
+from query.espn_parser import ESPNParser
 
 
 def parse_games(game_json: dict) -> list[dict]:
