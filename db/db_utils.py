@@ -1,11 +1,11 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
 from common import DB_SESSION
-from db.models import Base, Game
+from db.models import Base, Game, Query
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
@@ -41,4 +41,16 @@ def insert_rows(table: Base, rows: list[dict]):
         return
 
     DB_SESSION.execute(insert(table).values(rows).on_conflict_do_nothing())
+    DB_SESSION.commit()
+
+
+def save_api_query(url: str, status_code: int):
+    """Saves a query to the database.
+
+    Args:
+        url (str): url that was queried
+        status_code (int): status code of the api response
+    """
+    query = Query(url=url, status_code=status_code, date_ts=datetime.now(timezone.utc))
+    DB_SESSION.add(query)
     DB_SESSION.commit()

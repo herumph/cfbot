@@ -6,8 +6,8 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
-from db.db_utils import get_a_days_games, insert_rows
-from db.models import Game
+from db.db_utils import get_a_days_games, insert_rows, save_api_query
+from db.models import Game, Query
 
 DB_SESSION = init_db_session()
 
@@ -104,3 +104,24 @@ class TestInsertRows:
         with caplog.at_level(logging.INFO):
             insert_rows(Game, [])
         assert any("No rows to insert" in message for message in caplog.messages)
+
+
+class TestSaveApiQuery:
+    def setup_class(self):
+        self.session = DB_SESSION
+        self.valid_url = "https://example.com"
+        self.valid_status_code = 200
+
+    def teardown_class(self):
+        self.session.rollback()
+        self.session.close()
+
+    def test_save_api_query_success(self):
+        save_api_query(self.valid_url, self.valid_status_code)
+
+        statement = select(Query).filter(Query.url == self.valid_url)
+        rows = self.session.execute(statement).all()
+
+        assert len(rows) == 1  # Just checking that no games were added
+        assert rows[0].Query.url == self.valid_url
+        assert rows[0].Query.status_code == self.valid_status_code
