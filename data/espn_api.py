@@ -49,6 +49,12 @@ class _ESPNAPI():
         Returns:
             str: full URL to query the ESPN scoreboard API
         """
+        try:
+            datetime.strptime(date, "%Y%m%d")
+        except ValueError:
+            raise AssertionError("Date must be in %Y%m%d format")
+        assert len(group), "Group must be a non-empty string"
+
         return f"{self.scoreboard}{date}&groups={group}"
 
     def _create_team_url(self, team_id: str) -> str:
@@ -60,6 +66,8 @@ class _ESPNAPI():
         Returns:
             str: full URL to query the ESPN team API
         """
+        assert len(team_id), "team_id must be a non-empty string"
+        
         return f"{self.team}{team_id}"
 
     def _create_game_url(self, game_id: str) -> str:
@@ -71,6 +79,8 @@ class _ESPNAPI():
         Returns:
             str: full URL to query the ESPN game API
         """
+        assert len(game_id), "game_id must be a non-empty string"
+
         return f"{self.game}{game_id}"
 
     def query_scoreboard(self, date: str, group: str) -> dict:
