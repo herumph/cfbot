@@ -35,20 +35,7 @@ def _create_scoreboard_url(date: str, group: str) -> str:
     return f"{ESPNAPIUrls.scoreboard}{date}&groups={group}"
 
 
-def query_scoreboard(date: str, group: str) -> dict:
-    """Query the ESPN scoreboard API.
-
-    Args:
-        date (str): date to query in %Y%m%d format
-        group (str): ESPN group to query
-
-    Returns:
-        dict: json response from the API
-    """
-    return call_espn(_create_scoreboard_url(date, group))
-
-
-def call_espn(url: str) -> dict:
+def _call_espn(url: str) -> dict:
     """Query ESPN API.
 
     Args:
@@ -65,3 +52,17 @@ def call_espn(url: str) -> dict:
     else:
         logging.error(f"Error querying ESPN API: {response.status_code} for URL {url}")
         return None
+
+
+def query_scoreboard(date: str, group: str) -> dict:
+    """Query the ESPN scoreboard API.
+
+    Args:
+        date (str): date to query in %Y%m%d format
+        group (str): ESPN group to query
+
+    Returns:
+        dict: json response from the API
+    """
+    return call_espn(_create_scoreboard_url(date, group))
+
