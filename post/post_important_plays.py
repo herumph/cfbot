@@ -8,7 +8,7 @@ from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
 from post.post_game_headers import get_games
-from query.common import ESPN_GAME, call_espn
+from query.common import query_game
 
 
 def _update_database(result: dict[str, str]):
@@ -145,7 +145,7 @@ def post_about_game(game_id: str):
         game_id (str): id of the game in the game table
         date (datetime): datetime of the earliest drive to consider posting about
     """
-    game_info = call_espn(ESPN_GAME + game_id)
+    game_info = query_game(game_id)
     important_results = get_important_results(game_info)
 
     post_important_results(important_results)

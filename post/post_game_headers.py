@@ -7,7 +7,7 @@ from sqlalchemy import select, update
 from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
-from query.common import ESPN_TEAM, call_espn
+from query.common import query_team
 
 
 def _update_database(result: dict[str, str]):
@@ -126,7 +126,7 @@ def create_game_header_posts(date: datetime):
         if not game.last_post_id:
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
-                team_info = call_espn(ESPN_TEAM + team)
+                team_info = query_team(team)
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
