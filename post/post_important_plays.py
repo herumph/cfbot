@@ -9,6 +9,7 @@ from db.models import Game, Post
 from post.create_post import create_post
 from post.post_game_headers import get_games
 from query.query_api import query_game
+from query.parse_results import get_scoring_plays
 
 
 def _update_database(result: dict[str, str]):
@@ -53,45 +54,6 @@ def _get_previous_posts(last_post_id: str) -> dict[str, str]:
         "root": root_id,
         "created_at": last_post[0].created_at,
     }
-
-
-def get_important_results(game_info: dict) -> list[dict[str, str]]:
-    """Gets scoring plays from an ESPN API response and returns them sorted by
-    time.
-
-    Args:
-        game_info (dict): ESPN API response
-
-    Returns:
-        list[dict]: list containing all scoring plays from the game that haven't been posted about yet
-    """
-    results = []
-    if "drives" not in game_info.keys():
-        return results
-    if "previous" not in game_info["drives"].keys():
-        return results
-
-    is_complete = game_info["header"]["competitions"][0]["status"]["type"]["completed"]
-    all_drives = game_info["drives"]["previous"]
-    for drive in all_drives:
-        scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
-        for ind, play in enumerate(scoring_plays):  # yes, there can be multiple scoring plays in one drive according to ESPN
-            if drive["isScore"]:
-                drive_description = drive["description"] if ind == 0 else None
-                results.append(
-                    {
-                        "game_id": game_info["header"]["id"],
-                        "play_text": play["text"],
-                        "away_score": play["awayScore"],
-                        "home_score": play["homeScore"],
-                        "total_score": play["homeScore"] + play["awayScore"],  # needed because ESPN doesn't know how clocks work
-                        "drive_description": drive_description,
-                        "scoring_team": play["end"]["team"]["id"],
-                        "is_complete": is_complete,
-                    }
-                )
-
-    return sorted(results, key=lambda d: d["total_score"])
 
 
 def format_scoring_play(drive: dict[str, str]) -> str:
@@ -146,9 +108,9 @@ def post_about_game(game_id: str):
         date (datetime): datetime of the earliest drive to consider posting about
     """
     game_info = query_game(game_id)
-    important_results = get_important_results(game_info)
+    scoring_plays = get_scoring_plays(game_info)
 
-    post_important_results(important_results)
+    post_important_results(scoring_plays)
 
 
 def post_important_plays(date: datetime):

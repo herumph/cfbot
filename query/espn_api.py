@@ -6,7 +6,7 @@ import requests
 from db.db_utils import add_record
 
 
-class ESPNAPIs:
+class _ESPNAPI():
     """ESPN API endpoints."""
 
     @property
@@ -108,4 +108,4 @@ class ESPNAPIs:
         return self._call_espn(self._create_game_url(game_id))
 
 
-ESPNAPI = ESPNAPIs()
+ESPNAPI = _ESPNAPI()
