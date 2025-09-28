@@ -49,7 +49,7 @@ class _ESPNParser:
             game_json (dict): ESPN API response from the ESPN scoreboard for a given league
 
         Returns:
-            list[dict]: list of games to be added to the SQLite database
+            list[dict]: list of games to be added to the database
         """
         games = []
         for event in game_json["events"]:
