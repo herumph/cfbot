@@ -4,9 +4,9 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
+from common import CLIENT, DB_SESSION
 from sqlalchemy import select
 
-from common import CLIENT, DB_SESSION
 from db.models import Post
 
 

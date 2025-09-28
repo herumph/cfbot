@@ -1,9 +1,10 @@
 """Wrapper to call each module needed to get and post about CFB data."""
 from datetime import datetime, timezone
 
+from data.get_games import get_games
+
 from post.post_game_headers import create_game_header_posts, post_a_days_games
 from post.post_important_plays import post_important_plays
-from data.get_games import get_games
 
 DATE = datetime.now(timezone.utc)
 

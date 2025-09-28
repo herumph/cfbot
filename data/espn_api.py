@@ -2,11 +2,10 @@ import logging
 from datetime import datetime
 
 import requests
-
 from db.db_utils import add_record
 
 
-class _ESPNAPI():
+class _ESPNAPI:
     """ESPN API endpoints."""
 
     @property
@@ -67,7 +66,7 @@ class _ESPNAPI():
             str: full URL to query the ESPN team API
         """
         assert len(team_id), "team_id must be a non-empty string"
-        
+
         return f"{self.team}{team_id}"
 
     def _create_game_url(self, game_id: str) -> str:

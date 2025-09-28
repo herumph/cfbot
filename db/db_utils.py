@@ -1,10 +1,10 @@
 import logging
 from datetime import datetime, timedelta
 
+from common import DB_SESSION
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert
 
-from common import DB_SESSION
 from db.models import Base, Game
 
 

@@ -1,7 +1,9 @@
 from datetime import datetime
 
-class _ESPNParser():
+
+class _ESPNParser:
     """Class to parse ESPN API responses."""
+
     def get_team_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
         """Parse record information from an ESPN API response.
 
@@ -23,7 +25,6 @@ class _ESPNParser():
 
         return teams
 
-
     def parse_competitors(self, competitors: list[dict]) -> dict[str, str]:
         """Gather competitor information from an ESPN API response.
 
@@ -40,7 +41,6 @@ class _ESPNParser():
             teams = self.get_team_records(teams, team["homeAway"], team["records"])
 
         return teams
-
 
     def parse_games(self, game_json: dict) -> list[dict]:
         """Parse game information from the ESPN scoreboard.
@@ -67,11 +67,10 @@ class _ESPNParser():
             )
 
         return games
-    
 
     def get_scoring_plays(self, game_json: dict) -> list[dict[str, str]]:
-        """Gets scoring plays from an ESPN API response and returns them sorted by
-        time.
+        """Gets scoring plays from an ESPN API response and returns them sorted
+        by time.
 
         Args:
             game_json (dict): ESPN API response
@@ -107,5 +106,5 @@ class _ESPNParser():
 
         return sorted(results, key=lambda d: d["total_score"])
 
-    
+
 ESPNParser = _ESPNParser()

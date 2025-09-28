@@ -1,6 +1,6 @@
 import pytest
-
 from data.espn_api import ESPNAPI
+
 
 class TestESPNAPI:
     def test_create_team_url(self):
@@ -12,7 +12,6 @@ class TestESPNAPI:
         team_id = ""
         with pytest.raises(AssertionError):
             ESPNAPI._create_team_url(team_id)
-        
 
     def test_create_game_url(self):
         game_id = "456"
@@ -23,7 +22,6 @@ class TestESPNAPI:
         game_id = ""
         with pytest.raises(AssertionError):
             ESPNAPI._create_game_url(game_id)
-        
 
     def test_create_scoreboard_url(self):
         date = "20240101"
@@ -42,5 +40,3 @@ class TestESPNAPI:
         group = ""
         with pytest.raises(AssertionError):
             ESPNAPI._create_scoreboard_url(date, group)
-
-    

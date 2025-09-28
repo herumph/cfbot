@@ -2,12 +2,12 @@
 
 from datetime import datetime, timedelta
 
+from common import DB_SESSION
+from data.query_api import query_team
 from sqlalchemy import select, update
 
-from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
-from data.query_api import query_team
 
 
 def _update_database(result: dict[str, str]):

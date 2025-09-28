@@ -2,14 +2,14 @@
 
 from datetime import datetime, timedelta, timezone
 
+from common import DB_SESSION
+from data.parse_results import get_scoring_plays
+from data.query_api import query_game
 from sqlalchemy import select, update
 
-from common import DB_SESSION
 from db.models import Game, Post
 from post.create_post import create_post
 from post.post_game_headers import get_games
-from data.query_api import query_game
-from data.parse_results import get_scoring_plays
 
 
 def _update_database(result: dict[str, str]):
