@@ -2,7 +2,7 @@ from datetime import datetime
 
 class _ESPNParser():
     """Class to parse ESPN API responses."""
-    def get_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
+    def get_team_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
         """Parse record information from an ESPN API response.
 
         Args:
@@ -37,7 +37,7 @@ class _ESPNParser():
         for team in competitors:
             teams[f"{team['homeAway']}_team"] = team["team"]["shortDisplayName"]
             teams[f"{team['homeAway']}_team_id"] = team["id"]
-            teams = self.get_records(teams, team["homeAway"], team["records"])
+            teams = self.get_team_records(teams, team["homeAway"], team["records"])
 
         return teams
 
