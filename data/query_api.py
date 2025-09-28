@@ -11,7 +11,7 @@ def query_scoreboard(date: str, group: str) -> dict:
     Returns:
         dict: json response from the API
     """
-    return ESPNAPI.query_scoreboard(date, group)
+    return ESPNAPI.scoreboard(date, group)
 
 
 def query_team(team_id: str) -> dict:
@@ -23,7 +23,7 @@ def query_team(team_id: str) -> dict:
     Returns:
         dict: json response from the API
     """
-    return ESPNAPI.query_team(team_id)
+    return ESPNAPI.team(team_id)
 
 
 def query_game(game_id: str) -> dict:
@@ -35,4 +35,4 @@ def query_game(game_id: str) -> dict:
     Returns:
         dict: json response from the API
     """
-    return ESPNAPI.query_game(game_id)
+    return ESPNAPI.game(game_id)
