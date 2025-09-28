@@ -4,7 +4,7 @@ from datetime import datetime
 class _ESPNParser:
     """Class to parse ESPN API responses."""
 
-    def get_team_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
+    def team_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
         """Parse record information from an ESPN API response.
 
         Args:
@@ -25,7 +25,7 @@ class _ESPNParser:
 
         return teams
 
-    def parse_competitors(self, competitors: list[dict]) -> dict[str, str]:
+    def competitors(self, competitors: list[dict]) -> dict[str, str]:
         """Gather competitor information from an ESPN API response.
 
         Args:
@@ -38,11 +38,11 @@ class _ESPNParser:
         for team in competitors:
             teams[f"{team['homeAway']}_team"] = team["team"]["shortDisplayName"]
             teams[f"{team['homeAway']}_team_id"] = team["id"]
-            teams = self.get_team_records(teams, team["homeAway"], team["records"])
+            teams = self.team_records(teams, team["homeAway"], team["records"])
 
         return teams
 
-    def parse_games(self, game_json: dict) -> list[dict]:
+    def games(self, game_json: dict) -> list[dict]:
         """Parse game information from the ESPN scoreboard.
 
         Args:
@@ -53,7 +53,7 @@ class _ESPNParser:
         """
         games = []
         for event in game_json["events"]:
-            competitors = self.parse_competitors(event["competitions"][0]["competitors"])
+            competitors = self.competitors(event["competitions"][0]["competitors"])
             games.append(
                 {
                     "id": event["id"],
@@ -68,7 +68,7 @@ class _ESPNParser:
 
         return games
 
-    def get_scoring_plays(self, game_json: dict) -> list[dict[str, str]]:
+    def scoring_plays(self, game_json: dict) -> list[dict[str, str]]:
         """Gets scoring plays from an ESPN API response and returns them sorted
         by time.
 

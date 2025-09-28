@@ -10,7 +10,7 @@ def parse_games(game_json: dict) -> list[dict]:
     Returns:
         list[dict]: list of games to be added to the SQLite database
     """
-    return ESPNParser.parse_games(game_json)
+    return ESPNParser.games(game_json)
 
 
 def get_scoring_plays(game_json: dict) -> list[dict[str, str]]:
@@ -22,4 +22,4 @@ def get_scoring_plays(game_json: dict) -> list[dict[str, str]]:
     Returns:
         list[dict]: list containing all scoring plays from the game that haven't been posted about yet
     """
-    return ESPNParser.get_scoring_plays(game_json)
+    return ESPNParser.scoring_plays(game_json)

@@ -2157,14 +2157,7 @@
                             "altDetail": "OT"
                         }
                     },
-                    "broadcasts": [
-                        {
-                            "market": "national",
-                            "names": [
-                                "ESPN"
-                            ]
-                        }
-                    ],
+                    "broadcasts": [],
                     "leaders": [
                         {
                             "name": "passingYards",
