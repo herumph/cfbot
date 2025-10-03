@@ -7,7 +7,7 @@ from sqlalchemy.dialects.sqlite import insert
 
 from db.models import Base, Game, Post
 
-
+# TODO: add tests
 def get_db_tables(table_name: str) -> Base:
     """Get a database table by name.
 
