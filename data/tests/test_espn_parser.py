@@ -43,6 +43,9 @@ class TestESPNParser:
         )
         assert plays[1]["scoring_team"] == "68"
 
+    @pytest.mark.skip(reason="not currently supported")
+    def test_get_scoring_plays_safety(self, game_with_safety): ...
+
     def test_parse_games(self, scoreboard):
         games = ESPNParser.games(scoreboard)
         assert len(games) == 3
@@ -54,11 +57,29 @@ class TestESPNParser:
         assert games[0]["away_score"] == 0
         assert games[0]["trackable"] is True
 
-    @pytest.mark.skip(reason="change input to function")
-    def test_parse_team_records(self, game_with_pick_six): ...
+    def test_parse_team_records(self, scoreboard):
+        for event in scoreboard["events"]:
+            competitors = ESPNParser.competitors(
+                event["competitions"][0]["competitors"]
+            )
 
-    @pytest.mark.skip(reason="not currently supported")
-    def test_get_scoring_plays_safety(self, game_with_safety): ...
+        assert competitors["home_wins"] == "0"
+        assert competitors["home_losses"] == "5"
+        assert competitors["home_conf_wins"] == "0"
+        assert competitors["home_conf_losses"] == "0"
 
-    @pytest.mark.skip(reason="need to split function")
-    def test_parse_competitors(self, game_with_missed_pat): ...
+        assert competitors["away_wins"] == "4"
+        assert competitors["away_losses"] == "0"
+        assert competitors["away_conf_wins"] == "1"
+        assert competitors["away_conf_losses"] == "0"
+
+    def test_parse_competitors(self, scoreboard):
+        for event in scoreboard["events"]:
+            competitors = ESPNParser.competitors(
+                event["competitions"][0]["competitors"]
+            )
+
+        assert competitors["home_team_id"] == "204"
+        assert competitors["home_team"] == "Oregon St"
+        assert competitors["away_team_id"] == "248"
+        assert competitors["away_team"] == "Houston"
