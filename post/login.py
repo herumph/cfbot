@@ -32,7 +32,7 @@ def get_session(
         insert_rows("credentials", [{"username": username, "password": password, "session": session_string}])
 
     elif refresh_session:
-        client.login(credentials[0].username, credentials.password)
+        client.login(credentials.username, credentials.password)
         session_string = client.export_session_string()
         update_rows("credentials", {"username": credentials.username, "password": credentials.password, "session": session_string}, {"username": credentials.username})
 

@@ -5,7 +5,7 @@ from common import DB_SESSION
 from sqlalchemy import select, update
 from sqlalchemy.dialects.sqlite import insert
 
-from db.models import Base, Game
+from db.models import Base, Game, Post
 
 
 def get_db_tables(table_name: str) -> Base:
@@ -27,7 +27,7 @@ def get_db_tables(table_name: str) -> Base:
     )
 
 
-def get_a_days_games(start_date: datetime) -> list[Game]:
+def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     """Query the games table for all games on a given date.
 
     Args:
@@ -38,18 +38,37 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     """
     statement = select(Game).filter(
         (Game.start_ts >= start_date),
-        (Game.start_ts <= (start_date + timedelta(days=1))),
+        (Game.start_ts <= end_date),
     )
     rows = DB_SESSION.execute(statement).all()
 
     if not len(rows):
-        logging.warning(f"No games found for date {start_date.date()}")
+        logging.warning(f"No games found for dates {start_date.date(), end_date.date()}")
 
     return [row[0] for row in rows]
 
 # TODO: add tests
+def has_previous_daily_post(date: datetime) -> bool:
+    """Checking if a daily post was made already for a given date.
+
+    Args:
+        date (datetime): date to get previous posts for
+
+    Returns:
+        bool: if there is a previous daily post
+    """
+    query = select(Post).filter(
+        (Post.created_at_ts >= date - timedelta(hours=24)),
+        (Post.created_at_ts <= date),
+        (Post.post_type == "daily"),
+    )
+    rows = DB_SESSION.execute(query).all()
+    return len(rows) > 1
+
+
+# TODO: add tests
 def get_values(table_name: str, filter: dict, return_type: str | None = "all") -> list[dict]:
-    """Generic interface to get values from a database table.
+    """Generic interface to get values from a database table. Only operates with equality filters.
 
     Args:
         table_name: table in the database to get values from

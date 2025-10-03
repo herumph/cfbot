@@ -2,33 +2,10 @@
 
 from datetime import datetime, timedelta
 
-from common import DB_SESSION
 from data.query_api import query_team
-from sqlalchemy import select, update
-
-from db.models import Game, Post
+from db.db_utils import get_values, update_rows, has_previous_daily_post, get_games
 from post.create_post import create_post
-
-
-def _update_database(result: dict[str, str]):
-    """Update database with last created post.
-
-    Args:
-        DB_SESSION (Session): SQLite session
-        result (dict[str, str]): dictionary containing game_id and last_post_id
-    """
-    query = (
-        update(Game)
-        .where(Game.id == result["game_id"])
-        .values(
-            {
-                "last_post_id": result["last_post_id"],
-            }
-        )
-    )
-
-    DB_SESSION.execute(query)
-    DB_SESSION.commit()
+from db.models import Game
 
 
 def _get_team_streak(team_info: dict) -> str:
@@ -72,24 +49,7 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     )
 
 
-def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
-    """Query game table to get currently active games.
-
-    Args:
-        start_date (datetime): start date of games to consider
-
-    Returns:
-        list[Game]: list of currently ongoing games
-    """
-    query = select(Game).filter(
-        (Game.start_ts <= end_date),
-        (Game.start_ts >= start_date),
-    )
-    rows = DB_SESSION.execute(query).all()
-
-    return [row[0] for row in rows]
-
-
+# TODO: This isn't used for anything right now
 def post_a_days_games(
     date: datetime, offset: int | None = -5, post_hour: int | None = 7
 ):
@@ -111,24 +71,6 @@ def post_a_days_games(
         create_post(post_text, "daily")
 
 
-def has_previous_daily_post(date: datetime) -> bool:
-    """Checking if a daily post was made already for a given date.
-
-    Args:
-        date (datetime): date to get previous posts for
-
-    Returns:
-        bool: if there is a previous daily post
-    """
-    query = select(Post).filter(
-        (Post.created_at_ts >= date - timedelta(hours=24)),
-        (Post.created_at_ts <= date),
-        (Post.post_type == "daily"),
-    )
-    rows = DB_SESSION.execute(query).all()
-    return len(rows) > 1
-
-
 def create_game_header_posts(date: datetime):
     """Create root level posts for all currently ongoing games.
 
@@ -146,5 +88,5 @@ def create_game_header_posts(date: datetime):
                 streak_info[team] = _get_team_streak(team_info)
 
             post_text = _format_post_text(game, streak_info)
-            post = create_post(post_text, "game_header")
-            _update_database({"game_id": game.id, "last_post_id": post})
+            post_id = create_post(post_text, "game_header")
+            update_rows("games", {"last_post_id": post_id}, {"id": game.id})

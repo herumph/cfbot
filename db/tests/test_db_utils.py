@@ -1,12 +1,12 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pytest
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
-from db.db_utils import add_record, get_a_days_games, get_db_tables, insert_rows
+from db.db_utils import add_record, get_games, get_db_tables, insert_rows
 from db.models import Game, Query
 
 DB_SESSION = init_db_session()
@@ -42,7 +42,7 @@ class TestGetADaysGames:
 
     def test_get_a_days_games_no_games(self, caplog):
         with caplog.at_level(logging.WARNING):
-            games = get_a_days_games(datetime(1700, 1, 1))
+            games = get_games(datetime(1700, 1, 1), datetime(1700, 1, 2))
         assert any("No games found for date" in message for message in caplog.messages)
 
     def test_get_a_days_games_with_games(self):
@@ -52,7 +52,7 @@ class TestGetADaysGames:
         except IntegrityError:
             self.session.rollback()
 
-        games = get_a_days_games(self.valid_game.start_ts)
+        games = get_games(self.valid_game.start_ts, self.valid_game.start_ts + timedelta(days=1))
         self.teardown_class()
 
         assert len(games)
