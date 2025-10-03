@@ -7,8 +7,8 @@ from db.db_utils import get_values, update_rows, has_previous_daily_post, get_ga
 from post.create_post import create_post
 from db.models import Game
 
-
-def _get_team_streak(team_info: dict) -> str:
+# TODO: add tests
+def get_team_streak(team_info: dict) -> str:
     """Gather win/loss streaks from ESPN API json.
 
     Args:
@@ -25,8 +25,8 @@ def _get_team_streak(team_info: dict) -> str:
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
 
-
-def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
+# TODO: add tests
+def format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     """Format information into posting format.
 
     Args:
@@ -85,8 +85,8 @@ def create_game_header_posts(date: datetime):
             streak_info = {}
             for team in [game.home_team_id, game.away_team_id]:
                 team_info = query_team(team)
-                streak_info[team] = _get_team_streak(team_info)
+                streak_info[team] = get_team_streak(team_info)
 
-            post_text = _format_post_text(game, streak_info)
+            post_text = format_post_text(game, streak_info)
             post_id = create_post(post_text, "game_header")
             update_rows("games", {"last_post_id": post_id}, {"id": game.id})
