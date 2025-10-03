@@ -7,6 +7,7 @@ from sqlalchemy.dialects.sqlite import insert
 
 from db.models import Base, Game, Post
 
+
 # TODO: add tests
 def get_db_tables(table_name: str) -> Base:
     """Get a database table by name.
@@ -43,9 +44,12 @@ def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     rows = DB_SESSION.execute(statement).all()
 
     if not len(rows):
-        logging.warning(f"No games found for dates {start_date.date(), end_date.date()}")
+        logging.warning(
+            f"No games found for dates {start_date.date(), end_date.date()}"
+        )
 
     return [row[0] for row in rows]
+
 
 # TODO: add tests
 def has_previous_daily_post(date: datetime) -> bool:
@@ -67,7 +71,9 @@ def has_previous_daily_post(date: datetime) -> bool:
 
 
 # TODO: add tests
-def get_values(table_name: str, filter: dict, return_type: str | None = "all") -> list[dict]:
+def get_values(
+    table_name: str, filter: dict, return_type: str | None = "all"
+) -> list[dict]:
     """Generic interface to get values from a database table. Only operates with equality filters.
 
     Args:
@@ -90,7 +96,6 @@ def get_values(table_name: str, filter: dict, return_type: str | None = "all") -
         logging.warning(f"No rows found for filter {filter} in table {table_name}")
 
     return [row[0] for row in rows] if return_type == "all" else rows[0]
-
 
 
 def insert_rows(table_name: str, rows: list[dict]):
@@ -125,6 +130,7 @@ def add_record(table_name: str, values: dict):
     query = table(**values)
     DB_SESSION.add(query)
     DB_SESSION.commit()
+
 
 # TODO: add tests
 def update_rows(table_name: str, values: dict, condition: dict):

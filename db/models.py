@@ -1,5 +1,3 @@
-"""SQLite models."""
-
 from typing import Optional
 
 from sqlalchemy import TIMESTAMP, Boolean, Integer, String

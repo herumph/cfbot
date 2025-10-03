@@ -6,6 +6,7 @@ from post import CLIENT
 
 from db.db_utils import add_record, get_values
 
+
 # TODO: add test
 def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     """Gather information for a parent/root post from the sqlite database.
@@ -18,8 +19,9 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
         dict: containing 'uri' and 'cid' for the queried post
     """
     post = get_values("posts", {"id": reply_ids[key]}, "first")
-    
+
     return {"uri": post.uri, "cid": post.cid}
+
 
 # TODO: add test
 def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
@@ -42,6 +44,7 @@ def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
     root = query_for_post_ids(reply_ids, "root")
 
     return {"parent": parent, "root": root}
+
 
 # TODO: add test
 def log_post_to_db(

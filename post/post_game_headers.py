@@ -1,11 +1,10 @@
-"""Create root post about a game that is starting."""
-
 from datetime import datetime, timedelta
 
 from data.query_api import query_team
-from db.db_utils import get_values, update_rows, has_previous_daily_post, get_games
+from db.db_utils import update_rows, has_previous_daily_post, get_games
 from post.create_post import create_post
 from db.models import Game
+
 
 # TODO: add tests
 def get_team_streak(team_info: dict) -> str:
@@ -24,6 +23,7 @@ def get_team_streak(team_info: dict) -> str:
     ][0]
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
+
 
 # TODO: add tests
 def format_post_text(game: Game, streak_info: dict[str, str]) -> str:

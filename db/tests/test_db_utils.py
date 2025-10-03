@@ -52,7 +52,9 @@ class TestGetADaysGames:
         except IntegrityError:
             self.session.rollback()
 
-        games = get_games(self.valid_game.start_ts, self.valid_game.start_ts + timedelta(days=1))
+        games = get_games(
+            self.valid_game.start_ts, self.valid_game.start_ts + timedelta(days=1)
+        )
         self.teardown_class()
 
         assert len(games)
