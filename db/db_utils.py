@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime, timedelta
 
-from common import DB_SESSION
+from db import DB_SESSION
 from sqlalchemy import select, update
 from sqlalchemy.dialects.sqlite import insert
 
