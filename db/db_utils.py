@@ -48,7 +48,7 @@ def get_a_days_games(start_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 # TODO: add tests
-def get_values(table_name: str, filter: dict) -> list[dict]:
+def get_values(table_name: str, filter: dict, return_type: str | None = "all") -> list[dict]:
     """Generic interface to get values from a database table.
 
     Args:
@@ -59,12 +59,18 @@ def get_values(table_name: str, filter: dict) -> list[dict]:
     """
     table = get_db_tables(table_name)
     query = select(table).where(*(getattr(table, k) == v for k, v in filter.items()))
-    rows = DB_SESSION.execute(query).all()
+
+    if return_type == "all":
+        rows = DB_SESSION.execute(query).all()
+    elif return_type == "first":
+        rows = DB_SESSION.execute(query).first()
+    else:
+        raise ValueError("return_type must be 'all' or 'first'")
 
     if not len(rows):
         logging.warning(f"No rows found for filter {filter} in table {table_name}")
 
-    return [row[0] for row in rows]
+    return [row[0] for row in rows] if return_type == "all" else rows[0]
 
 
 

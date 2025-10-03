@@ -1,5 +1,3 @@
-"""Login to bluesky."""
-
 import getpass
 
 from atproto import Client
@@ -24,8 +22,8 @@ def get_session(
     Returns:
         session text information if it exists
     """
-    credentials = get_values("credentials", {"username": username})
-    session_string = credentials[0].session if credentials else None
+    credentials = get_values("credentials", {"username": username}, "first")
+    session_string = credentials.session if credentials else None
 
     if not session_string:
         password = getpass.getpass("password:")
@@ -34,9 +32,9 @@ def get_session(
         insert_rows("credentials", [{"username": username, "password": password, "session": session_string}])
 
     elif refresh_session:
-        client.login(credentials[0].username, credentials[0].password)
+        client.login(credentials[0].username, credentials.password)
         session_string = client.export_session_string()
-        update_rows("credentials", {"username": credentials[0].username, "password": credentials[0].password, "session": session_string}, {"username": credentials[0].username})
+        update_rows("credentials", {"username": credentials.username, "password": credentials.password, "session": session_string}, {"username": credentials.username})
 
     return session_string
 
