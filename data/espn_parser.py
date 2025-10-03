@@ -4,7 +4,9 @@ from datetime import datetime
 class _ESPNParser:
     """Class to parse ESPN API responses."""
 
-    def team_records(self, teams: dict[str, str], home_away: str, records: list[dict]) -> dict[str, str]:
+    def team_records(
+        self, teams: dict[str, str], home_away: str, records: list[dict]
+    ) -> dict[str, str]:
         """Parse record information from an ESPN API response.
 
         Args:
@@ -15,13 +17,19 @@ class _ESPNParser:
         Returns:
             teams dictionary with total records and conference records populated.
         """
-        assert home_away in ("home", "away"), "home_away variable must be either home or away."
+        assert home_away in ("home", "away"), (
+            "home_away variable must be either home or away."
+        )
 
         for record in records:
             if record["type"] == "total":
-                teams[f"{home_away}_wins"], teams[f"{home_away}_losses"] = record["summary"].split("-")
+                teams[f"{home_away}_wins"], teams[f"{home_away}_losses"] = record[
+                    "summary"
+                ].split("-")
             elif record["type"] == "vsconf":
-                teams[f"{home_away}_conf_wins"], teams[f"{home_away}_conf_losses"] = record["summary"].split("-")
+                teams[f"{home_away}_conf_wins"], teams[f"{home_away}_conf_losses"] = (
+                    record["summary"].split("-")
+                )
 
         return teams
 
@@ -84,11 +92,15 @@ class _ESPNParser:
         if "previous" not in game_json["drives"].keys():
             return results
 
-        is_complete = game_json["header"]["competitions"][0]["status"]["type"]["completed"]
+        is_complete = game_json["header"]["competitions"][0]["status"]["type"][
+            "completed"
+        ]
         all_drives = game_json["drives"]["previous"]
         for drive in all_drives:
             scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
-            for ind, play in enumerate(scoring_plays):  # yes, there can be multiple scoring plays in one drive according to ESPN
+            for ind, play in enumerate(
+                scoring_plays
+            ):  # yes, there can be multiple scoring plays in one drive according to ESPN
                 if drive["isScore"]:
                     drive_description = drive["description"] if ind == 0 else None
                     results.append(
@@ -97,7 +109,10 @@ class _ESPNParser:
                             "play_text": play["text"],
                             "away_score": play["awayScore"],
                             "home_score": play["homeScore"],
-                            "total_score": play["homeScore"] + play["awayScore"],  # needed because ESPN doesn't know how clocks work
+                            "total_score": play["homeScore"]
+                            + play[
+                                "awayScore"
+                            ],  # needed because ESPN doesn't know how clocks work
                             "drive_description": drive_description,
                             "scoring_team": play["end"]["team"]["id"],
                             "is_complete": is_complete,

@@ -66,7 +66,11 @@ def format_scoring_play(drive: dict[str, str]) -> str:
         string: scoring play formatted for posting
     """
     play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
-    drive_text = f""" after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
+    drive_text = (
+        f""" after a drive of {drive["drive_description"]} minutes.\n"""
+        if drive["drive_description"]
+        else ".\n"
+    )
     score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
     return play_text + drive_text + score_text
 
@@ -84,17 +88,33 @@ def post_important_results(important_results: dict[str, str]):
         assert game_info.last_post_id, "No previous post made for this game"
         result["home"] = game_info.home_team
         result["away"] = game_info.away_team
-        result["scoring_team"] = game_info.home_team if game_info.home_team_id == result["scoring_team"] else game_info.away_team
+        result["scoring_team"] = (
+            game_info.home_team
+            if game_info.home_team_id == result["scoring_team"]
+            else game_info.away_team
+        )
 
         # get parent and root posts from post table
         previous_post = _get_previous_posts(game_info.last_post_id)
 
         # format post and send it if the score has gone up
-        if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
-            previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
+        if (
+            result["home_score"] > game_info.home_score
+            or result["away_score"] > game_info.away_score
+        ):
+            previous_post = {
+                k: v for k, v in previous_post.items() if k in ("parent", "root")
+            }
             post_text = format_scoring_play(result)
-            if "KICK" in post_text or "Two-Point" in post_text or "FG" in post_text or "PAT" in post_text:
-                result["last_post_id"] = create_post(post_text, previous_post, "game_update")
+            if (
+                "KICK" in post_text
+                or "Two-Point" in post_text
+                or "FG" in post_text
+                or "PAT" in post_text
+            ):
+                result["last_post_id"] = create_post(
+                    post_text, previous_post, "game_update"
+                )
 
                 # update database with new information
                 _update_database(result)

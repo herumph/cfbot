@@ -30,12 +30,21 @@ class _ESPNAPI:
             dict: json response from the api
         """
         response = requests.get(url, timeout=10)
-        add_record("api_queries", {"url": url, "status_code": response.status_code, "date_ts": datetime.now()})
+        add_record(
+            "api_queries",
+            {
+                "url": url,
+                "status_code": response.status_code,
+                "date_ts": datetime.now(),
+            },
+        )
 
         if response.status_code == 200:
             return response.json()
         else:
-            logging.error(f"Error querying ESPN API: {response.status_code} for URL {url}")
+            logging.error(
+                f"Error querying ESPN API: {response.status_code} for URL {url}"
+            )
             return {}
 
     def _create_scoreboard_url(self, date: str, group: str) -> str:

@@ -6,8 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
-from db.db_utils import (add_record, get_a_days_games, get_db_tables,
-                         insert_rows)
+from db.db_utils import add_record, get_a_days_games, get_db_tables, insert_rows
 from db.models import Game, Query
 
 DB_SESSION = init_db_session()
@@ -118,7 +117,14 @@ class TestAddRecord:
         self.session.close()
 
     def test_save_api_query_success(self):
-        add_record("api_queries", {"url": self.valid_url, "status_code": self.valid_status_code, "date_ts": datetime.now()})
+        add_record(
+            "api_queries",
+            {
+                "url": self.valid_url,
+                "status_code": self.valid_status_code,
+                "date_ts": datetime.now(),
+            },
+        )
 
         statement = select(Query).filter(Query.url == self.valid_url)
         rows = self.session.execute(statement).all()

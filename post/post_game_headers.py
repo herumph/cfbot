@@ -40,7 +40,11 @@ def _get_team_streak(team_info: dict) -> str:
     Returns:
         string: formatted win/loss streak
     """
-    streak = [stat["value"] for stat in team_info["team"]["record"]["items"][0]["stats"] if stat["name"] == "streak"][0]
+    streak = [
+        stat["value"]
+        for stat in team_info["team"]["record"]["items"][0]["stats"]
+        if stat["name"] == "streak"
+    ][0]
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
 
@@ -59,7 +63,13 @@ def _format_post_text(game: Game, streak_info: dict[str, str]) -> str:
     away_team_conference = f"{(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
     home_team = f"{game.home_team} ({game.home_wins}-{game.home_losses}, "
     home_team_conference = f"{game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
-    return away_team + away_team_conference + home_team + home_team_conference + f" has kicked off on {game.networks}!"
+    return (
+        away_team
+        + away_team_conference
+        + home_team
+        + home_team_conference
+        + f" has kicked off on {game.networks}!"
+    )
 
 
 def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
@@ -80,7 +90,9 @@ def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 
-def post_a_days_games(date: datetime, offset: int | None = -5, post_hour: int | None = 7):
+def post_a_days_games(
+    date: datetime, offset: int | None = -5, post_hour: int | None = 7
+):
     """Create a top level post of how many games there are today. If a post
     hasn't already been created.
 
@@ -89,7 +101,11 @@ def post_a_days_games(date: datetime, offset: int | None = -5, post_hour: int | 
         offset (Optional, int): timezone offset from utc, default -5
         post_hour (Optional, int): hour after which to post the daily update, default 7
     """
-    todays_games = get_games(date, date + timedelta(hours=24)) if date.hour + offset >= post_hour else None
+    todays_games = (
+        get_games(date, date + timedelta(hours=24))
+        if date.hour + offset >= post_hour
+        else None
+    )
     if todays_games and has_previous_daily_post(date):
         post_text = f"There are {len(todays_games)} college football games today!"
         create_post(post_text, "daily")

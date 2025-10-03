@@ -22,7 +22,9 @@ def get_db_tables(table_name: str) -> Base:
         if table.__tablename__ == table_name:
             return table
 
-    raise ValueError(f"Table {table_name} not found in database. Available tables: {[table.__tablename__ for table in tables]}")
+    raise ValueError(
+        f"Table {table_name} not found in database. Available tables: {[table.__tablename__ for table in tables]}"
+    )
 
 
 def get_a_days_games(start_date: datetime) -> list[Game]:
@@ -57,7 +59,9 @@ def insert_rows(table_name: str, rows: list[dict]):
         logging.info("No rows to insert")
         return
 
-    DB_SESSION.execute(insert(get_db_tables(table_name)).values(rows).on_conflict_do_nothing())
+    DB_SESSION.execute(
+        insert(get_db_tables(table_name)).values(rows).on_conflict_do_nothing()
+    )
     DB_SESSION.commit()
 
 

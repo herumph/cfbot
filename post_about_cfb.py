@@ -1,4 +1,5 @@
 """Wrapper to call each module needed to get and post about CFB data."""
+
 from datetime import datetime, timezone
 
 from data.get_games import get_games

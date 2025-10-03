@@ -10,7 +10,12 @@ from sqlalchemy.orm import Session
 from db.models import Credentials
 
 
-def get_session(client: Client, db_session: Session, username: str, refresh_session: bool | None = False) -> str:
+def get_session(
+    client: Client,
+    db_session: Session,
+    username: str,
+    refresh_session: bool | None = False,
+) -> str:
     """Get session text files if they exist, otherwise prompt for username and
     password.
 
@@ -41,7 +46,9 @@ def get_session(client: Client, db_session: Session, username: str, refresh_sess
     return session_string
 
 
-def save_session(db_session: Session, username: str, password: str, session_string: str):
+def save_session(
+    db_session: Session, username: str, password: str, session_string: str
+):
     """Export current session to a text file.
 
     Args:
