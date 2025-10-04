@@ -13,7 +13,7 @@ DATE = datetime.now(timezone.utc)
 def post_about_cfb(date: datetime):
     """Wrapper function to execute each module."""
     get_games(date=date)
-    post_a_days_games(date=date)
+    # post_a_days_games(date=date)
     create_game_header_posts(date=date)
     post_important_plays(date=date)
 

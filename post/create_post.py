@@ -1,10 +1,5 @@
-from datetime import datetime, timezone
-from typing import Optional
-
-from atproto_client.models.app.bsky.feed.post import CreateRecordResponse
+from db.db_utils import get_values, log_post_to_db
 from post import CLIENT
-
-from db.db_utils import add_record, get_values
 
 
 # TODO: add test
@@ -46,46 +41,11 @@ def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
     return {"parent": parent, "root": root}
 
 
-# TODO: add test
-def log_post_to_db(
-    post: CreateRecordResponse,
-    post_params: dict[str, str],
-    post_type: str,
-    reply_ids: dict[str, dict],
-) -> str:
-    """Logs created post to the Post table.
-
-    Args:
-        post (CreateRecordResponse): bluesky response after post creation
-        post_params (dict): parameters of the post including ids and post text
-        reply_ids (dict): ids of the parent and root posts
-
-    Returns:
-        str: post id of the newly created database entry
-    """
-    new_post = {
-        "uri": post.uri,
-        "cid": post.cid,
-        "post_text": post_params["text"],
-        "created_at_ts": datetime.now(timezone.utc),
-        "updated_at_ts": datetime.now(timezone.utc),
-        "post_type": post_type,
-    }
-
-    if reply_ids:
-        new_post["root_id"] = reply_ids["root"]
-        new_post["parent_id"] = reply_ids["parent"]
-
-    add_record("posts", new_post)
-
-    return new_post["id"]
-
-
 def create_post(
     post_text,
     post_type,
-    reply_ids: Optional[dict[str, int]] = None,
-) -> str:
+    reply_ids: dict | None = None,
+) -> int:
     """Create a post that is either new or a reply to an existing post.
 
     Args:
@@ -103,4 +63,4 @@ def create_post(
     post_params["text"] = post_text
     post = CLIENT.send_post(**post_params)
 
-    return log_post_to_db(post, post_params, post_type, reply_ids)
+    return log_post_to_db(post.uri, post.cid, post_params, post_type, reply_ids)

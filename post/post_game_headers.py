@@ -77,9 +77,8 @@ def create_game_header_posts(date: datetime):
     Args:
         date (datetime): date to get active games for
     """
-    end_date = date - timedelta(hours=6)
+    end_date = date + timedelta(hours=6)
     games = get_games(date, end_date)
-    # TODO: This shouldn't be here
     for game in games:
         if not game.last_post_id:
             streak_info = {}

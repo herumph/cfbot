@@ -17,13 +17,13 @@ def update_database(result: dict[str, str]):
     end_ts = datetime.now(timezone.utc) if result["is_complete"] else None
     update_rows(
         "games",
-        {"id": result["game_id"]},
         {
             "last_post_id": result["last_post_id"],
             "home_score": result["home_score"],
             "away_score": result["away_score"],
             "end_ts": end_ts,
         },
+        {"id": result["game_id"]},
     )
 
 
@@ -42,7 +42,7 @@ def get_previous_posts(last_post_id: str) -> dict[str, str]:
     return {
         "parent": last_post.id,
         "root": last_post.root_id if last_post.root_id else last_post.id,
-        "created_at": last_post.created_at,
+        "created_at": last_post.created_at_ts,
     }
 
 
@@ -65,7 +65,7 @@ def format_scoring_play(drive: dict[str, str]) -> str:
     return play_text + drive_text + score_text
 
 
-def post_scoring_plays(important_results: dict[str, str]):
+def post_scoring_plays(important_results: list[dict]):
     """Post scoring plays for a game.
 
     Args:
@@ -101,7 +101,9 @@ def post_scoring_plays(important_results: dict[str, str]):
                 or "PAT" in post_text
             ):
                 result["last_post_id"] = create_post(
-                    post_text, previous_post, "game_update"
+                    post_text,
+                    "game_update",
+                    previous_post,
                 )
 
                 # update database with new information
@@ -127,6 +129,6 @@ def post_important_plays(date: datetime):
     Args:
         date (datetime): date to query against
     """
-    games = get_games(date, date + timedelta(hours=1))
+    games = get_games(date - timedelta(days=1), date)
     for game in games:
         post_about_game(game.id)
