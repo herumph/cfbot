@@ -77,7 +77,8 @@ def create_game_header_posts(date: datetime):
     Args:
         date (datetime): date to get active games for
     """
-    end_date = date + timedelta(hours=6)
+    # this will ensure that games that started within the last hour are included
+    end_date = date - timedelta(hours=1)
     games = get_games(date, end_date)
     for game in games:
         if not game.last_post_id:
