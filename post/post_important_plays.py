@@ -82,6 +82,10 @@ def post_scoring_plays(important_results: list[dict]):
             else game_info.away_team
         )
 
+        # if there is no last_post_id, then there is no game header to reply to
+        if game_info.last_post_id is None:
+            continue
+
         # get parent and root posts from post table
         previous_post = get_previous_posts(game_info.last_post_id)
 
