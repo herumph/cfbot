@@ -41,7 +41,7 @@ class TestGetADaysGames:
         self.session.close()
 
     def test_get_a_days_games_no_games(self, caplog):
-        with caplog.at_level(logging.WARNING):
+        with caplog.at_level(logging.INFO):
             games = get_games(datetime(1700, 1, 1), datetime(1700, 1, 2))
         assert any("No games found for date" in message for message in caplog.messages)
 

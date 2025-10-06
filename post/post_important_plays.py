@@ -73,6 +73,8 @@ def post_scoring_plays(important_results: list[dict]):
     """
     for result in important_results:
         game_info = get_values("games", {"id": result["game_id"]}, "first")
+        if game_info.last_post_id is None:
+            continue
 
         result["home"] = game_info.home_team
         result["away"] = game_info.away_team
@@ -81,10 +83,6 @@ def post_scoring_plays(important_results: list[dict]):
             if game_info.home_team_id == result["scoring_team"]
             else game_info.away_team
         )
-
-        # if there is no last_post_id, then there is no game header to reply to
-        if game_info.last_post_id is None:
-            continue
 
         # get parent and root posts from post table
         previous_post = get_previous_posts(game_info.last_post_id)

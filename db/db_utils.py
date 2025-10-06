@@ -44,8 +44,8 @@ def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     rows = DB_SESSION.execute(statement).all()
 
     if not len(rows):
-        logging.warning(
-            f"No games found for dates {start_date.date(), end_date.date()}"
+        logging.info(
+            f"No games found for dates {start_date, end_date}"
         )
 
     return [row[0] for row in rows]
