@@ -6,6 +6,7 @@ from atproto.exceptions import AtProtocolError, NetworkError
 from db.db_utils import insert_rows, update_rows, get_values
 
 
+# TODO: move to bluesky utils file or class
 def get_session(
     client: Client,
     username: str,
@@ -50,6 +51,7 @@ def get_session(
     return session_string
 
 
+# TODO: move to bluesky utils file or class
 def init_client(username: str) -> Client:
     """Connect to bluesky using saved credentials.
 

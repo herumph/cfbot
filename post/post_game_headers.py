@@ -6,7 +6,7 @@ from post.create_post import create_post
 from db.models import Game
 
 
-# TODO: add tests
+# TODO: add tests, move to espn_parser
 def get_team_streak(team_info: dict) -> str:
     """Gather win/loss streaks from ESPN API json.
 

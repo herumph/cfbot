@@ -2,7 +2,7 @@ from db.db_utils import get_values, log_post_to_db
 from post import CLIENT
 
 
-# TODO: add test
+# TODO: add test, move to db_utils
 def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     """Gather information for a parent/root post from the sqlite database.
 
@@ -18,7 +18,7 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     return {"uri": post.uri, "cid": post.cid}
 
 
-# TODO: add test
+# TODO: add test, move to db_utils
 def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
     """Gather information for the parent and root posts from the sqlite
     database.
@@ -41,6 +41,7 @@ def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
     return {"parent": parent, "root": root}
 
 
+# TODO: move to a bluesky_utils file
 def create_post(
     post_text,
     post_type,
