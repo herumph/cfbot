@@ -193,3 +193,19 @@ def update_rows(table_name: str, values: dict, condition: dict):
 
     DB_SESSION.execute(query)
     DB_SESSION.commit()
+
+
+# TODO: add tests
+def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
+    """Gather information for a parent/root post from the sqlite database.
+
+    Args:
+        reply_ids (dict): dictionary containing the post id of the parent and/or root post
+        key (str): dictionary key that contains the post id to query
+
+    Returns:
+        dict: containing 'uri' and 'cid' for the queried post
+    """
+    post = get_values("posts", {"id": reply_ids[key]}, "first")
+
+    return {"uri": post.uri, "cid": post.cid}

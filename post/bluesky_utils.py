@@ -3,7 +3,8 @@ import getpass
 from atproto import Client
 from atproto.exceptions import AtProtocolError, NetworkError
 
-from db.db_utils import insert_rows, update_rows, get_values
+from db.db_utils import insert_rows, update_rows, get_values, log_post_to_db
+from post.get_reply_ids import get_reply_ids
 
 
 # TODO: move to bluesky utils file or class
@@ -51,7 +52,6 @@ def get_session(
     return session_string
 
 
-# TODO: move to bluesky utils file or class
 def init_client(username: str) -> Client:
     """Connect to bluesky using saved credentials.
 
@@ -73,3 +73,28 @@ def init_client(username: str) -> Client:
         client.login(session_string=session_string)
 
     return client
+
+
+def create_post(
+    post_text,
+    post_type,
+    reply_ids: dict | None = None,
+) -> int:
+    """Create a post that is either new or a reply to an existing post.
+
+    Args:
+        post_text (str): post text
+        reply_ids (optional, dict): reply parameters of the parent and root posts
+
+    Returns:
+        str: post id of the newly created database entry
+    """
+    post_params = {}
+    if reply_ids:
+        bsky_ids = get_reply_ids(reply_ids)
+        post_params["reply_to"] = bsky_ids
+
+    post_params["text"] = post_text
+    post = CLIENT.send_post(**post_params)
+
+    return log_post_to_db(post.uri, post.cid, post_params, post_type, reply_ids)

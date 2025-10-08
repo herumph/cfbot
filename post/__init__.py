@@ -1,4 +1,4 @@
-from post.login import init_client
+from post.bluesky_utils import init_client
 
 USERNAME = "arethegoodnamesaretaken+devbot@gmail.com"
 
