@@ -116,7 +116,7 @@ def insert_rows(table_name: str, rows: list[dict]):
     DB_SESSION.commit()
 
 
-# TODO: add test
+# TODO: add tests
 def log_post_to_db(
     post_uri: str,
     post_cid: str,
@@ -195,7 +195,6 @@ def update_rows(table_name: str, values: dict, condition: dict):
     DB_SESSION.commit()
 
 
-# TODO: add tests
 def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     """Gather information for a parent/root post from the sqlite database.
 

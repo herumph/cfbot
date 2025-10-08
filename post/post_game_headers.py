@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from data.query_api import query_team
 from db.db_utils import update_rows, has_previous_daily_post, get_games
-from post.get_reply_ids import create_post
+from post.bluesky_utils import create_post
 from db.models import Game
 
 

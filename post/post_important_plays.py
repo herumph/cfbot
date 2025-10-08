@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 from data.parse_results import get_scoring_plays
 from data.query_api import query_game
 
-from post.get_reply_ids import create_post
+from post.bluesky_utils import create_post
 from db.db_utils import get_games, update_rows, get_values
 
 
