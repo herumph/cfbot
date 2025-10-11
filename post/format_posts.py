@@ -1,5 +1,6 @@
 from db.models import Game
 
+
 # TODO: add tests
 def game_header(game: Game, streak_info: dict[str, str]) -> str:
     """Format information into posting format.

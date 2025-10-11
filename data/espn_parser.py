@@ -121,5 +121,23 @@ class _ESPNParser:
 
         return sorted(results, key=lambda d: d["total_score"])
 
+    # TODO: add tests
+    def team_streak(self, team_info: dict) -> str:
+        """Gather win/loss streaks from ESPN API json.
+
+        Args:
+            team_info (dict): ESPN API json response
+
+        Returns:
+            string: formatted win/loss streak
+        """
+        streak = [
+            stat["value"]
+            for stat in team_info["team"]["record"]["items"][0]["stats"]
+            if stat["name"] == "streak"
+        ][0]
+        streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
+        return str(streak)[:-2]
+
 
 ESPNParser = _ESPNParser()

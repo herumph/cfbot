@@ -18,3 +18,4 @@ To run this bot run the `post_about_cfb` script
        2.  Game with missing PAT: 401628358
        3.  Game with pick six: 
    4.  Why are we not using `scoringPlays` instead? The `id` is the same as the play id and it includes safeties as well.
+4.  Have post a days games do something
