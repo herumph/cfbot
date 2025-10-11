@@ -137,6 +137,7 @@ def update_rows(table_name: str, values: dict, condition: dict):
         values: values to update
         condition: condition to match rows to update
     """
+    assert condition, "Matching conditions are required"
     if not values:
         logging.info("No values to update")
         return
@@ -167,7 +168,7 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     return {"uri": post.uri, "cid": post.cid}
 
 
-# TODO: add tests
+# TODO: add tests, remove???
 def get_previous_posts(last_post_id: int) -> dict[str, str]:
     """Get information about previous post for a game.
 

@@ -13,6 +13,7 @@ from db.db_utils import (
     insert_rows,
     has_previous_daily_post,
     get_values,
+    update_rows,
 )
 from db.models import Game, Query
 
@@ -62,12 +63,12 @@ class TestGetADaysGames:
         games = get_games(
             self.valid_game.start_ts, self.valid_game.start_ts + timedelta(days=1)
         )
-        self.teardown_class()
 
         assert len(games)
-        assert int(games[0].id) == self.valid_game.id
+        assert int(games[0].id) == int(self.valid_game.id)
         assert games[0].home_team == self.valid_game.home_team
         assert games[0].away_team == self.valid_game.away_team
+        self.teardown_class()
 
 
 class TestInsertRows:
@@ -108,6 +109,7 @@ class TestInsertRows:
         assert int(rows[0].Game.id) == self.valid_game["id"]
         assert rows[0].Game.home_team == self.valid_game["home_team"]
         assert rows[0].Game.away_team == self.valid_game["away_team"]
+        self.teardown_class()
 
     def test_insert_values_no_rows(self, caplog):
         with caplog.at_level(logging.INFO):
@@ -140,6 +142,7 @@ class TestAddRecord:
 
         assert rows[0].Query.url == self.valid_url
         assert rows[0].Query.status_code == self.valid_status_code
+        self.teardown_class()
 
     def test_save_api_query_no_values(self, caplog):
         with caplog.at_level(logging.INFO):
@@ -187,11 +190,13 @@ class TestPreviousDailyPost:
     def test_has_previous_daily_post(self):
         insert_rows("posts", [self.valid_post])
 
+        self.teardown_class()
         assert has_previous_daily_post(datetime.now())
 
     def test_invalid_has_previous_daily_post(self):
         insert_rows("posts", [self.valid_post])
 
+        self.teardown_class()
         assert not has_previous_daily_post(datetime.now() + timedelta(days=30))
 
 
@@ -218,6 +223,7 @@ class TestGetValues:
         results = get_values("posts", {"post_type": "daily"})
         results_all = get_values("posts", {"post_type": "daily"}, "all")
 
+        self.teardown_class()
         assert results == results_all
         assert len(results) > 1
 
@@ -226,6 +232,7 @@ class TestGetValues:
 
         results = get_values("posts", {"id": -20}, "all")
 
+        self.teardown_class()
         assert len(results) == 1
 
     def test_get_values_first_row(self):
@@ -233,4 +240,5 @@ class TestGetValues:
 
         results = get_values("posts", {"id": -20}, "first")
 
+        self.teardown_class()
         assert results.id
