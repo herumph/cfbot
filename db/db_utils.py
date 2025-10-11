@@ -66,7 +66,6 @@ def has_previous_daily_post(date: datetime) -> bool:
     return len(rows) > 0
 
 
-# TODO: add tests
 def get_values(
     table_name: str, filter: dict, return_type: str | None = "all"
 ) -> list | object | None:

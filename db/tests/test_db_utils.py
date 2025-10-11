@@ -12,6 +12,7 @@ from db.db_utils import (
     get_db_tables,
     insert_rows,
     has_previous_daily_post,
+    get_values,
 )
 from db.models import Game, Query
 
@@ -191,4 +192,47 @@ class TestPreviousDailyPost:
     def test_invalid_has_previous_daily_post(self):
         insert_rows("posts", [self.valid_post])
 
-        assert not has_previous_daily_post(datetime.now() - timedelta(days=1e5))
+        assert not has_previous_daily_post(datetime.now() + timedelta(days=30))
+
+
+class TestGetValues:
+    def setup_class(self):
+        self.session = DB_SESSION
+        self.valid_post = {
+            "id": -20,
+            "uri": "test",
+            "cid": "test",
+            "post_text": "test",
+            "created_at_ts": datetime.now(),
+            "updated_at_ts": datetime.now(),
+            "post_type": "daily",
+        }
+
+    def teardown_class(self):
+        self.session.rollback()
+        self.session.close()
+
+    def test_get_values_all(self):
+        insert_rows("posts", [self.valid_post])
+
+        results = get_values("posts", {"post_type": "daily"})
+        results_all = get_values("posts", {"post_type": "daily"}, "all")
+
+        assert results == results_all
+        assert len(results) > 1
+
+    
+    def test_get_values_specific_row(self):
+        insert_rows("posts", [self.valid_post])
+
+        results = get_values("posts", {"id": -20}, "all")
+
+        assert len(results) == 1
+
+
+    def test_get_values_first_row(self):
+        insert_rows("posts", [self.valid_post])
+
+        results = get_values("posts", {"id": -20}, "first")
+
+        assert results.id
