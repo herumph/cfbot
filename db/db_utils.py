@@ -48,7 +48,6 @@ def get_games(start_date: datetime, end_date: datetime) -> list[Game]:
     return [row[0] for row in rows]
 
 
-# TODO: add tests
 def has_previous_daily_post(date: datetime) -> bool:
     """Checking if a daily post was made already for a given date.
 
@@ -64,7 +63,6 @@ def has_previous_daily_post(date: datetime) -> bool:
         (Post.post_type == "daily"),
     )
     rows = DB_SESSION.execute(query).all()
-    print(rows)
     return len(rows) > 0
 
 
