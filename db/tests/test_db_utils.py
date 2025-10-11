@@ -242,3 +242,30 @@ class TestGetValues:
 
         self.teardown_class()
         assert results.id
+
+
+class TestUpdateRows:
+    def setup_class(self):
+        self.session = DB_SESSION
+        self.valid_post = {
+            "id": -20,
+            "uri": "test",
+            "cid": "test",
+            "post_text": "test",
+            "created_at_ts": datetime.now(),
+            "updated_at_ts": datetime.now(),
+            "post_type": "daily",
+        }
+
+    def teardown_class(self):
+        self.session.rollback()
+        self.session.close()
+
+    def test_update_rows(self):
+        insert_rows("posts", [self.valid_post])
+
+        update_rows("posts", {"post_text": "test_1"}, {"id": -20})
+        post = get_values("posts", {"id": -20}, "first")
+
+        self.teardown_class()
+        assert post.post_text == "test_1"

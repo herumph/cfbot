@@ -128,7 +128,6 @@ def add_record(table_name: str, values: dict):
     DB_SESSION.commit()
 
 
-# TODO: add tests
 def update_rows(table_name: str, values: dict, condition: dict):
     """Generic interface to update rows in a database table.
 
