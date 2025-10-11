@@ -1,0 +1,2615 @@
+{
+    "leagues": [
+        {
+            "id": "23",
+            "uid": "s:20~l:23",
+            "name": "NCAA - Football",
+            "abbreviation": "NCAAF",
+            "midsizeName": "NCAA Football",
+            "slug": "college-football",
+            "season": {
+                "year": 2025,
+                "startDate": "2025-02-01T08:00Z",
+                "endDate": "2026-01-21T07:59Z",
+                "displayName": "2025",
+                "type": {
+                    "id": "2",
+                    "type": 2,
+                    "name": "Regular Season",
+                    "abbreviation": "reg"
+                }
+            },
+            "logos": [
+                {
+                    "href": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-football-college.png",
+                    "width": 500,
+                    "height": 500,
+                    "alt": "",
+                    "rel": [
+                        "full",
+                        "default"
+                    ],
+                    "lastUpdated": "2021-08-03T15:56Z"
+                },
+                {
+                    "href": "https://a.espncdn.com/redesign/assets/img/icons/ESPN-icon-football-college.png",
+                    "width": 500,
+                    "height": 500,
+                    "alt": "",
+                    "rel": [
+                        "full",
+                        "dark"
+                    ],
+                    "lastUpdated": "2021-08-03T15:56Z"
+                }
+            ],
+            "calendarType": "list",
+            "calendarIsWhitelist": true,
+            "calendarStartDate": "2025-02-01T08:00Z",
+            "calendarEndDate": "2026-01-21T07:59Z",
+            "calendar": [
+                {
+                    "label": "Regular Season",
+                    "value": "2",
+                    "startDate": "2025-08-23T07:00Z",
+                    "endDate": "2025-12-14T07:59Z",
+                    "entries": [
+                        {
+                            "label": "Week 1",
+                            "alternateLabel": "Week 1",
+                            "detail": "Aug 23-Sep 1",
+                            "value": "1",
+                            "startDate": "2025-08-23T07:00Z",
+                            "endDate": "2025-09-02T06:59Z"
+                        },
+                        {
+                            "label": "Week 2",
+                            "alternateLabel": "Week 2",
+                            "detail": "Sep 2-7",
+                            "value": "2",
+                            "startDate": "2025-09-02T07:00Z",
+                            "endDate": "2025-09-08T06:59Z"
+                        },
+                        {
+                            "label": "Week 3",
+                            "alternateLabel": "Week 3",
+                            "detail": "Sep 8-14",
+                            "value": "3",
+                            "startDate": "2025-09-08T07:00Z",
+                            "endDate": "2025-09-15T06:59Z"
+                        },
+                        {
+                            "label": "Week 4",
+                            "alternateLabel": "Week 4",
+                            "detail": "Sep 15-21",
+                            "value": "4",
+                            "startDate": "2025-09-15T07:00Z",
+                            "endDate": "2025-09-22T06:59Z"
+                        },
+                        {
+                            "label": "Week 5",
+                            "alternateLabel": "Week 5",
+                            "detail": "Sep 22-28",
+                            "value": "5",
+                            "startDate": "2025-09-22T07:00Z",
+                            "endDate": "2025-09-29T06:59Z"
+                        },
+                        {
+                            "label": "Week 6",
+                            "alternateLabel": "Week 6",
+                            "detail": "Sep 29-Oct 5",
+                            "value": "6",
+                            "startDate": "2025-09-29T07:00Z",
+                            "endDate": "2025-10-06T06:59Z"
+                        },
+                        {
+                            "label": "Week 7",
+                            "alternateLabel": "Week 7",
+                            "detail": "Oct 6-12",
+                            "value": "7",
+                            "startDate": "2025-10-06T07:00Z",
+                            "endDate": "2025-10-13T06:59Z"
+                        },
+                        {
+                            "label": "Week 8",
+                            "alternateLabel": "Week 8",
+                            "detail": "Oct 13-19",
+                            "value": "8",
+                            "startDate": "2025-10-13T07:00Z",
+                            "endDate": "2025-10-20T06:59Z"
+                        },
+                        {
+                            "label": "Week 9",
+                            "alternateLabel": "Week 9",
+                            "detail": "Oct 20-26",
+                            "value": "9",
+                            "startDate": "2025-10-20T07:00Z",
+                            "endDate": "2025-10-27T06:59Z"
+                        },
+                        {
+                            "label": "Week 10",
+                            "alternateLabel": "Week 10",
+                            "detail": "Oct 27-Nov 2",
+                            "value": "10",
+                            "startDate": "2025-10-27T07:00Z",
+                            "endDate": "2025-11-03T07:59Z"
+                        },
+                        {
+                            "label": "Week 11",
+                            "alternateLabel": "Week 11",
+                            "detail": "Nov 3-9",
+                            "value": "11",
+                            "startDate": "2025-11-03T08:00Z",
+                            "endDate": "2025-11-10T07:59Z"
+                        },
+                        {
+                            "label": "Week 12",
+                            "alternateLabel": "Week 12",
+                            "detail": "Nov 10-16",
+                            "value": "12",
+                            "startDate": "2025-11-10T08:00Z",
+                            "endDate": "2025-11-17T07:59Z"
+                        },
+                        {
+                            "label": "Week 13",
+                            "alternateLabel": "Week 13",
+                            "detail": "Nov 17-23",
+                            "value": "13",
+                            "startDate": "2025-11-17T08:00Z",
+                            "endDate": "2025-11-24T07:59Z"
+                        },
+                        {
+                            "label": "Week 14",
+                            "alternateLabel": "Week 14",
+                            "detail": "Nov 24-30",
+                            "value": "14",
+                            "startDate": "2025-11-24T08:00Z",
+                            "endDate": "2025-12-01T07:59Z"
+                        },
+                        {
+                            "label": "Week 15",
+                            "alternateLabel": "Week 15",
+                            "detail": "Dec 1-7",
+                            "value": "15",
+                            "startDate": "2025-12-01T08:00Z",
+                            "endDate": "2025-12-08T07:59Z"
+                        },
+                        {
+                            "label": "Week 16",
+                            "alternateLabel": "Week 16",
+                            "detail": "Dec 8-13",
+                            "value": "16",
+                            "startDate": "2025-12-08T08:00Z",
+                            "endDate": "2026-12-14T07:59Z"
+                        }
+                    ]
+                },
+                {
+                    "label": "Postseason",
+                    "value": "3",
+                    "startDate": "2025-12-13T08:00Z",
+                    "endDate": "2026-01-21T07:59Z",
+                    "entries": [
+                        {
+                            "label": "Bowls",
+                            "alternateLabel": "Bowls",
+                            "detail": "Dec 13-Jan 20",
+                            "value": "1",
+                            "startDate": "2025-12-13T08:00Z",
+                            "endDate": "2026-01-21T07:59Z"
+                        },
+                        {
+                            "label": "CFP",
+                            "alternateLabel": "CFP",
+                            "detail": "Dec 19-Jan 20",
+                            "value": "999",
+                            "startDate": "2025-12-19T08:00Z",
+                            "endDate": "2026-01-20T07:59Z"
+                        }
+                    ]
+                },
+                {
+                    "label": "Off Season",
+                    "value": "4",
+                    "startDate": "2026-01-21T08:00Z",
+                    "endDate": "2026-02-01T07:59Z",
+                    "entries": [
+                        {
+                            "label": "All-Star",
+                            "alternateLabel": "All-Star",
+                            "detail": "Jan 21-31",
+                            "value": "1",
+                            "startDate": "2026-01-21T08:00Z",
+                            "endDate": "2026-02-01T07:59Z"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "groups": [
+        "80"
+    ],
+    "events": [
+        {
+            "id": "401754543",
+            "uid": "s:20~l:23~e:401754543",
+            "date": "2025-09-26T23:00Z",
+            "name": "Florida State Seminoles at Virginia Cavaliers",
+            "shortName": "FSU @ UVA",
+            "season": {
+                "year": 2025,
+                "type": 2,
+                "slug": "regular-season"
+            },
+            "week": {
+                "number": 5
+            },
+            "competitions": [
+                {
+                    "id": "401754543",
+                    "uid": "s:20~l:23~e:401754543~c:401754543",
+                    "date": "2025-09-26T23:00Z",
+                    "attendance": 50107,
+                    "type": {
+                        "id": "1",
+                        "abbreviation": "STD"
+                    },
+                    "timeValid": true,
+                    "dateValid": false,
+                    "neutralSite": false,
+                    "conferenceCompetition": true,
+                    "playByPlayAvailable": true,
+                    "recent": false,
+                    "venue": {
+                        "id": "3923",
+                        "fullName": "Scott Stadium",
+                        "address": {
+                            "city": "Charlottesville",
+                            "state": "VA",
+                            "country": "USA"
+                        },
+                        "indoor": false
+                    },
+                    "competitors": [
+                        {
+                            "id": "258",
+                            "uid": "s:20~l:23~t:258",
+                            "type": "team",
+                            "order": 0,
+                            "homeAway": "home",
+                            "winner": true,
+                            "team": {
+                                "id": "258",
+                                "uid": "s:20~l:23~t:258",
+                                "location": "Virginia",
+                                "name": "Cavaliers",
+                                "abbreviation": "UVA",
+                                "displayName": "Virginia Cavaliers",
+                                "shortDisplayName": "Virginia",
+                                "color": "232d4b",
+                                "alternateColor": "f84c1e",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "3923"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/258/virginia-cavaliers",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/258/virginia-cavaliers",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/258",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/258",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/258",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
+                                "conferenceId": "1"
+                            },
+                            "score": "46",
+                            "linescores": [
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 14,
+                                    "displayValue": "14",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 4
+                                },
+                                {
+                                    "value": 3,
+                                    "displayValue": "3",
+                                    "period": 5
+                                },
+                                {
+                                    "value": 8,
+                                    "displayValue": "8",
+                                    "period": 6
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 99
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "4-1"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "4-0"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "0-1"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "2-0"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "52",
+                            "uid": "s:20~l:23~t:52",
+                            "type": "team",
+                            "order": 1,
+                            "homeAway": "away",
+                            "winner": false,
+                            "team": {
+                                "id": "52",
+                                "uid": "s:20~l:23~t:52",
+                                "location": "Florida State",
+                                "name": "Seminoles",
+                                "abbreviation": "FSU",
+                                "displayName": "Florida State Seminoles",
+                                "shortDisplayName": "Florida St",
+                                "color": "782f40",
+                                "alternateColor": "ceb888",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "3697"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/52/florida-state-seminoles",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/52/florida-state-seminoles",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/52",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/52",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/52",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
+                                "conferenceId": "1"
+                            },
+                            "score": "38",
+                            "linescores": [
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 21,
+                                    "displayValue": "21",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 4
+                                },
+                                {
+                                    "value": 3,
+                                    "displayValue": "3",
+                                    "period": 5
+                                },
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 6
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 8
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "3-1"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "3-0"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "0-1"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "0-1"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [],
+                    "status": {
+                        "clock": 0,
+                        "displayClock": "0:00",
+                        "period": 6,
+                        "type": {
+                            "id": "3",
+                            "name": "STATUS_FINAL",
+                            "state": "post",
+                            "completed": true,
+                            "description": "Final",
+                            "detail": "Final/2OT",
+                            "shortDetail": "Final/2OT",
+                            "altDetail": "2OT"
+                        }
+                    },
+                    "broadcasts": [
+                        {
+                            "market": "national",
+                            "names": [
+                                "ESPN"
+                            ]
+                        }
+                    ],
+                    "leaders": [
+                        {
+                            "name": "passingYards",
+                            "displayName": "Passing Leader",
+                            "shortDisplayName": "PASS",
+                            "abbreviation": "PYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "18/32, 254 YDS, 1 TD, 2 INT",
+                                    "value": 254,
+                                    "athlete": {
+                                        "id": "4773919",
+                                        "fullName": "Tommy Castellanos",
+                                        "displayName": "Tommy Castellanos",
+                                        "shortName": "T. Castellanos",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4773919/tommy-castellanos"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4773919.png",
+                                        "jersey": "1",
+                                        "position": {
+                                            "abbreviation": "QB"
+                                        },
+                                        "team": {
+                                            "id": "52"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "52"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "rushingYards",
+                            "displayName": "Rushing Leader",
+                            "shortDisplayName": "RUSH",
+                            "abbreviation": "RYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "27 CAR, 99 YDS, 1 TD",
+                                    "value": 99,
+                                    "athlete": {
+                                        "id": "4713118",
+                                        "fullName": "J'Mari Taylor",
+                                        "displayName": "J'Mari Taylor",
+                                        "shortName": "J. Taylor",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4713118/jmari-taylor"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4713118.png",
+                                        "jersey": "3",
+                                        "position": {
+                                            "abbreviation": "RB"
+                                        },
+                                        "team": {
+                                            "id": "258"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "258"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "receivingYards",
+                            "displayName": "Receiving Leader",
+                            "shortDisplayName": "REC",
+                            "abbreviation": "RECYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "9 REC, 147 YDS, 1 TD",
+                                    "value": 147,
+                                    "athlete": {
+                                        "id": "4870922",
+                                        "fullName": "Duce Robinson",
+                                        "displayName": "Duce Robinson",
+                                        "shortName": "D. Robinson",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4870922/duce-robinson"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4870922.png",
+                                        "jersey": "0",
+                                        "position": {
+                                            "abbreviation": "WR"
+                                        },
+                                        "team": {
+                                            "id": "52"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "52"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "groups": {
+                        "id": "1",
+                        "name": "Atlantic Coast Conference",
+                        "shortName": "ACC",
+                        "isConference": true
+                    },
+                    "format": {
+                        "regulation": {
+                            "periods": 4
+                        }
+                    },
+                    "startDate": "2025-09-26T23:00Z",
+                    "broadcast": "ESPN",
+                    "geoBroadcasts": [
+                        {
+                            "type": {
+                                "id": "1",
+                                "shortName": "TV"
+                            },
+                            "market": {
+                                "id": "1",
+                                "type": "National"
+                            },
+                            "media": {
+                                "shortName": "ESPN",
+                                "logo": "https://a.espncdn.com/guid/335fd2d2-97b9-336b-81ee-573eb6bdcffc/logos/default.png",
+                                "darkLogo": ""
+                            },
+                            "lang": "en",
+                            "region": "us"
+                        }
+                    ],
+                    "highlights": [
+                        {
+                            "id": 46392839,
+                            "cerebroId": "68d75dc47c132e6d926468c6",
+                            "source": "espn",
+                            "headline": "Florida State Seminoles vs. Virginia Cavaliers: Full Highlights",
+                            "description": "Florida State Seminoles vs. Virginia Cavaliers: Full Highlights",
+                            "lastModified": "2025-09-27T03:47:03Z",
+                            "originalPublishDate": "2025-09-27T03:45:02Z",
+                            "duration": 69,
+                            "timeRestrictions": {
+                                "embargoDate": "2025-09-27T03:45:02Z",
+                                "expirationDate": "2038-01-01T04:59:59Z"
+                            },
+                            "deviceRestrictions": {
+                                "type": "whitelist",
+                                "devices": [
+                                    "desktop",
+                                    "ipad",
+                                    "settop",
+                                    "handset",
+                                    "tablet"
+                                ]
+                            },
+                            "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.jpg",
+                            "links": {
+                                "web": {
+                                    "href": "https://www.espn.com/video/clip?id=46392839",
+                                    "self": {
+                                        "href": "https://www.espn.com/video/clip?id=46392839",
+                                        "dsi": {
+                                            "href": "https://www.espn.com/video/clip?id=5b976e02b1be1"
+                                        }
+                                    },
+                                    "seo": {
+                                        "href": "https://www.espn.com/video/clip/_/id/46392839"
+                                    }
+                                },
+                                "mobile": {
+                                    "source": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.mp4"
+                                    },
+                                    "alert": {
+                                        "href": "https://m.espn.com/general/video/videoAlert?vid=46392839"
+                                    },
+                                    "streaming": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/d702a3dc-3d09-4236-9462-91ec37abb53d/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46392839"
+                                    },
+                                    "progressiveDownload": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/d702a3dc-3d09-4236-9462-91ec37abb53d/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46392839"
+                                    }
+                                },
+                                "api": {
+                                    "self": {
+                                        "href": "https://content.core.api.espn.com/v1/video/clips/46392839"
+                                    },
+                                    "artwork": {
+                                        "href": "https://artwork.api.espn.com/artwork/collections/media/d702a3dc-3d09-4236-9462-91ec37abb53d"
+                                    }
+                                },
+                                "source": {
+                                    "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_360p30_1464k.mp4",
+                                    "mezzanine": {
+                                        "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.mp4"
+                                    },
+                                    "flash": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.smil"
+                                    },
+                                    "hds": {
+                                        "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_rel.smil/manifest.f4m"
+                                    },
+                                    "HLS": {
+                                        "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8",
+                                        "HD": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                        },
+                                        "cmaf": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8",
+                                            "9x16": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                            }
+                                        },
+                                        "9x16": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                        },
+                                        "shield": {
+                                            "href": "https://watch.auth.api.espn.com/video/auth/media/d702a3dc-3d09-4236-9462-91ec37abb53d/asset"
+                                        }
+                                    },
+                                    "HD": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_720p30_2896k.mp4"
+                                    },
+                                    "full": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_360p30_1464k.mp4"
+                                    }
+                                },
+                                "sportscenter": {
+                                    "href": "sportscenter://x-callback-url/showVideo?videoID=46392839&videoDSI=5b976e02b1be1"
+                                }
+                            },
+                            "ad": {
+                                "sport": "ncf",
+                                "bundle": "ncf_highlights"
+                            },
+                            "tracking": {
+                                "sportName": "football",
+                                "leagueName": "NCAA Football",
+                                "coverageType": "Final Game Highlight",
+                                "trackingName": "NCF_One-Play (Florida State Seminoles vs. Virginia Cavaliers: Full Highlights) 2025/09/26 ESHEET",
+                                "trackingId": "dm_20250926_NCF_florida_state_seminoles_vs_virginia_cavaliers_full_highlights"
+                            }
+                        }
+                    ],
+                    "headlines": [
+                        {
+                            "type": "Recap",
+                            "description": "— Chandler Morris scored on a 4-yard run in the second overtime and Virginia beat No. 8 Florida State 46-38 on Friday night for its first home victory over a Top 10 team since also beating the Seminoles in 2005.",
+                            "shortLinkText": "Virginia outlasts No. 8 Florida State 46-38 in second overtime",
+                            "video": [
+                                {
+                                    "id": 46392839,
+                                    "source": "espn",
+                                    "headline": "Florida State Seminoles vs. Virginia Cavaliers: Full Highlights",
+                                    "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.jpg",
+                                    "duration": 69,
+                                    "tracking": {
+                                        "sportName": "football",
+                                        "leagueName": "NCAA Football",
+                                        "coverageType": "Final Game Highlight",
+                                        "trackingName": "NCF_One-Play (Florida State Seminoles vs. Virginia Cavaliers: Full Highlights) 2025/09/26 ESHEET",
+                                        "trackingId": "dm_20250926_NCF_florida_state_seminoles_vs_virginia_cavaliers_full_highlights"
+                                    },
+                                    "deviceRestrictions": {
+                                        "type": "whitelist",
+                                        "devices": [
+                                            "desktop",
+                                            "ipad",
+                                            "settop",
+                                            "handset",
+                                            "tablet"
+                                        ]
+                                    },
+                                    "links": {
+                                        "web": {
+                                            "href": "https://www.espn.com/video/clip?id=46392839",
+                                            "self": {
+                                                "href": "https://www.espn.com/video/clip?id=46392839",
+                                                "dsi": {
+                                                    "href": "https://www.espn.com/video/clip?id=5b976e02b1be1"
+                                                }
+                                            },
+                                            "seo": {
+                                                "href": "https://www.espn.com/video/clip/_/id/46392839"
+                                            }
+                                        },
+                                        "mobile": {
+                                            "source": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.mp4"
+                                            },
+                                            "alert": {
+                                                "href": "https://m.espn.com/general/video/videoAlert?vid=46392839"
+                                            },
+                                            "streaming": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/d702a3dc-3d09-4236-9462-91ec37abb53d/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46392839"
+                                            },
+                                            "progressiveDownload": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/d702a3dc-3d09-4236-9462-91ec37abb53d/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46392839"
+                                            }
+                                        },
+                                        "api": {
+                                            "self": {
+                                                "href": "https://content.core.api.espn.com/v1/video/clips/46392839"
+                                            },
+                                            "artwork": {
+                                                "href": "https://artwork.api.espn.com/artwork/collections/media/d702a3dc-3d09-4236-9462-91ec37abb53d"
+                                            }
+                                        },
+                                        "source": {
+                                            "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_360p30_1464k.mp4",
+                                            "mezzanine": {
+                                                "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.mp4"
+                                            },
+                                            "flash": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e.smil"
+                                            },
+                                            "hds": {
+                                                "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_rel.smil/manifest.f4m"
+                                            },
+                                            "HLS": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8",
+                                                "HD": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                                },
+                                                "cmaf": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8",
+                                                    "9x16": {
+                                                        "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                                    }
+                                                },
+                                                "9x16": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/playlist.m3u8"
+                                                },
+                                                "shield": {
+                                                    "href": "https://watch.auth.api.espn.com/video/auth/media/d702a3dc-3d09-4236-9462-91ec37abb53d/asset"
+                                                }
+                                            },
+                                            "HD": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_720p30_2896k.mp4"
+                                            },
+                                            "full": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e/1c8aa916-ca97-4e8a-b8cc-8e87ebfd460e_360p30_1464k.mp4"
+                                            }
+                                        },
+                                        "sportscenter": {
+                                            "href": "sportscenter://x-callback-url/showVideo?videoID=46392839&videoDSI=5b976e02b1be1"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "summary",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/game/_/gameId/401754543/florida-st-virginia",
+                    "text": "Gamecast",
+                    "shortText": "Gamecast",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "boxscore",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/boxscore/_/gameId/401754543",
+                    "text": "Box Score",
+                    "shortText": "Box Score",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "highlights",
+                        "desktop"
+                    ],
+                    "href": "https://www.espn.com/college-football/video?gameId=401754543",
+                    "text": "Highlights",
+                    "shortText": "Highlights",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "pbp",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/playbyplay/_/gameId/401754543",
+                    "text": "Play-by-Play",
+                    "shortText": "Play-by-Play",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "recap",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/recap?gameId=401754543",
+                    "text": "Recap",
+                    "shortText": "Recap",
+                    "isExternal": false,
+                    "isPremium": false
+                }
+            ],
+            "status": {
+                "clock": 0,
+                "displayClock": "0:00",
+                "period": 6,
+                "type": {
+                    "id": "3",
+                    "name": "STATUS_FINAL",
+                    "state": "post",
+                    "completed": true,
+                    "description": "Final",
+                    "detail": "Final/2OT",
+                    "shortDetail": "Final/2OT",
+                    "altDetail": "2OT"
+                }
+            }
+        },
+        {
+            "id": "401756902",
+            "uid": "s:20~l:23~e:401756902",
+            "date": "2025-09-27T01:00Z",
+            "name": "TCU Horned Frogs at Arizona State Sun Devils",
+            "shortName": "TCU @ ASU",
+            "season": {
+                "year": 2025,
+                "type": 2,
+                "slug": "regular-season"
+            },
+            "week": {
+                "number": 5
+            },
+            "competitions": [
+                {
+                    "id": "401756902",
+                    "uid": "s:20~l:23~e:401756902~c:401756902",
+                    "date": "2025-09-27T01:00Z",
+                    "attendance": 53774,
+                    "type": {
+                        "id": "1",
+                        "abbreviation": "STD"
+                    },
+                    "timeValid": true,
+                    "dateValid": false,
+                    "neutralSite": false,
+                    "conferenceCompetition": true,
+                    "playByPlayAvailable": true,
+                    "recent": false,
+                    "venue": {
+                        "id": "3947",
+                        "fullName": "Mountain America Stadium",
+                        "address": {
+                            "city": "Tempe",
+                            "state": "AZ",
+                            "country": "USA"
+                        },
+                        "indoor": false
+                    },
+                    "competitors": [
+                        {
+                            "id": "9",
+                            "uid": "s:20~l:23~t:9",
+                            "type": "team",
+                            "order": 0,
+                            "homeAway": "home",
+                            "winner": true,
+                            "team": {
+                                "id": "9",
+                                "uid": "s:20~l:23~t:9",
+                                "location": "Arizona State",
+                                "name": "Sun Devils",
+                                "abbreviation": "ASU",
+                                "displayName": "Arizona State Sun Devils",
+                                "shortDisplayName": "Arizona St",
+                                "color": "8e0c3a",
+                                "alternateColor": "ffc72c",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "3947"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/9/arizona-state-sun-devils",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/9/arizona-state-sun-devils",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/9",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/9",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/9",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
+                                "conferenceId": "4"
+                            },
+                            "score": "27",
+                            "linescores": [
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 14,
+                                    "displayValue": "14",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 3,
+                                    "displayValue": "3",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 10,
+                                    "displayValue": "10",
+                                    "period": 4
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 99
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "4-1"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "3-0"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "1-1"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "2-0"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "2628",
+                            "uid": "s:20~l:23~t:2628",
+                            "type": "team",
+                            "order": 1,
+                            "homeAway": "away",
+                            "winner": false,
+                            "team": {
+                                "id": "2628",
+                                "uid": "s:20~l:23~t:2628",
+                                "location": "TCU",
+                                "name": "Horned Frogs",
+                                "abbreviation": "TCU",
+                                "displayName": "TCU Horned Frogs",
+                                "shortDisplayName": "TCU",
+                                "color": "4d1979",
+                                "alternateColor": "f1f2f3",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "3616"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/2628/tcu-horned-frogs",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/2628/tcu-horned-frogs",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/2628",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/2628",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/2628",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png",
+                                "conferenceId": "4"
+                            },
+                            "score": "24",
+                            "linescores": [
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 10,
+                                    "displayValue": "10",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 4
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 24
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "3-1"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "2-0"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "1-1"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "0-1"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [],
+                    "status": {
+                        "clock": 0,
+                        "displayClock": "0:00",
+                        "period": 4,
+                        "type": {
+                            "id": "3",
+                            "name": "STATUS_FINAL",
+                            "state": "post",
+                            "completed": true,
+                            "description": "Final",
+                            "detail": "Final",
+                            "shortDetail": "Final"
+                        }
+                    },
+                    "broadcasts": [
+                        {
+                            "market": "national",
+                            "names": [
+                                "FOX"
+                            ]
+                        }
+                    ],
+                    "leaders": [
+                        {
+                            "name": "passingYards",
+                            "displayName": "Passing Leader",
+                            "shortDisplayName": "PASS",
+                            "abbreviation": "PYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "27/39, 291 YDS, 2 TD",
+                                    "value": 291,
+                                    "athlete": {
+                                        "id": "5078810",
+                                        "fullName": "Sam Leavitt",
+                                        "displayName": "Sam Leavitt",
+                                        "shortName": "S. Leavitt",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/5078810/sam-leavitt"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/5078810.png",
+                                        "jersey": "10",
+                                        "position": {
+                                            "abbreviation": "QB"
+                                        },
+                                        "team": {
+                                            "id": "9"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "9"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "rushingYards",
+                            "displayName": "Rushing Leader",
+                            "shortDisplayName": "RUSH",
+                            "abbreviation": "RYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "21 CAR, 134 YDS",
+                                    "value": 134,
+                                    "athlete": {
+                                        "id": "4685268",
+                                        "fullName": "Raleek Brown",
+                                        "displayName": "Raleek Brown",
+                                        "shortName": "R. Brown",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4685268/raleek-brown"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4685268.png",
+                                        "jersey": "3",
+                                        "position": {
+                                            "abbreviation": "RB"
+                                        },
+                                        "team": {
+                                            "id": "9"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "9"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "receivingYards",
+                            "displayName": "Receiving Leader",
+                            "shortDisplayName": "REC",
+                            "abbreviation": "RECYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "8 REC, 126 YDS, 2 TD",
+                                    "value": 126,
+                                    "athlete": {
+                                        "id": "4880281",
+                                        "fullName": "Jordyn Tyson",
+                                        "displayName": "Jordyn Tyson",
+                                        "shortName": "J. Tyson",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4880281/jordyn-tyson"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4880281.png",
+                                        "jersey": "0",
+                                        "position": {
+                                            "abbreviation": "WR"
+                                        },
+                                        "team": {
+                                            "id": "9"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "9"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "groups": {
+                        "id": "4",
+                        "name": "Big 12 Conference",
+                        "shortName": "Big 12",
+                        "isConference": true
+                    },
+                    "format": {
+                        "regulation": {
+                            "periods": 4
+                        }
+                    },
+                    "startDate": "2025-09-27T01:00Z",
+                    "broadcast": "FOX",
+                    "geoBroadcasts": [
+                        {
+                            "type": {
+                                "id": "1",
+                                "shortName": "TV"
+                            },
+                            "market": {
+                                "id": "1",
+                                "type": "National"
+                            },
+                            "media": {
+                                "shortName": "FOX"
+                            },
+                            "lang": "en",
+                            "region": "us"
+                        }
+                    ],
+                    "highlights": [
+                        {
+                            "id": 46393627,
+                            "cerebroId": "68d77067e77ef756fcb8a45a",
+                            "source": "espn",
+                            "headline": "Arizona State locks up win with an interception",
+                            "description": "Martell Hughes makes a big play to intercept Josh Hoover and Arizona State beats TCU.",
+                            "lastModified": "2025-09-27T05:14:03Z",
+                            "originalPublishDate": "2025-09-27T05:04:39Z",
+                            "duration": 36,
+                            "timeRestrictions": {
+                                "embargoDate": "2025-09-27T05:04:39Z",
+                                "expirationDate": "2026-01-30T05:00:00Z"
+                            },
+                            "deviceRestrictions": {
+                                "type": "whitelist",
+                                "devices": [
+                                    "desktop",
+                                    "ipad",
+                                    "settop",
+                                    "handset",
+                                    "tablet"
+                                ]
+                            },
+                            "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.jpg",
+                            "links": {
+                                "web": {
+                                    "href": "https://www.espn.com/video/clip?id=46393627",
+                                    "self": {
+                                        "href": "https://www.espn.com/video/clip?id=46393627",
+                                        "dsi": {
+                                            "href": "https://www.espn.com/video/clip?id=2cace81ea1587"
+                                        }
+                                    },
+                                    "seo": {
+                                        "href": "https://www.espn.com/video/clip/_/id/46393627"
+                                    }
+                                },
+                                "mobile": {
+                                    "source": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.mp4"
+                                    },
+                                    "alert": {
+                                        "href": "https://m.espn.com/general/video/videoAlert?vid=46393627"
+                                    },
+                                    "streaming": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46393627"
+                                    },
+                                    "progressiveDownload": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46393627"
+                                    }
+                                },
+                                "api": {
+                                    "self": {
+                                        "href": "https://content.core.api.espn.com/v1/video/clips/46393627"
+                                    },
+                                    "artwork": {
+                                        "href": "https://artwork.api.espn.com/artwork/collections/media/4e1abed0-ab71-460e-9b08-b99fb283b4d4"
+                                    }
+                                },
+                                "source": {
+                                    "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_360p30_1464k.mp4",
+                                    "mezzanine": {
+                                        "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.mp4"
+                                    },
+                                    "flash": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.smil"
+                                    },
+                                    "hds": {
+                                        "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_rel.smil/manifest.f4m"
+                                    },
+                                    "HLS": {
+                                        "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8",
+                                        "HD": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                        },
+                                        "cmaf": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8",
+                                            "9x16": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                            }
+                                        },
+                                        "9x16": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                        },
+                                        "shield": {
+                                            "href": "https://watch.auth.api.espn.com/video/auth/media/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset"
+                                        }
+                                    },
+                                    "HD": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_720p30_2896k.mp4"
+                                    },
+                                    "full": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_360p30_1464k.mp4"
+                                    }
+                                },
+                                "sportscenter": {
+                                    "href": "sportscenter://x-callback-url/showVideo?videoID=46393627&videoDSI=2cace81ea1587"
+                                }
+                            },
+                            "ad": {
+                                "sport": "ncf",
+                                "bundle": "sportscenter"
+                            },
+                            "tracking": {
+                                "sportName": "football",
+                                "leagueName": "NCAA Football",
+                                "coverageType": "Final Game Highlight",
+                                "trackingName": "NCF_One-Play (Arizona State locks up win with an interception) 2025/09/27 ESHEET",
+                                "trackingId": "dm_NCF_martell_hughes_int_vs_tcu"
+                            }
+                        }
+                    ],
+                    "headlines": [
+                        {
+                            "type": "Recap",
+                            "description": "— Jesus Gomez kicked a 23-yard field goal with 1:14 left and Arizona State overcame a 17-point deficit to beat No. 24 TCU 27-24 on Friday night.",
+                            "shortLinkText": "Jesus Gomez hits late 23-yard field goal to lift Arizona State past No. 24 TCU, 27-24",
+                            "video": [
+                                {
+                                    "id": 46393627,
+                                    "source": "espn",
+                                    "headline": "Arizona State locks up win with an interception",
+                                    "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.jpg",
+                                    "duration": 36,
+                                    "tracking": {
+                                        "sportName": "football",
+                                        "leagueName": "NCAA Football",
+                                        "coverageType": "Final Game Highlight",
+                                        "trackingName": "NCF_One-Play (Arizona State locks up win with an interception) 2025/09/27 ESHEET",
+                                        "trackingId": "dm_NCF_martell_hughes_int_vs_tcu"
+                                    },
+                                    "deviceRestrictions": {
+                                        "type": "whitelist",
+                                        "devices": [
+                                            "desktop",
+                                            "ipad",
+                                            "settop",
+                                            "handset",
+                                            "tablet"
+                                        ]
+                                    },
+                                    "links": {
+                                        "web": {
+                                            "href": "https://www.espn.com/video/clip?id=46393627",
+                                            "self": {
+                                                "href": "https://www.espn.com/video/clip?id=46393627",
+                                                "dsi": {
+                                                    "href": "https://www.espn.com/video/clip?id=2cace81ea1587"
+                                                }
+                                            },
+                                            "seo": {
+                                                "href": "https://www.espn.com/video/clip/_/id/46393627"
+                                            }
+                                        },
+                                        "mobile": {
+                                            "source": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.mp4"
+                                            },
+                                            "alert": {
+                                                "href": "https://m.espn.com/general/video/videoAlert?vid=46393627"
+                                            },
+                                            "streaming": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46393627"
+                                            },
+                                            "progressiveDownload": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46393627"
+                                            }
+                                        },
+                                        "api": {
+                                            "self": {
+                                                "href": "https://content.core.api.espn.com/v1/video/clips/46393627"
+                                            },
+                                            "artwork": {
+                                                "href": "https://artwork.api.espn.com/artwork/collections/media/4e1abed0-ab71-460e-9b08-b99fb283b4d4"
+                                            }
+                                        },
+                                        "source": {
+                                            "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_360p30_1464k.mp4",
+                                            "mezzanine": {
+                                                "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.mp4"
+                                            },
+                                            "flash": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c.smil"
+                                            },
+                                            "hds": {
+                                                "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_rel.smil/manifest.f4m"
+                                            },
+                                            "HLS": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8",
+                                                "HD": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                                },
+                                                "cmaf": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8",
+                                                    "9x16": {
+                                                        "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                                    }
+                                                },
+                                                "9x16": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c/playlist.m3u8"
+                                                },
+                                                "shield": {
+                                                    "href": "https://watch.auth.api.espn.com/video/auth/media/4e1abed0-ab71-460e-9b08-b99fb283b4d4/asset"
+                                                }
+                                            },
+                                            "HD": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_720p30_2896k.mp4"
+                                            },
+                                            "full": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/dec3928a-eccc-4d21-8723-384af8a8b40c/dec3928a-eccc-4d21-8723-384af8a8b40c_360p30_1464k.mp4"
+                                            }
+                                        },
+                                        "sportscenter": {
+                                            "href": "sportscenter://x-callback-url/showVideo?videoID=46393627&videoDSI=2cace81ea1587"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "summary",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/game/_/gameId/401756902/tcu-arizona-st",
+                    "text": "Gamecast",
+                    "shortText": "Gamecast",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "boxscore",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/boxscore/_/gameId/401756902",
+                    "text": "Box Score",
+                    "shortText": "Box Score",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "highlights",
+                        "desktop"
+                    ],
+                    "href": "https://www.espn.com/college-football/video?gameId=401756902",
+                    "text": "Highlights",
+                    "shortText": "Highlights",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "pbp",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/playbyplay/_/gameId/401756902",
+                    "text": "Play-by-Play",
+                    "shortText": "Play-by-Play",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "recap",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/recap?gameId=401756902",
+                    "text": "Recap",
+                    "shortText": "Recap",
+                    "isExternal": false,
+                    "isPremium": false
+                }
+            ],
+            "status": {
+                "clock": 0,
+                "displayClock": "0:00",
+                "period": 4,
+                "type": {
+                    "id": "3",
+                    "name": "STATUS_FINAL",
+                    "state": "post",
+                    "completed": true,
+                    "description": "Final",
+                    "detail": "Final",
+                    "shortDetail": "Final"
+                }
+            }
+        },
+        {
+            "id": "401752939",
+            "uid": "s:20~l:23~e:401752939",
+            "date": "2025-09-27T02:35Z",
+            "name": "Houston Cougars at Oregon State Beavers",
+            "shortName": "HOU @ ORST",
+            "season": {
+                "year": 2025,
+                "type": 2,
+                "slug": "regular-season"
+            },
+            "week": {
+                "number": 5
+            },
+            "competitions": [
+                {
+                    "id": "401752939",
+                    "uid": "s:20~l:23~e:401752939~c:401752939",
+                    "date": "2025-09-27T02:35Z",
+                    "attendance": 29338,
+                    "type": {
+                        "id": "1",
+                        "abbreviation": "STD"
+                    },
+                    "timeValid": true,
+                    "dateValid": false,
+                    "neutralSite": false,
+                    "conferenceCompetition": false,
+                    "playByPlayAvailable": true,
+                    "recent": false,
+                    "venue": {
+                        "id": "3893",
+                        "fullName": "Reser Stadium",
+                        "address": {
+                            "city": "Corvallis",
+                            "state": "OR",
+                            "country": "USA"
+                        },
+                        "indoor": false
+                    },
+                    "competitors": [
+                        {
+                            "id": "204",
+                            "uid": "s:20~l:23~t:204",
+                            "type": "team",
+                            "order": 0,
+                            "homeAway": "home",
+                            "winner": false,
+                            "team": {
+                                "id": "204",
+                                "uid": "s:20~l:23~t:204",
+                                "location": "Oregon State",
+                                "name": "Beavers",
+                                "abbreviation": "ORST",
+                                "displayName": "Oregon State Beavers",
+                                "shortDisplayName": "Oregon St",
+                                "color": "231f20",
+                                "alternateColor": "d73f09",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "3893"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/204/oregon-state-beavers",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/204/oregon-state-beavers",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/204",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/204",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/204",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/204.png",
+                                "conferenceId": "9"
+                            },
+                            "score": "24",
+                            "linescores": [
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 3,
+                                    "displayValue": "3",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 7,
+                                    "displayValue": "7",
+                                    "period": 4
+                                },
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 5
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 99
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "0-5"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "0-3"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "0-2"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "0-0"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "248",
+                            "uid": "s:20~l:23~t:248",
+                            "type": "team",
+                            "order": 1,
+                            "homeAway": "away",
+                            "winner": true,
+                            "team": {
+                                "id": "248",
+                                "uid": "s:20~l:23~t:248",
+                                "location": "Houston",
+                                "name": "Cougars",
+                                "abbreviation": "HOU",
+                                "displayName": "Houston Cougars",
+                                "shortDisplayName": "Houston",
+                                "color": "c92a39",
+                                "alternateColor": "ffffff",
+                                "isActive": true,
+                                "venue": {
+                                    "id": "453"
+                                },
+                                "links": [
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/248/houston-cougars",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "clubhouse",
+                                            "mobile",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/_/id/248/houston-cougars",
+                                        "text": "Clubhouse",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "roster",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/roster/_/id/248",
+                                        "text": "Roster",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "stats",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/stats/_/id/248",
+                                        "text": "Statistics",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    },
+                                    {
+                                        "rel": [
+                                            "schedule",
+                                            "desktop",
+                                            "team"
+                                        ],
+                                        "href": "https://www.espn.com/college-football/team/schedule/_/id/248",
+                                        "text": "Schedule",
+                                        "isExternal": false,
+                                        "isPremium": false
+                                    }
+                                ],
+                                "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
+                                "conferenceId": "4"
+                            },
+                            "score": "27",
+                            "linescores": [
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 1
+                                },
+                                {
+                                    "value": 10,
+                                    "displayValue": "10",
+                                    "period": 2
+                                },
+                                {
+                                    "value": 0,
+                                    "displayValue": "0",
+                                    "period": 3
+                                },
+                                {
+                                    "value": 14,
+                                    "displayValue": "14",
+                                    "period": 4
+                                },
+                                {
+                                    "value": 3,
+                                    "displayValue": "3",
+                                    "period": 5
+                                }
+                            ],
+                            "statistics": [],
+                            "curatedRank": {
+                                "current": 99
+                            },
+                            "records": [
+                                {
+                                    "name": "overall",
+                                    "abbreviation": "Game",
+                                    "type": "total",
+                                    "summary": "4-0"
+                                },
+                                {
+                                    "name": "Home",
+                                    "type": "home",
+                                    "summary": "2-0"
+                                },
+                                {
+                                    "name": "Road",
+                                    "type": "road",
+                                    "summary": "2-0"
+                                },
+                                {
+                                    "name": "vs. Conf.",
+                                    "type": "vsconf",
+                                    "summary": "1-0"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [],
+                    "status": {
+                        "clock": 0,
+                        "displayClock": "0:00",
+                        "period": 5,
+                        "type": {
+                            "id": "3",
+                            "name": "STATUS_FINAL",
+                            "state": "post",
+                            "completed": true,
+                            "description": "Final",
+                            "detail": "Final/OT",
+                            "shortDetail": "Final/OT",
+                            "altDetail": "OT"
+                        }
+                    },
+                    "broadcasts": [],
+                    "leaders": [
+                        {
+                            "name": "passingYards",
+                            "displayName": "Passing Leader",
+                            "shortDisplayName": "PASS",
+                            "abbreviation": "PYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "20/36, 270 YDS, 2 TD, 1 INT",
+                                    "value": 270,
+                                    "athlete": {
+                                        "id": "4685574",
+                                        "fullName": "Conner Weigman",
+                                        "displayName": "Conner Weigman",
+                                        "shortName": "C. Weigman",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/4685574/conner-weigman"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/4685574.png",
+                                        "jersey": "1",
+                                        "position": {
+                                            "abbreviation": "QB"
+                                        },
+                                        "team": {
+                                            "id": "248"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "248"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "rushingYards",
+                            "displayName": "Rushing Leader",
+                            "shortDisplayName": "RUSH",
+                            "abbreviation": "RYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "17 CAR, 93 YDS, 1 TD",
+                                    "value": 93,
+                                    "athlete": {
+                                        "id": "5167313",
+                                        "fullName": "Cornell Hatcher Jr.",
+                                        "displayName": "Cornell Hatcher Jr.",
+                                        "shortName": "C. Hatcher Jr.",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/5167313/cornell-hatcher-jr"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/5167313.png",
+                                        "jersey": "21",
+                                        "position": {
+                                            "abbreviation": "RB"
+                                        },
+                                        "team": {
+                                            "id": "204"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "204"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "receivingYards",
+                            "displayName": "Receiving Leader",
+                            "shortDisplayName": "REC",
+                            "abbreviation": "RECYDS",
+                            "leaders": [
+                                {
+                                    "displayValue": "6 REC, 104 YDS",
+                                    "value": 104,
+                                    "athlete": {
+                                        "id": "5077060",
+                                        "fullName": "Amare Thomas",
+                                        "displayName": "Amare Thomas",
+                                        "shortName": "A. Thomas",
+                                        "links": [
+                                            {
+                                                "rel": [
+                                                    "playercard",
+                                                    "desktop",
+                                                    "athlete"
+                                                ],
+                                                "href": "https://www.espn.com/college-football/player/_/id/5077060/amare-thomas"
+                                            }
+                                        ],
+                                        "headshot": "https://a.espncdn.com/i/headshots/college-football/players/full/5077060.png",
+                                        "jersey": "0",
+                                        "position": {
+                                            "abbreviation": "WR"
+                                        },
+                                        "team": {
+                                            "id": "248"
+                                        },
+                                        "active": true
+                                    },
+                                    "team": {
+                                        "id": "248"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "format": {
+                        "regulation": {
+                            "periods": 4
+                        }
+                    },
+                    "startDate": "2025-09-27T02:35Z",
+                    "broadcast": "ESPN",
+                    "geoBroadcasts": [
+                        {
+                            "type": {
+                                "id": "1",
+                                "shortName": "TV"
+                            },
+                            "market": {
+                                "id": "1",
+                                "type": "National"
+                            },
+                            "media": {
+                                "shortName": "ESPN",
+                                "logo": "https://a.espncdn.com/guid/335fd2d2-97b9-336b-81ee-573eb6bdcffc/logos/default.png",
+                                "darkLogo": ""
+                            },
+                            "lang": "en",
+                            "region": "us"
+                        }
+                    ],
+                    "highlights": [
+                        {
+                            "id": 46394368,
+                            "cerebroId": "68d78b927ed452331443289b",
+                            "source": "espn",
+                            "headline": "Houston Cougars vs. Oregon State Beavers: Full Highlights",
+                            "description": "Houston Cougars vs. Oregon State Beavers: Full Highlights",
+                            "lastModified": "2025-09-27T07:10:17Z",
+                            "originalPublishDate": "2025-09-27T07:00:31Z",
+                            "duration": 64,
+                            "timeRestrictions": {
+                                "embargoDate": "2025-09-27T07:00:31Z",
+                                "expirationDate": "2038-01-01T04:59:59Z"
+                            },
+                            "deviceRestrictions": {
+                                "type": "whitelist",
+                                "devices": [
+                                    "desktop",
+                                    "ipad",
+                                    "settop",
+                                    "handset",
+                                    "tablet"
+                                ]
+                            },
+                            "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.jpg",
+                            "links": {
+                                "web": {
+                                    "href": "https://www.espn.com/video/clip?id=46394368",
+                                    "self": {
+                                        "href": "https://www.espn.com/video/clip?id=46394368",
+                                        "dsi": {
+                                            "href": "https://www.espn.com/video/clip?id=919bdfa1d1592"
+                                        }
+                                    },
+                                    "seo": {
+                                        "href": "https://www.espn.com/video/clip/_/id/46394368"
+                                    }
+                                },
+                                "mobile": {
+                                    "source": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.mp4"
+                                    },
+                                    "alert": {
+                                        "href": "https://m.espn.com/general/video/videoAlert?vid=46394368"
+                                    },
+                                    "streaming": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/f78287b6-6363-446b-b2f7-4f670804e7a7/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46394368"
+                                    },
+                                    "progressiveDownload": {
+                                        "href": "https://watch.auth.api.espn.com/video/auth/brightcove/f78287b6-6363-446b-b2f7-4f670804e7a7/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46394368"
+                                    }
+                                },
+                                "api": {
+                                    "self": {
+                                        "href": "https://content.core.api.espn.com/v1/video/clips/46394368"
+                                    },
+                                    "artwork": {
+                                        "href": "https://artwork.api.espn.com/artwork/collections/media/f78287b6-6363-446b-b2f7-4f670804e7a7"
+                                    }
+                                },
+                                "source": {
+                                    "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_360p30_1464k.mp4",
+                                    "mezzanine": {
+                                        "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.mp4"
+                                    },
+                                    "flash": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.smil"
+                                    },
+                                    "hds": {
+                                        "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_rel.smil/manifest.f4m"
+                                    },
+                                    "HLS": {
+                                        "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8",
+                                        "HD": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                        },
+                                        "cmaf": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8",
+                                            "9x16": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                            }
+                                        },
+                                        "9x16": {
+                                            "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                        },
+                                        "shield": {
+                                            "href": "https://watch.auth.api.espn.com/video/auth/media/f78287b6-6363-446b-b2f7-4f670804e7a7/asset"
+                                        }
+                                    },
+                                    "HD": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_720p30_2896k.mp4"
+                                    },
+                                    "full": {
+                                        "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_360p30_1464k.mp4"
+                                    }
+                                },
+                                "sportscenter": {
+                                    "href": "sportscenter://x-callback-url/showVideo?videoID=46394368&videoDSI=919bdfa1d1592"
+                                }
+                            },
+                            "ad": {
+                                "sport": "ncf",
+                                "bundle": "ncf_highlights"
+                            },
+                            "tracking": {
+                                "sportName": "football",
+                                "leagueName": "NCAA Football",
+                                "coverageType": "Final Game Highlight",
+                                "trackingName": "NCF_One-Play (Houston Cougars vs. Oregon State Beavers: Full Highlights) 2025/09/27 ESHEET",
+                                "trackingId": "dm_20250927_NCF_houston_cougars_vs_oregon_state_beavers_full_highlights"
+                            }
+                        }
+                    ],
+                    "headlines": [
+                        {
+                            "type": "Recap",
+                            "description": "— Ethan Sanchez kicked a 24-yard field goal in overtime and Houston rallied from a fourth-quarter deficit for a 27-24 victory over Oregon State on Friday night.",
+                            "shortLinkText": "Houston stages furious comeback to beat Oregon State 27-24 in overtime",
+                            "video": [
+                                {
+                                    "id": 46394368,
+                                    "source": "espn",
+                                    "headline": "Houston Cougars vs. Oregon State Beavers: Full Highlights",
+                                    "thumbnail": "https://a.espncdn.com/media/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.jpg",
+                                    "duration": 64,
+                                    "tracking": {
+                                        "sportName": "football",
+                                        "leagueName": "NCAA Football",
+                                        "coverageType": "Final Game Highlight",
+                                        "trackingName": "NCF_One-Play (Houston Cougars vs. Oregon State Beavers: Full Highlights) 2025/09/27 ESHEET",
+                                        "trackingId": "dm_20250927_NCF_houston_cougars_vs_oregon_state_beavers_full_highlights"
+                                    },
+                                    "deviceRestrictions": {
+                                        "type": "whitelist",
+                                        "devices": [
+                                            "desktop",
+                                            "ipad",
+                                            "settop",
+                                            "handset",
+                                            "tablet"
+                                        ]
+                                    },
+                                    "links": {
+                                        "web": {
+                                            "href": "https://www.espn.com/video/clip?id=46394368",
+                                            "self": {
+                                                "href": "https://www.espn.com/video/clip?id=46394368",
+                                                "dsi": {
+                                                    "href": "https://www.espn.com/video/clip?id=919bdfa1d1592"
+                                                }
+                                            },
+                                            "seo": {
+                                                "href": "https://www.espn.com/video/clip/_/id/46394368"
+                                            }
+                                        },
+                                        "mobile": {
+                                            "source": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.mp4"
+                                            },
+                                            "alert": {
+                                                "href": "https://m.espn.com/general/video/videoAlert?vid=46394368"
+                                            },
+                                            "streaming": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/f78287b6-6363-446b-b2f7-4f670804e7a7/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46394368"
+                                            },
+                                            "progressiveDownload": {
+                                                "href": "https://watch.auth.api.espn.com/video/auth/brightcove/f78287b6-6363-446b-b2f7-4f670804e7a7/asset?UMADPARAMreferer=https://www.espn.com/video/clip?id=46394368"
+                                            }
+                                        },
+                                        "api": {
+                                            "self": {
+                                                "href": "https://content.core.api.espn.com/v1/video/clips/46394368"
+                                            },
+                                            "artwork": {
+                                                "href": "https://artwork.api.espn.com/artwork/collections/media/f78287b6-6363-446b-b2f7-4f670804e7a7"
+                                            }
+                                        },
+                                        "source": {
+                                            "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_360p30_1464k.mp4",
+                                            "mezzanine": {
+                                                "href": "https://media.video-origin.espn.com/espnvideo/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.mp4"
+                                            },
+                                            "flash": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51.smil"
+                                            },
+                                            "hds": {
+                                                "href": "https://hds.video-cdn.espn.com/z/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_rel.smil/manifest.f4m"
+                                            },
+                                            "HLS": {
+                                                "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8",
+                                                "HD": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                                },
+                                                "cmaf": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8",
+                                                    "9x16": {
+                                                        "href": "https://service-pkgespn.akamaized.net/opp/cmaf/espn/9x16/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                                    }
+                                                },
+                                                "9x16": {
+                                                    "href": "https://service-pkgespn.akamaized.net/opp/hls/espn/9x16/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51/playlist.m3u8"
+                                                },
+                                                "shield": {
+                                                    "href": "https://watch.auth.api.espn.com/video/auth/media/f78287b6-6363-446b-b2f7-4f670804e7a7/asset"
+                                                }
+                                            },
+                                            "HD": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_720p30_2896k.mp4"
+                                            },
+                                            "full": {
+                                                "href": "https://media.video-cdn.espn.com/motion/wsc/2025/0927/a4125512-2cc2-498e-b944-b0caa3ee1a51/a4125512-2cc2-498e-b944-b0caa3ee1a51_360p30_1464k.mp4"
+                                            }
+                                        },
+                                        "sportscenter": {
+                                            "href": "sportscenter://x-callback-url/showVideo?videoID=46394368&videoDSI=919bdfa1d1592"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "links": [
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "summary",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/game/_/gameId/401752939/houston-oregon-st",
+                    "text": "Gamecast",
+                    "shortText": "Gamecast",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "boxscore",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/boxscore/_/gameId/401752939",
+                    "text": "Box Score",
+                    "shortText": "Box Score",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "highlights",
+                        "desktop"
+                    ],
+                    "href": "https://www.espn.com/college-football/video?gameId=401752939",
+                    "text": "Highlights",
+                    "shortText": "Highlights",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "pbp",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/playbyplay/_/gameId/401752939",
+                    "text": "Play-by-Play",
+                    "shortText": "Play-by-Play",
+                    "isExternal": false,
+                    "isPremium": false
+                },
+                {
+                    "language": "en-US",
+                    "rel": [
+                        "recap",
+                        "desktop",
+                        "event"
+                    ],
+                    "href": "https://www.espn.com/college-football/recap?gameId=401752939",
+                    "text": "Recap",
+                    "shortText": "Recap",
+                    "isExternal": false,
+                    "isPremium": false
+                }
+            ],
+            "status": {
+                "clock": 0,
+                "displayClock": "0:00",
+                "period": 5,
+                "type": {
+                    "id": "3",
+                    "name": "STATUS_FINAL",
+                    "state": "post",
+                    "completed": true,
+                    "description": "Final",
+                    "detail": "Final/OT",
+                    "shortDetail": "Final/OT",
+                    "altDetail": "OT"
+                }
+            }
+        }
+    ]
+}

@@ -1,142 +1,45 @@
-"""Post scoring plays for a given game."""
+from datetime import datetime, timedelta
 
-from datetime import datetime, timedelta, timezone
+from data.parse_results import get_scoring_plays
+from data.query_api import query_game
 
-from sqlalchemy import select, update
-
-from db.models import Game, Post
-from post.create_post import create_post
-from post.post_game_headers import get_games
-from query.common import ESPN_GAME, call_espn
-
-from common import DB_SESSION
+from db.db_utils import get_games, get_values
+from post.bluesky_utils import create_post
+from post.format_posts import scoring_play
 
 
-def _update_database(result: dict[str, str]):
-    """Update database with last post created and if a game is over.
-
-    Args:
-        result (dict): dictionary containing last_post_id, game_id, and is_complete
-    """
-    end_ts = datetime.now(timezone.utc) if result["is_complete"] else None
-    query = (
-        update(Game)
-        .where(Game.id == result["game_id"])
-        .values(
-            {
-                "last_post_id": result["last_post_id"],
-                "home_score": result["home_score"],
-                "away_score": result["away_score"],
-                "end_ts": end_ts,
-            }
-        )
-    )
-
-    DB_SESSION.execute(query)
-    DB_SESSION.commit()
-
-
-def _get_previous_posts(last_post_id: str) -> dict[str, str]:
-    """Get information about previous post for a game.
-
-    Args:
-        last_post_id (str): id of the last post made
-
-    Returns:
-        dict: post information
-    """
-    query = select(Post).filter(Post.id == last_post_id)
-    last_post = DB_SESSION.execute(query).first()
-
-    root_id = last_post[0].root_id if last_post[0].root_id else last_post[0].id
-    return {
-        "parent": last_post[0].id,
-        "root": root_id,
-        "created_at": last_post[0].created_at,
-    }
-
-
-def get_important_results(game_info: dict) -> list[dict[str, str]]:
-    """Gets scoring plays from an ESPN API response and returns them sorted by
-    time.
-
-    Args:
-        game_info (dict): ESPN API response
-
-    Returns:
-        list[dict]: list containing all scoring plays from the game that haven't been posted about yet
-    """
-    results = []
-    if "drives" not in game_info.keys():
-        return results
-    if "previous" not in game_info["drives"].keys():
-        return results
-
-    is_complete = game_info["header"]["competitions"][0]["status"]["type"]["completed"]
-    all_drives = game_info["drives"]["previous"]
-    for drive in all_drives:
-        scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
-        for ind, play in enumerate(scoring_plays):  # yes, there can be multiple scoring plays in one drive according to ESPN
-            if drive["isScore"]:
-                drive_description = drive["description"] if ind == 0 else None
-                results.append(
-                    {
-                        "game_id": game_info["header"]["id"],
-                        "play_text": play["text"],
-                        "away_score": play["awayScore"],
-                        "home_score": play["homeScore"],
-                        "total_score": play["homeScore"] + play["awayScore"],  # needed because ESPN doesn't know how clocks work
-                        "drive_description": drive_description,
-                        "scoring_team": play["end"]["team"]["id"],
-                        "is_complete": is_complete,
-                    }
-                )
-
-    return sorted(results, key=lambda d: d["total_score"])
-
-
-def format_scoring_play(drive: dict[str, str]) -> str:
-    """Format the scoring play for a drive.
-
-    Args:
-        drive (dict): dictionary containing drive information
-
-    Returns:
-        string: scoring play formatted for posting
-    """
-    play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
-    drive_text = f""" after a drive of {drive["drive_description"]} minutes.\n""" if drive["drive_description"] else ".\n"
-    score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
-    return play_text + drive_text + score_text
-
-
-def post_important_results(important_results: dict[str, str]):
+def post_scoring_plays(important_results: list[dict]):
     """Post scoring plays for a game.
 
     Args:
         important_results (dict): information about the drive's scoring play
     """
     for result in important_results:
-        # get information about this game from game table
-        query = select(Game).filter(Game.id == result["game_id"])
-        game_info = DB_SESSION.execute(query).first()[0]
-        assert game_info.last_post_id, "No previous post made for this game"
+        game_info = get_values("games", {"id": result["game_id"]}, "first")
+        if game_info.last_post_id is None:
+            continue
+
         result["home"] = game_info.home_team
         result["away"] = game_info.away_team
-        result["scoring_team"] = game_info.home_team if game_info.home_team_id == result["scoring_team"] else game_info.away_team
-
-        # get parent and root posts from post table
-        previous_post = _get_previous_posts(game_info.last_post_id)
+        result["scoring_team"] = (
+            game_info.home_team
+            if game_info.home_team_id == result["scoring_team"]
+            else game_info.away_team
+        )
 
         # format post and send it if the score has gone up
-        if result["home_score"] > game_info.home_score or result["away_score"] > game_info.away_score:
-            previous_post = {k: v for k, v in previous_post.items() if k in ("parent", "root")}
-            post_text = format_scoring_play(result)
-            if "KICK" in post_text or "Two-Point" in post_text or "FG" in post_text or "PAT" in post_text:
-                result["last_post_id"] = create_post(post_text, previous_post, "game_update")
-
-                # update database with new information
-                _update_database(result)
+        if (
+            result["home_score"] > game_info.home_score
+            or result["away_score"] > game_info.away_score
+        ):
+            post_text = scoring_play(result)
+            if (
+                "KICK" in post_text
+                or "Two-Point" in post_text
+                or "FG" in post_text
+                or "PAT" in post_text
+            ):
+                create_post(post_text, "game_update", game_info.last_post_id)
 
 
 def post_about_game(game_id: str):
@@ -146,10 +49,10 @@ def post_about_game(game_id: str):
         game_id (str): id of the game in the game table
         date (datetime): datetime of the earliest drive to consider posting about
     """
-    game_info = call_espn(ESPN_GAME + game_id)
-    important_results = get_important_results(game_info)
+    game_info = query_game(game_id)
+    scoring_plays = get_scoring_plays(game_info)
 
-    post_important_results(important_results)
+    post_scoring_plays(scoring_plays)
 
 
 def post_important_plays(date: datetime):
@@ -158,6 +61,6 @@ def post_important_plays(date: datetime):
     Args:
         date (datetime): date to query against
     """
-    games = get_games(date, date + timedelta(hours=1))
+    games = get_games(date - timedelta(days=1), date)
     for game in games:
-        post_about_game(game["id"])
+        post_about_game(game.id)

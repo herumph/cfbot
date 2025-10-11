@@ -1,5 +1,3 @@
-"""Create sqlite db and all tables."""
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
