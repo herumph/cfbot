@@ -8,7 +8,6 @@ from sqlalchemy.dialects.sqlite import insert
 from db.models import Base, Game, Post
 
 
-# TODO: add tests
 def get_db_tables(table_name: str) -> Base:
     """Get a database table by name.
 
@@ -65,7 +64,8 @@ def has_previous_daily_post(date: datetime) -> bool:
         (Post.post_type == "daily"),
     )
     rows = DB_SESSION.execute(query).all()
-    return len(rows) > 1
+    print(rows)
+    return len(rows) > 0
 
 
 # TODO: add tests

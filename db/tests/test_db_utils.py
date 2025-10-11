@@ -6,7 +6,13 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from db.create_db import init_db_session
-from db.db_utils import add_record, get_games, get_db_tables, insert_rows
+from db.db_utils import (
+    add_record,
+    get_games,
+    get_db_tables,
+    insert_rows,
+    has_previous_daily_post,
+)
 from db.models import Game, Query
 
 DB_SESSION = init_db_session()
@@ -156,5 +162,33 @@ class TestGetDBTables:
         invalid_table = "__not_a_real_table"
 
         with pytest.raises(ValueError) as excinfo:
-                get_db_tables(invalid_table)
+            get_db_tables(invalid_table)
         assert "Table __not_a_real_table not found in database" in str(excinfo.value)
+
+
+class TestPreviousDailyPost:
+    def setup_class(self):
+        self.session = DB_SESSION
+        self.valid_post = {
+            "id": -15,
+            "uri": "test",
+            "cid": "test",
+            "post_text": "test",
+            "created_at_ts": datetime.now(),
+            "updated_at_ts": datetime.now(),
+            "post_type": "daily",
+        }
+
+    def teardown_class(self):
+        self.session.rollback()
+        self.session.close()
+
+    def test_has_previous_daily_post(self):
+        insert_rows("posts", [self.valid_post])
+
+        assert has_previous_daily_post(datetime.now())
+
+    def test_invalid_has_previous_daily_post(self):
+        insert_rows("posts", [self.valid_post])
+
+        assert not has_previous_daily_post(datetime.now() - timedelta(days=1e5))
