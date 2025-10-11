@@ -5,6 +5,7 @@ from atproto.exceptions import AtProtocolError, NetworkError
 
 from db.db_utils import insert_rows, update_rows, get_values, log_post_to_db
 from post.get_reply_ids import get_reply_ids
+from post import CLIENT
 
 
 # TODO: move to bluesky utils file or class

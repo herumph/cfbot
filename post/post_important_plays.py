@@ -5,6 +5,7 @@ from data.query_api import query_game
 
 from post.bluesky_utils import create_post
 from db.db_utils import get_games, update_rows, get_values
+from post.format_posts import scoring_play
 
 
 # TODO: add tests
@@ -46,25 +47,6 @@ def get_previous_posts(last_post_id: str) -> dict[str, str]:
     }
 
 
-def format_scoring_play(drive: dict[str, str]) -> str:
-    """Format the scoring play for a drive.
-
-    Args:
-        drive (dict): dictionary containing drive information
-
-    Returns:
-        string: scoring play formatted for posting
-    """
-    play_text = f"""{drive["scoring_team"]} scores! {drive["play_text"].strip()}"""
-    drive_text = (
-        f""" after a drive of {drive["drive_description"]} minutes.\n"""
-        if drive["drive_description"]
-        else ".\n"
-    )
-    score_text = f"""{drive["away"]} {drive["away_score"]} - {drive["home"]} {drive["home_score"]}"""
-    return play_text + drive_text + score_text
-
-
 def post_scoring_plays(important_results: list[dict]):
     """Post scoring plays for a game.
 
@@ -95,7 +77,7 @@ def post_scoring_plays(important_results: list[dict]):
             previous_post = {
                 k: v for k, v in previous_post.items() if k in ("parent", "root")
             }
-            post_text = format_scoring_play(result)
+            post_text = scoring_play(result)
             if (
                 "KICK" in post_text
                 or "Two-Point" in post_text

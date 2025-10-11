@@ -3,8 +3,7 @@ from datetime import datetime, timedelta
 from data.query_api import query_team
 from db.db_utils import update_rows, has_previous_daily_post, get_games
 from post.bluesky_utils import create_post
-from db.models import Game
-
+from post.format_posts import game_header
 
 # TODO: add tests, move to espn_parser
 def get_team_streak(team_info: dict) -> str:
@@ -23,30 +22,6 @@ def get_team_streak(team_info: dict) -> str:
     ][0]
     streak = f"W{streak}" if streak >= 0 else f"L{str(streak).strip('-')}"
     return str(streak)[:-2]
-
-
-# TODO: add tests
-def format_post_text(game: Game, streak_info: dict[str, str]) -> str:
-    """Format information into posting format.
-
-    Args:
-        game (Game): game information from the game database
-        streak_info (dict[str, str]): dictionary of the streak information for the home and away teams
-
-    Returns:
-        string: post text
-    """
-    away_team = f"{game.away_team} ({game.away_wins}-{game.away_losses}, "
-    away_team_conference = f"{(game.away_conf_wins)}-{game.away_conf_losses}) {streak_info[game.away_team_id]} @ "
-    home_team = f"{game.home_team} ({game.home_wins}-{game.home_losses}, "
-    home_team_conference = f"{game.home_conf_wins}-{game.home_conf_losses}) {streak_info[game.home_team_id]}"
-    return (
-        away_team
-        + away_team_conference
-        + home_team
-        + home_team_conference
-        + f" has kicked off on {game.networks}!"
-    )
 
 
 # TODO: This isn't used for anything right now
@@ -85,6 +60,6 @@ def create_game_header_posts(date: datetime):
                 team_info = query_team(team)
                 streak_info[team] = get_team_streak(team_info)
 
-            post_text = format_post_text(game, streak_info)
+            post_text = game_header(game, streak_info)
             post_id = create_post(post_text, "game_header")
             update_rows("games", {"last_post_id": post_id}, {"id": game.id})
