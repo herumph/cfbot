@@ -9,7 +9,7 @@ To run this bot run the `post_about_cfb` script
 
 ## TO-DO
 1. Add unit tests
-2. Move bluesky functions to their own package
+2. Move bluesky functions to their own package -- DONE
 3.  Fix touchdown/extra point race condition properly
    1.  Add scoring type class?
    2.  Deal with ESPN double "KICK" posting
