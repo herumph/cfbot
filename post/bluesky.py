@@ -14,6 +14,7 @@ from db.db_utils import (
 class _BlueSky:
     def __init__(self, username: str) -> None:
         self.username = username
+        self.client = Client()
         self._init_client()
 
     def _get_session(
