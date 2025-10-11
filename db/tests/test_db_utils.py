@@ -138,3 +138,23 @@ class TestAddRecord:
         with caplog.at_level(logging.INFO):
             add_record("api_queries", {})
         assert any("No values to insert" in message for message in caplog.messages)
+
+
+class TestGetDBTables:
+    def setup_class(self):
+        self.session = DB_SESSION
+
+    def test_get_db_tables_existing_table(self):
+        valid_table = "games"
+
+        table = get_db_tables(valid_table)
+
+        assert table
+        assert table.__tablename__ == "games"
+
+    def test_get_db_tables_invalid_table(self):
+        invalid_table = "__not_a_real_table"
+
+        with pytest.raises(ValueError) as excinfo:
+                get_db_tables(invalid_table)
+        assert "Table __not_a_real_table not found in database" in str(excinfo.value)
