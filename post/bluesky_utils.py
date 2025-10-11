@@ -1,11 +1,8 @@
 from datetime import datetime, timezone
 
-from db.db_utils import (
-    add_record,
-    get_previous_posts,
-)
-from post.get_reply_ids import get_reply_ids
+from db.db_utils import add_record, get_previous_posts
 from post.bluesky import Bluesky
+from post.get_reply_ids import get_reply_ids
 
 
 def get_post_params(

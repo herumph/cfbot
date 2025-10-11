@@ -8,11 +8,11 @@ from sqlalchemy.exc import IntegrityError
 from db.create_db import init_db_session
 from db.db_utils import (
     add_record,
-    get_games,
     get_db_tables,
-    insert_rows,
-    has_previous_daily_post,
+    get_games,
     get_values,
+    has_previous_daily_post,
+    insert_rows,
     update_rows,
 )
 from db.models import Game, Query

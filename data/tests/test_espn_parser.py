@@ -83,3 +83,13 @@ class TestESPNParser:
         assert competitors["home_team"] == "Oregon St"
         assert competitors["away_team_id"] == "248"
         assert competitors["away_team"] == "Houston"
+
+    def test_team_streak_losing(self, losing_team):
+        streak = ESPNParser.team_streak(losing_team)
+
+        assert streak == "L4"
+
+    def test_team_streak_winning(self, winning_team):
+        streak = ESPNParser.team_streak(winning_team)
+
+        assert streak == "W8"

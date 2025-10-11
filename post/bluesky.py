@@ -3,12 +3,8 @@ import getpass
 from atproto import Client
 from atproto.exceptions import AtProtocolError, NetworkError
 
+from db.db_utils import get_values, insert_rows, update_rows
 from post import BSKY_USERNAME
-from db.db_utils import (
-    insert_rows,
-    update_rows,
-    get_values,
-)
 
 
 class _BlueSky:
@@ -22,8 +18,8 @@ class _BlueSky:
         client: Client,
         refresh_session: bool | None = False,
     ) -> str:
-        """Get session text files if they exist, otherwise prompt for username and
-        password.
+        """Get session text files if they exist, otherwise prompt for username
+        and password.
 
         Args:
             client (Client): atproto client

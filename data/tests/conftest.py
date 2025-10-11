@@ -31,3 +31,15 @@ def scoreboard():
 def boxscore():
     with open("data/tests/resources/boxscore.json") as f:
         return json.load(f)
+
+
+@pytest.fixture
+def losing_team():
+    with open("data/tests/resources/losing_team.json") as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def winning_team():
+    with open("data/tests/resources/winning_team.json") as f:
+        return json.load(f)

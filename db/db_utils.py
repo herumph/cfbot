@@ -1,10 +1,10 @@
 import logging
 from datetime import datetime, timedelta, timezone
 
-from db import DB_SESSION
 from sqlalchemy import select, update
 from sqlalchemy.dialects.sqlite import insert
 
+from db import DB_SESSION
 from db.models import Base, Game, Post
 
 
@@ -69,7 +69,8 @@ def has_previous_daily_post(date: datetime) -> bool:
 def get_values(
     table_name: str, filter: dict, return_type: str | None = "all"
 ) -> list | object | None:
-    """Generic interface to get values from a database table. Only operates with equality filters.
+    """Generic interface to get values from a database table. Only operates
+    with equality filters.
 
     Args:
         table_name: table in the database to get values from
@@ -167,7 +168,6 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     return {"uri": post.uri, "cid": post.cid}
 
 
-# TODO: add tests, remove???
 def get_previous_posts(last_post_id: int) -> dict[str, str]:
     """Get information about previous post for a game.
 

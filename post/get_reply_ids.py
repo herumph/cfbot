@@ -1,5 +1,6 @@
-from db.db_utils import get_values
 from typing import Any
+
+from db.db_utils import get_values
 
 
 def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
