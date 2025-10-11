@@ -111,44 +111,6 @@ def insert_rows(table_name: str, rows: list[dict]):
     DB_SESSION.commit()
 
 
-# TODO: add tests
-def log_post_to_db(
-    post_uri: str,
-    post_cid: str,
-    post_params: dict,
-    post_type: str,
-    reply_ids: dict | None = None,
-) -> int:
-    """Logs created post to the Post table.
-
-    Args:
-        post_uri (str): uri of the created post
-        post_cid (str): cid of the created post
-        post_params (dict): parameters of the post including ids and post text
-        reply_ids (dict): ids of the parent and root posts
-
-    Returns:
-        str: post id of the newly created database entry
-    """
-    new_post = Post(
-        uri=post_uri,
-        cid=post_cid,
-        post_text=post_params["text"],
-        created_at_ts=datetime.now(timezone.utc),
-        updated_at_ts=datetime.now(timezone.utc),
-        post_type=post_type,
-    )
-
-    if reply_ids:
-        new_post.root_id = reply_ids["root"]
-        new_post.parent_id = reply_ids["parent"]
-
-    DB_SESSION.add(new_post)
-    DB_SESSION.commit()
-
-    return new_post.id
-
-
 def add_record(table_name: str, values: dict):
     """Saves a record to the database.
 

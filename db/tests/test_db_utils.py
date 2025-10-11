@@ -221,14 +221,12 @@ class TestGetValues:
         assert results == results_all
         assert len(results) > 1
 
-    
     def test_get_values_specific_row(self):
         insert_rows("posts", [self.valid_post])
 
         results = get_values("posts", {"id": -20}, "all")
 
         assert len(results) == 1
-
 
     def test_get_values_first_row(self):
         insert_rows("posts", [self.valid_post])

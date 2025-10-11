@@ -1,5 +1,7 @@
+from datetime import datetime, timezone
+
 from db.db_utils import (
-    log_post_to_db,
+    add_record,
     get_previous_posts,
 )
 from post.get_reply_ids import get_reply_ids
@@ -49,6 +51,16 @@ def create_post(
     post_params = get_post_params(post_text, post_type, last_post_id)
     post = Bluesky.create_post(post_params)
 
-    log_post_to_db(
-        post.uri, post.cid, post_params, post_type, post_params.get("reply_to", None)
+    add_record(
+        "posts",
+        {
+            "uri": post.uri,
+            "cid": post.cid,
+            "post_text": post_text,
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc),
+            "post_type": post_type,
+            "root_id": post_params.get("root_id", None),
+            "parent_id": post_params.get("parent_id", None),
+        },
     )
