@@ -1,50 +1,11 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 from data.parse_results import get_scoring_plays
 from data.query_api import query_game
 
 from post.bluesky_utils import create_post
-from db.db_utils import get_games, update_rows, get_values
+from db.db_utils import get_games, get_values
 from post.format_posts import scoring_play
-
-
-# TODO: add tests
-def update_database(result: dict[str, str]):
-    """Update database with last post created and if a game is over.
-
-    Args:
-        result (dict): dictionary containing last_post_id, game_id, and is_complete
-    """
-    end_ts = datetime.now(timezone.utc) if result["is_complete"] else None
-    update_rows(
-        "games",
-        {
-            "last_post_id": result["last_post_id"],
-            "home_score": result["home_score"],
-            "away_score": result["away_score"],
-            "end_ts": end_ts,
-        },
-        {"id": result["game_id"]},
-    )
-
-
-# TODO: add tests
-def get_previous_posts(last_post_id: str) -> dict[str, str]:
-    """Get information about previous post for a game.
-
-    Args:
-        last_post_id (str): id of the last post made
-
-    Returns:
-        dict: post information
-    """
-    last_post = get_values("posts", {"id": last_post_id}, "first")
-
-    return {
-        "parent": last_post.id,
-        "root": last_post.root_id if last_post.root_id else last_post.id,
-        "created_at": last_post.created_at_ts,
-    }
 
 
 def post_scoring_plays(important_results: list[dict]):
@@ -66,17 +27,11 @@ def post_scoring_plays(important_results: list[dict]):
             else game_info.away_team
         )
 
-        # get parent and root posts from post table
-        previous_post = get_previous_posts(game_info.last_post_id)
-
         # format post and send it if the score has gone up
         if (
             result["home_score"] > game_info.home_score
             or result["away_score"] > game_info.away_score
         ):
-            previous_post = {
-                k: v for k, v in previous_post.items() if k in ("parent", "root")
-            }
             post_text = scoring_play(result)
             if (
                 "KICK" in post_text
@@ -84,14 +39,7 @@ def post_scoring_plays(important_results: list[dict]):
                 or "FG" in post_text
                 or "PAT" in post_text
             ):
-                result["last_post_id"] = create_post(
-                    post_text,
-                    "game_update",
-                    previous_post,
-                )
-
-                # update database with new information
-                update_database(result)
+                create_post(post_text, "game_update", game_info.last_post_id)
 
 
 def post_about_game(game_id: str):

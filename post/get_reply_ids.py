@@ -1,4 +1,5 @@
 from db.db_utils import get_values
+from typing import Any
 
 
 def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
@@ -16,7 +17,7 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     return {"uri": post.uri, "cid": post.cid}
 
 
-def get_reply_ids(reply_ids: dict[str, dict]) -> dict:
+def get_reply_ids(reply_ids: dict[str, Any]) -> dict:
     """Gather information for the parent and root posts from the sqlite
     database.
 

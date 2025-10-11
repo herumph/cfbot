@@ -71,7 +71,7 @@ def has_previous_daily_post(date: datetime) -> bool:
 # TODO: add tests
 def get_values(
     table_name: str, filter: dict, return_type: str | None = "all"
-) -> list[dict] | dict | None:
+) -> list | object | None:
     """Generic interface to get values from a database table. Only operates with equality filters.
 
     Args:
@@ -206,3 +206,22 @@ def query_for_post_ids(reply_ids: dict[str, str], key: str) -> dict:
     post = get_values("posts", {"id": reply_ids[key]}, "first")
 
     return {"uri": post.uri, "cid": post.cid}
+
+
+# TODO: add tests
+def get_previous_posts(last_post_id: int) -> dict[str, str]:
+    """Get information about previous post for a game.
+
+    Args:
+        last_post_id (int): id of the last post made
+
+    Returns:
+        dict: post information
+    """
+    last_post = get_values("posts", {"id": last_post_id}, "first")
+
+    return {
+        "parent": last_post.id,
+        "root": last_post.root_id if last_post.root_id else last_post.id,
+        "created_at": last_post.created_at_ts,
+    }
