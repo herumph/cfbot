@@ -38,7 +38,7 @@ def create_post(
     post_text,
     post_type,
     last_post_id: int | None = None,
-) -> None:
+) -> object:
     """Create a post that is either new or a reply to an existing post.
 
     Args:
@@ -54,10 +54,12 @@ def create_post(
             "uri": post.uri,
             "cid": post.cid,
             "post_text": post_text,
-            "created_at": datetime.now(timezone.utc),
-            "updated_at": datetime.now(timezone.utc),
+            "created_at_ts": datetime.now(timezone.utc),
+            "updated_at_ts": datetime.now(timezone.utc),
             "post_type": post_type,
             "root_id": post_params.get("root_id", None),
             "parent_id": post_params.get("parent_id", None),
         },
     )
+
+    return post

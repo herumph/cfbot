@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from data.espn_parser import ESPNParser
 from data.query_api import query_team
 
-from db.db_utils import get_games, has_previous_daily_post, update_rows
+from db.db_utils import get_games, has_previous_daily_post, update_rows, get_values
 from post.bluesky_utils import create_post
 from post.format_posts import game_header
 
@@ -45,5 +45,8 @@ def create_game_header_posts(date: datetime):
                 streak_info[team] = ESPNParser.team_streak(team_info)
 
             post_text = game_header(game, streak_info)
-            post_id = create_post(post_text, "game_header")
-            update_rows("games", {"last_post_id": post_id}, {"id": game.id})
+            post_ids = create_post(post_text, "game_header")
+            last_post_id = get_values(
+                "posts", {"uri": post_ids.uri, "cid": post_ids.cid}, "first"
+            ).id
+            update_rows("games", {"last_post_id": last_post_id}, {"id": game.id})
