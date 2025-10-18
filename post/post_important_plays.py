@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from data.parse_results import get_scoring_plays
 from data.query_api import query_game
 
-from db.db_utils import get_games, get_values
+from db.db_utils import get_games, get_values, update_rows
 from post.bluesky_utils import create_post
 from post.format_posts import scoring_play
 
@@ -39,6 +39,7 @@ def post_scoring_plays(important_results: list[dict]):
                 or "FG" in post_text
                 or "PAT" in post_text
             ):
+                update_rows("games", {"home_score": result["home_score"], "away_score": result["away_score"]}, {"id": result["game_id"]})
                 create_post(post_text, "game_update", game_info.last_post_id)
 
 
