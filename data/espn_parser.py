@@ -95,29 +95,25 @@ class _ESPNParser:
         is_complete = game_json["header"]["competitions"][0]["status"]["type"][
             "completed"
         ]
-        all_drives = game_json["drives"]["previous"]
-        for drive in all_drives:
-            scoring_plays = [play for play in drive["plays"] if play["scoringPlay"]]
-            for ind, play in enumerate(
-                scoring_plays
-            ):  # yes, there can be multiple scoring plays in one drive according to ESPN
-                if drive["isScore"]:
-                    drive_description = drive["description"] if ind == 0 else None
-                    results.append(
-                        {
-                            "game_id": game_json["header"]["id"],
-                            "play_text": play["text"],
-                            "away_score": play["awayScore"],
-                            "home_score": play["homeScore"],
-                            "total_score": play["homeScore"]
-                            + play[
-                                "awayScore"
-                            ],  # needed because ESPN doesn't know how clocks work
-                            "drive_description": drive_description,
-                            "scoring_team": play["end"]["team"]["id"],
-                            "is_complete": is_complete,
-                        }
-                    )
+
+        scoring_plays = game_json["scoringPlays"]
+        for play in scoring_plays:
+            drive_description = None # TODO: fix this to pull from the drive details
+            results.append(
+                {
+                    "game_id": game_json["header"]["id"],
+                    "play_text": play["text"],
+                    "away_score": play["awayScore"],
+                    "home_score": play["homeScore"],
+                    "total_score": play["homeScore"]
+                    + play[
+                        "awayScore"
+                    ],  # needed because ESPN doesn't know how clocks work
+                    "drive_description": drive_description,
+                    "scoring_team": play["team"]["id"],
+                    "is_complete": is_complete,
+                }
+            )
 
         return sorted(results, key=lambda d: d["total_score"])
 

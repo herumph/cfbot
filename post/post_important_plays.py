@@ -33,14 +33,9 @@ def post_scoring_plays(important_results: list[dict]):
             or result["away_score"] > game_info.away_score
         ):
             post_text = scoring_play(result)
-            if (
-                "KICK" in post_text
-                or "Two-Point" in post_text
-                or "FG" in post_text
-                or "PAT" in post_text
-            ):
-                update_rows("games", {"home_score": result["home_score"], "away_score": result["away_score"]}, {"id": result["game_id"]})
-                create_post(post_text, "game_update", game_info.last_post_id)
+        
+            update_rows("games", {"home_score": result["home_score"], "away_score": result["away_score"]}, {"id": result["game_id"]})
+            create_post(post_text, "game_update", game_info.last_post_id)
 
 
 def post_about_game(game_id: str):
