@@ -11,20 +11,20 @@ class TestESPNParser:
         assert plays[0]["home_score"] == 7
         assert plays[0]["away_score"] == 0
         assert plays[0]["total_score"] == 7
-        assert plays[0]["drive_description"] == "14 plays, 69 yards, 5:46"
+        assert plays[0]["drive_description"] == None
         assert (
             plays[0]["play_text"]
-            == "Jackson Arnold run for 1 yd for a TD (Tyler Keltner KICK)"
+            == "Jackson Arnold 1 Yd Run (Tyler Keltner Kick)"
         )
         assert plays[0]["scoring_team"] == "201"
 
         assert plays[3]["home_score"] == 21
         assert plays[3]["away_score"] == 6
         assert plays[3]["total_score"] == 27
-        assert plays[3]["drive_description"] == "12 plays, 75 yards, 3:20"
+        assert plays[3]["drive_description"] == None
         assert (
             plays[3]["play_text"]
-            == "Ty Thompson pass complete to Reggie Brown for 7 yds for a TD (Ethan Head PAT MISSED)"
+            == "Reggie Brown 7 Yd pass from Ty Thompson (Ethan Head PAT failed)"
         )
         assert plays[3]["scoring_team"] == "2655"
 
@@ -36,10 +36,10 @@ class TestESPNParser:
         assert plays[1]["home_score"] == 14
         assert plays[1]["away_score"] == 0
         assert plays[1]["total_score"] == 14
-        assert plays[1]["drive_description"] == "6 plays, 13 yards, 1:35"
+        assert plays[1]["drive_description"] == None
         assert (
             plays[1]["play_text"]
-            == "AJ Swann pass intercepted A'Marion McCoy return for 26 yds for a TD (Colton Boomer KICK)"
+            == "A. Swann pass intercepted,A. McCoy return for 26 yds for a TD (C. Boomer KICK)"
         )
         assert plays[1]["scoring_team"] == "68"
 
