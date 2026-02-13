@@ -188,10 +188,17 @@ class TestPreviousDailyPost:
         self.session.close()
 
     def test_has_previous_daily_post(self):
+        now = datetime.now()
+        self.valid_post["created_at_ts"] = now
         insert_rows("posts", [self.valid_post])
 
+        result = has_previous_daily_post(now + timedelta(seconds=1))
         self.teardown_class()
-        assert has_previous_daily_post(datetime.now())
+        assert result
+
+    def teardown_class(self):
+        self.session.rollback()
+        self.session.close()
 
     def test_invalid_has_previous_daily_post(self):
         insert_rows("posts", [self.valid_post])
